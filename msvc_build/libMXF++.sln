@@ -1,0 +1,102 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libMXF++", "libMXF++\libMXF++.vcproj", "{33E3C49F-5483-4081-9446-9238A59B761A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{580F8E65-F910-46A6-8A9C-6A8E58D95E53} = {580F8E65-F910-46A6-8A9C-6A8E58D95E53}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libMXF", "..\..\libMXF\msvc_build\mxf\libMXF.vcproj", "{580F8E65-F910-46A6-8A9C-6A8E58D95E53}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "archivemxfreader", "examples\archivemxfreader\archivemxfreader.vcproj", "{D5E39577-DA0F-4176-A49D-64B04B8F8FB7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{33E3C49F-5483-4081-9446-9238A59B761A} = {33E3C49F-5483-4081-9446-9238A59B761A}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_archivemxfreader", "examples\archivemxfreader\test_archivemxfreader.vcproj", "{D62CD488-BDEE-439F-A652-38E864D5E418}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D5E39577-DA0F-4176-A49D-64B04B8F8FB7} = {D5E39577-DA0F-4176-A49D-64B04B8F8FB7}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "archivemxfwriter", "examples\archivemxfwriter\archivemxfwriter.vcproj", "{C88E9767-0759-421E-B13B-A71456A8F7C3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{33E3C49F-5483-4081-9446-9238A59B761A} = {33E3C49F-5483-4081-9446-9238A59B761A}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_archivemxfwriter", "examples\archivemxfwriter\test_archivemxfwriter.vcproj", "{9DB04619-288B-4E88-BA1D-79539E510A64}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C88E9767-0759-421E-B13B-A71456A8F7C3} = {C88E9767-0759-421E-B13B-A71456A8F7C3}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "avidclipwriter", "examples\avidclipwriter\avidclipwriter.vcproj", "{8B0EC744-3CAF-4C07-82CA-201EC69E6BE8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{33E3C49F-5483-4081-9446-9238A59B761A} = {33E3C49F-5483-4081-9446-9238A59B761A}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_avidclipwriter", "examples\avidclipwriter\test_avidclipwriter.vcproj", "{6D90B3BD-72CD-4E45-9942-60100322991A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8B0EC744-3CAF-4C07-82CA-201EC69E6BE8} = {8B0EC744-3CAF-4C07-82CA-201EC69E6BE8}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "D10MXFOP1AWriter", "examples\D10MXFOP1AWriter\D10MXFOP1AWriter.vcproj", "{F1E02AC9-B382-4770-A783-319F29E12D78}"
+	ProjectSection(ProjectDependencies) = postProject
+		{33E3C49F-5483-4081-9446-9238A59B761A} = {33E3C49F-5483-4081-9446-9238A59B761A}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_d10mxfop1awriter", "examples\D10MXFOP1AWriter\test_d10mxfop1awriter.vcproj", "{C40B9905-DF1C-43BA-B5EE-E4EB329EC4CE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F1E02AC9-B382-4770-A783-319F29E12D78} = {F1E02AC9-B382-4770-A783-319F29E12D78}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{33E3C49F-5483-4081-9446-9238A59B761A}.Debug.ActiveCfg = Debug|Win32
+		{33E3C49F-5483-4081-9446-9238A59B761A}.Debug.Build.0 = Debug|Win32
+		{33E3C49F-5483-4081-9446-9238A59B761A}.Release.ActiveCfg = Release|Win32
+		{33E3C49F-5483-4081-9446-9238A59B761A}.Release.Build.0 = Release|Win32
+		{580F8E65-F910-46A6-8A9C-6A8E58D95E53}.Debug.ActiveCfg = Debug|Win32
+		{580F8E65-F910-46A6-8A9C-6A8E58D95E53}.Debug.Build.0 = Debug|Win32
+		{580F8E65-F910-46A6-8A9C-6A8E58D95E53}.Release.ActiveCfg = Release|Win32
+		{580F8E65-F910-46A6-8A9C-6A8E58D95E53}.Release.Build.0 = Release|Win32
+		{D5E39577-DA0F-4176-A49D-64B04B8F8FB7}.Debug.ActiveCfg = Debug|Win32
+		{D5E39577-DA0F-4176-A49D-64B04B8F8FB7}.Debug.Build.0 = Debug|Win32
+		{D5E39577-DA0F-4176-A49D-64B04B8F8FB7}.Release.ActiveCfg = Release|Win32
+		{D5E39577-DA0F-4176-A49D-64B04B8F8FB7}.Release.Build.0 = Release|Win32
+		{D62CD488-BDEE-439F-A652-38E864D5E418}.Debug.ActiveCfg = Debug|Win32
+		{D62CD488-BDEE-439F-A652-38E864D5E418}.Debug.Build.0 = Debug|Win32
+		{D62CD488-BDEE-439F-A652-38E864D5E418}.Release.ActiveCfg = Release|Win32
+		{D62CD488-BDEE-439F-A652-38E864D5E418}.Release.Build.0 = Release|Win32
+		{C88E9767-0759-421E-B13B-A71456A8F7C3}.Debug.ActiveCfg = Debug|Win32
+		{C88E9767-0759-421E-B13B-A71456A8F7C3}.Debug.Build.0 = Debug|Win32
+		{C88E9767-0759-421E-B13B-A71456A8F7C3}.Release.ActiveCfg = Release|Win32
+		{C88E9767-0759-421E-B13B-A71456A8F7C3}.Release.Build.0 = Release|Win32
+		{9DB04619-288B-4E88-BA1D-79539E510A64}.Debug.ActiveCfg = Debug|Win32
+		{9DB04619-288B-4E88-BA1D-79539E510A64}.Debug.Build.0 = Debug|Win32
+		{9DB04619-288B-4E88-BA1D-79539E510A64}.Release.ActiveCfg = Release|Win32
+		{9DB04619-288B-4E88-BA1D-79539E510A64}.Release.Build.0 = Release|Win32
+		{8B0EC744-3CAF-4C07-82CA-201EC69E6BE8}.Debug.ActiveCfg = Debug|Win32
+		{8B0EC744-3CAF-4C07-82CA-201EC69E6BE8}.Debug.Build.0 = Debug|Win32
+		{8B0EC744-3CAF-4C07-82CA-201EC69E6BE8}.Release.ActiveCfg = Release|Win32
+		{8B0EC744-3CAF-4C07-82CA-201EC69E6BE8}.Release.Build.0 = Release|Win32
+		{6D90B3BD-72CD-4E45-9942-60100322991A}.Debug.ActiveCfg = Debug|Win32
+		{6D90B3BD-72CD-4E45-9942-60100322991A}.Debug.Build.0 = Debug|Win32
+		{6D90B3BD-72CD-4E45-9942-60100322991A}.Release.ActiveCfg = Release|Win32
+		{6D90B3BD-72CD-4E45-9942-60100322991A}.Release.Build.0 = Release|Win32
+		{F1E02AC9-B382-4770-A783-319F29E12D78}.Debug.ActiveCfg = Debug|Win32
+		{F1E02AC9-B382-4770-A783-319F29E12D78}.Debug.Build.0 = Debug|Win32
+		{F1E02AC9-B382-4770-A783-319F29E12D78}.Release.ActiveCfg = Release|Win32
+		{F1E02AC9-B382-4770-A783-319F29E12D78}.Release.Build.0 = Release|Win32
+		{C40B9905-DF1C-43BA-B5EE-E4EB329EC4CE}.Debug.ActiveCfg = Debug|Win32
+		{C40B9905-DF1C-43BA-B5EE-E4EB329EC4CE}.Debug.Build.0 = Debug|Win32
+		{C40B9905-DF1C-43BA-B5EE-E4EB329EC4CE}.Release.ActiveCfg = Release|Win32
+		{C40B9905-DF1C-43BA-B5EE-E4EB329EC4CE}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
