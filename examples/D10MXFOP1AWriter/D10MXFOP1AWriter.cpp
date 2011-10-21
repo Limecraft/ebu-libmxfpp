@@ -1000,6 +1000,11 @@ void D10MXFOP1AWriter::CreateFile()
 
     KAGFillerWriter kag_filler_writer(mHeaderPartition);
     mIndexSegment->write(mMXFFile, mHeaderPartition, &kag_filler_writer);
+
+
+    // update the header partition
+
+    mMXFFile->updatePartitions();
 }
 
 uint32_t D10MXFOP1AWriter::WriteSystemItem(const D10ContentPackage *content_package)
