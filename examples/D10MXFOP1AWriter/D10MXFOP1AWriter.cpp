@@ -46,7 +46,11 @@ using namespace std;
 using namespace mxfpp;
 
 
-#define UNKNOWN_SEQUENCE_OFFSET     255
+#define UNKNOWN_SEQUENCE_OFFSET         255
+
+#define LAST_AES3_BLOCK_SEQ_INDEX       ((mAudioSequenceIndex + mAES3Blocks.size() - 1) % mAudioSequenceCount)
+#define AES3_BLOCK_SIZE(num_samples)    (4 + num_samples * 32)
+#define AES3_BLOCK_NUM_SAMPLES(size)    ((size - 4) / 32)
 
 
 static const char *DEFAULT_COMPANY_NAME   = "BBC";
@@ -207,8 +211,9 @@ D10MXFOP1AWriter::D10MXFOP1AWriter()
     mMaterialPackageTC = 0;
     mFilePackageTC = 0;
 
+    mAES3Blocks.push(new DynamicByteArray());
+
     mContentPackage = new D10ContentPackageInt();
-    mAES3Block.allocate(1920 * 4 * 8 + 4); // max size required
 
     mDuration = 0;
 }
@@ -219,6 +224,11 @@ D10MXFOP1AWriter::~D10MXFOP1AWriter()
     for (i = 0; i < mBufferedContentPackages.size(); i++)
         delete mBufferedContentPackages[i];
     delete mContentPackage;
+
+    while (!mAES3Blocks.empty()) {
+        delete mAES3Blocks.front();
+        mAES3Blocks.pop();
+    }
 
     for (i = 0; i < mSetsWithDuration.size(); i++)
         delete mSetsWithDuration[i];
@@ -242,6 +252,9 @@ void D10MXFOP1AWriter::SetSampleRate(D10SampleRate sample_rate)
         mAudioSequenceCount = 1;
         mAudioSequenceIndex = 0;
         mAudioSequence[0] = 1920;
+        mMaxAudioSamples = 1920;
+        mMinAudioSamples = 1920;
+        mMaxFinalPaddingSamples = 0;
     } else {
         mMaxEncodedImageSize = 208541;
         mVideoSampleRate.numerator = 30000;
@@ -254,6 +267,10 @@ void D10MXFOP1AWriter::SetSampleRate(D10SampleRate sample_rate)
         mAudioSequence[2] = 1602;
         mAudioSequence[3] = 1601;
         mAudioSequence[4] = 1602;
+        mMaxAudioSamples = 1602;
+        mMinAudioSamples = 1601;
+        mMaxFinalPaddingSamples = 4; // if final frame is missing max this amount then pad with zero samples
+                                     // value must be >= 2 to support the DV sequence 1600,1602,1602,1602,1602
     }
 }
 
@@ -750,49 +767,102 @@ void D10MXFOP1AWriter::WriteContentPackage(const D10ContentPackage *content_pack
 {
     MXFPP_ASSERT(mMXFFile);
 
-    // determine sequence offset or buffer content package and determine later
+    if (mChannelCount > 0) {
+        if (mAudioSequenceCount > 1 && mAudioSequenceOffset == UNKNOWN_SEQUENCE_OFFSET) {
+            // buffer content packages if sequence offset can't yet be determined
+            if (content_package && mBufferedContentPackages.size() + 1 <= mAudioSequenceCount) {
+                mBufferedContentPackages.push_back(new D10ContentPackageInt(content_package));
+                return;
+            }
+            mAudioSequenceOffset = GetAudioSequenceOffset(content_package);
+            mAudioSequenceIndex = mAudioSequenceOffset;
 
-    if (mAudioSequenceCount > 1 && mAudioSequenceOffset == UNKNOWN_SEQUENCE_OFFSET) {
-        if (mBufferedContentPackages.size() + 1 <= mAudioSequenceCount) {
-            GetAudioSequenceOffset(content_package); // just a check
-            mBufferedContentPackages.push_back(new D10ContentPackageInt(content_package));
-            return;
+            size_t i;
+            for (i = 0; i < mBufferedContentPackages.size(); i++)
+                UpdateAES3Blocks(mBufferedContentPackages[i]);
         }
 
-        mAudioSequenceOffset = GetAudioSequenceOffset(content_package);
-        mAudioSequenceIndex = mAudioSequenceOffset;
-
-        size_t i;
-        for (i = 0; i < mBufferedContentPackages.size(); i++) {
-            WriteContentPackage(mBufferedContentPackages[i]);
-            delete mBufferedContentPackages[i];
-        }
-        mBufferedContentPackages.clear();
+        if (content_package)
+            UpdateAES3Blocks(content_package);
+        else
+            FinalUpdateAES3Blocks();
+    } else {
+        InitAES3Block(mAES3Blocks.front(), mAudioSequenceIndex);
+        mAES3Blocks.front()->setSize(AES3_BLOCK_SIZE(mAudioSequence[mAudioSequenceIndex]));
     }
 
 
-    // write system item
+    // determine number of content packages that can be written
 
-    uint32_t element_size = WriteSystemItem(content_package);
-    mMXFFile->writeFill(mSystemItemSize - element_size);
+    MXFPP_ASSERT(!mAES3Blocks.empty());
+    size_t num_complete_aes3_blocks = mAES3Blocks.size();
+    if (mAES3Blocks.back()->getSize() < AES3_BLOCK_SIZE(mAudioSequence[LAST_AES3_BLOCK_SEQ_INDEX]))
+        num_complete_aes3_blocks--; // last one is still incomplete
+
+    size_t num_cp_write = mBufferedContentPackages.size();
+    if (content_package)
+        num_cp_write++;
+
+    if (num_cp_write > num_complete_aes3_blocks) {
+        if (content_package)
+            mBufferedContentPackages.push_back(new D10ContentPackageInt(content_package)); // won't be written
+        num_cp_write = num_complete_aes3_blocks;
+    }
+
+    if (num_cp_write == 0)
+        return;
 
 
-    // write video item
+    // write content packages
 
-    mMXFFile->writeFixedKL(&VIDEO_ELEMENT_KEY, LLEN, content_package->GetVideoSize());
-    MXFPP_CHECK(mMXFFile->write(content_package->GetVideo(), content_package->GetVideoSize()) ==
-                content_package->GetVideoSize());
-    mMXFFile->writeFill(mVideoItemSize - mxfKey_extlen - LLEN - content_package->GetVideoSize());
-
-
-    // write audio item
-
-    element_size = WriteAES3AudioElement(content_package);
-    mMXFFile->writeFill(mAudioItemSize - element_size);
+    size_t i;
+    for (i = 0; i < num_cp_write; i++) {
+        const D10ContentPackage *cp_write;
+        if (i >= mBufferedContentPackages.size())
+            cp_write = content_package;
+        else
+            cp_write = mBufferedContentPackages[i];
 
 
-    mDuration++;
-    mAudioSequenceIndex = (mAudioSequenceIndex + 1) % mAudioSequenceCount;
+        // write system item
+
+        uint32_t element_size = WriteSystemItem(cp_write);
+        mMXFFile->writeFill(mSystemItemSize - element_size);
+
+
+        // write video item
+
+        mMXFFile->writeFixedKL(&VIDEO_ELEMENT_KEY, LLEN, cp_write->GetVideoSize());
+        MXFPP_CHECK(mMXFFile->write(cp_write->GetVideo(), cp_write->GetVideoSize()) == cp_write->GetVideoSize());
+        mMXFFile->writeFill(mVideoItemSize - mxfKey_extlen - LLEN - cp_write->GetVideoSize());
+
+
+        // write audio item
+
+        mMXFFile->writeFixedKL(&AUDIO_ELEMENT_KEY, LLEN, mAES3Blocks.front()->getSize());
+        MXFPP_CHECK(mMXFFile->write(mAES3Blocks.front()->getBytes(), mAES3Blocks.front()->getSize()) ==
+                                        mAES3Blocks.front()->getSize());
+        mMXFFile->writeFill(mAudioItemSize - (mxfKey_extlen + LLEN + mAES3Blocks.front()->getSize()));
+
+        // delete aes3 block if have more than 1, else keep and reset (not clear) it
+        if (mAES3Blocks.size() > 1) {
+            delete mAES3Blocks.front();
+            mAES3Blocks.pop();
+        } else {
+            mAES3Blocks.front()->setSize(0);
+        }
+
+
+        mDuration++;
+        mAudioSequenceIndex = (mAudioSequenceIndex + 1) % mAudioSequenceCount;
+    }
+
+    for (i = 0; i < num_cp_write && i < mBufferedContentPackages.size(); i++)
+        delete mBufferedContentPackages[i];
+    if (i > 0) {
+        mBufferedContentPackages.erase(mBufferedContentPackages.begin(),
+                                       mBufferedContentPackages.begin() + i);
+    }
 }
 
 int64_t D10MXFOP1AWriter::GetFileSize() const
@@ -826,17 +896,8 @@ void D10MXFOP1AWriter::CompleteFile()
     MXFPP_ASSERT(mMXFFile);
 
     // write buffered content packages
-    if (!mBufferedContentPackages.empty()) {
-        mAudioSequenceOffset = GetAudioSequenceOffset(0);
-        mAudioSequenceIndex = mAudioSequenceOffset;
-
-        size_t i;
-        for (i = 0; i < mBufferedContentPackages.size(); i++) {
-            WriteContentPackage(mBufferedContentPackages[i]);
-            delete mBufferedContentPackages[i];
-        }
-        mBufferedContentPackages.clear();
-    }
+    if (!mBufferedContentPackages.empty())
+        WriteContentPackage(0);
 
 
     // write the footer partition pack
@@ -979,55 +1040,120 @@ uint32_t D10MXFOP1AWriter::WriteSystemItem(const D10ContentPackage *content_pack
     return mxfKey_extlen + LLEN + SYSTEM_ITEM_METADATA_PACK_SIZE + mxfKey_extlen + LLEN;
 }
 
-uint32_t D10MXFOP1AWriter::WriteAES3AudioElement(const D10ContentPackage *content_package)
+void D10MXFOP1AWriter::InitAES3Block(DynamicByteArray *aes3_block, uint8_t sequence_index)
 {
-    uint32_t s, c;
-    unsigned char bytes[4];
+    aes3_block->minAllocate(AES3_BLOCK_SIZE(mMaxAudioSamples));
+    aes3_block->setSize(0);
 
-    MXFPP_CHECK(content_package->GetAudioSize() == mAudioSequence[mAudioSequenceIndex] * mAudioBytesPerSample);
+    unsigned char bytes[32];
 
-    mMXFFile->writeFixedKL(&AUDIO_ELEMENT_KEY, LLEN, mAudioSequence[mAudioSequenceIndex] * 4 * 8 + 4);
-
-    mAES3Block.setSize(0);
     bytes[0] = 0; // element header (FVUCP Valid Flag == 0 (false)
     if (mSampleRate == D10_SAMPLE_RATE_525_60I)
-        bytes[0] |= mAudioSequenceIndex & 0x07; // 5-sequence count
-    bytes[1] = (unsigned char)( mAudioSequence[mAudioSequenceIndex]       & 0xff); // samples per frame (LSB)
-    bytes[2] = (unsigned char)((mAudioSequence[mAudioSequenceIndex] >> 8) & 0xff); // samples per frame (MSB)
+        bytes[0] |= sequence_index & 0x07; // 5-sequence count
+    bytes[1] = (unsigned char)( mAudioSequence[sequence_index]       & 0xff); // samples per frame (LSB)
+    bytes[2] = (unsigned char)((mAudioSequence[sequence_index] >> 8) & 0xff); // samples per frame (MSB)
     bytes[3] = (1 << mChannelCount) - 1; // channel valid flags
-    mAES3Block.append(bytes, 4);
+    aes3_block->append(bytes, 4);
 
-    for (s = 0; s < mAudioSequence[mAudioSequenceIndex]; s++) {
-        for (c = 0; c < mChannelCount; c++) {
-            bytes[0] = (unsigned char)c; // channel number
+    if (mChannelCount == 0 && mDuration == 0) {
+        // initialize null audio once
+        uint32_t s, c;
+        for (c = 0; c < 8; c++) {
+            bytes[c * 4    ] = (unsigned char)c; // channel number
+            bytes[c * 4 + 1] = 0;
+            bytes[c * 4 + 2] = 0;
+            bytes[c * 4 + 3] = 0;
+        }
+        for (s = 0; s < mMaxAudioSamples; s++)
+            aes3_block->append(bytes, 32);
+    }
+}
 
-            if (mAudioBytesPerSample == 3) { // 24-bit
-                bytes[0] |= (content_package->GetAudio(c)[s * mAudioBytesPerSample    ] << 4) & 0xf0;
-                bytes[1] = ((content_package->GetAudio(c)[s * mAudioBytesPerSample    ] >> 4) & 0x0f) |
-                           ((content_package->GetAudio(c)[s * mAudioBytesPerSample + 1] << 4) & 0xf0);
-                bytes[2] = ((content_package->GetAudio(c)[s * mAudioBytesPerSample + 1] >> 4) & 0x0f) |
-                           ((content_package->GetAudio(c)[s * mAudioBytesPerSample + 2] << 4) & 0xf0);
-                bytes[3] = ((content_package->GetAudio(c)[s * mAudioBytesPerSample + 2] >> 4) & 0x0f);
-            } else { // 16-bit
-                bytes[1] = ((content_package->GetAudio(c)[s * mAudioBytesPerSample    ] << 4) & 0xf0);
-                bytes[2] = ((content_package->GetAudio(c)[s * mAudioBytesPerSample    ] >> 4) & 0x0f) |
-                           ((content_package->GetAudio(c)[s * mAudioBytesPerSample + 1] << 4) & 0xf0);
-                bytes[3] = ((content_package->GetAudio(c)[s * mAudioBytesPerSample + 1] >> 4) & 0x0f);
+void D10MXFOP1AWriter::UpdateAES3Blocks(const D10ContentPackage *content_package)
+{
+    MXFPP_ASSERT(!mAES3Blocks.empty());
+
+    unsigned char bytes[4];
+    uint32_t start_input_sample = 0;
+    uint32_t rem_input_samples = content_package->GetAudioSize() / mAudioBytesPerSample;
+    while (rem_input_samples > 0) {
+        uint8_t sequence_index = LAST_AES3_BLOCK_SEQ_INDEX;
+
+        DynamicByteArray *aes3_block = mAES3Blocks.back();
+        if (aes3_block->getSize() == 0)
+            InitAES3Block(aes3_block, sequence_index);
+
+        // copy audio samples
+        uint32_t rem_block_samples = mAudioSequence[sequence_index] - AES3_BLOCK_NUM_SAMPLES(aes3_block->getSize());
+        if (rem_block_samples > 0) {
+            uint32_t copy_num_samples = rem_block_samples;
+            if (copy_num_samples > rem_input_samples)
+                copy_num_samples = rem_input_samples;
+
+            uint32_t end_input_sample = start_input_sample + copy_num_samples;
+            uint32_t s, c;
+            for (s = start_input_sample; s < end_input_sample; s++) {
+                for (c = 0; c < mChannelCount; c++) {
+                    bytes[0] = (unsigned char)c; // channel number
+
+                    if (mAudioBytesPerSample == 3) { // 24-bit
+                        bytes[0] |= (content_package->GetAudio(c)[s * mAudioBytesPerSample    ] << 4) & 0xf0;
+                        bytes[1] = ((content_package->GetAudio(c)[s * mAudioBytesPerSample    ] >> 4) & 0x0f) |
+                                   ((content_package->GetAudio(c)[s * mAudioBytesPerSample + 1] << 4) & 0xf0);
+                        bytes[2] = ((content_package->GetAudio(c)[s * mAudioBytesPerSample + 1] >> 4) & 0x0f) |
+                                   ((content_package->GetAudio(c)[s * mAudioBytesPerSample + 2] << 4) & 0xf0);
+                        bytes[3] = ((content_package->GetAudio(c)[s * mAudioBytesPerSample + 2] >> 4) & 0x0f);
+                    } else { // 16-bit
+                        bytes[1] = ((content_package->GetAudio(c)[s * mAudioBytesPerSample    ] << 4) & 0xf0);
+                        bytes[2] = ((content_package->GetAudio(c)[s * mAudioBytesPerSample    ] >> 4) & 0x0f) |
+                                   ((content_package->GetAudio(c)[s * mAudioBytesPerSample + 1] << 4) & 0xf0);
+                        bytes[3] = ((content_package->GetAudio(c)[s * mAudioBytesPerSample + 1] >> 4) & 0x0f);
+                    }
+
+                    aes3_block->append(bytes, 4);
+                }
+
+                memset(bytes, 0, sizeof(bytes));
+                for (; c < 8; c++) {
+                    bytes[0] = (unsigned char)c; // channel number
+                    aes3_block->append(bytes, 4);
+                }
             }
 
-            mAES3Block.append(bytes, 4);
+
+            rem_input_samples -= copy_num_samples;
+            start_input_sample += copy_num_samples;
+            rem_block_samples -= copy_num_samples;
         }
 
-        memset(bytes, 0, sizeof(bytes));
-        for (; c < 8; c++) {
-            bytes[0] = (unsigned char)c; // channel number
-            mAES3Block.append(bytes, 4);
-        }
+        if (rem_block_samples == 0 && rem_input_samples > 0)
+            mAES3Blocks.push(new DynamicByteArray());
     }
+}
 
-    MXFPP_CHECK(mMXFFile->write(mAES3Block.getBytes(), mAES3Block.getSize()) == mAES3Block.getSize());
+void D10MXFOP1AWriter::FinalUpdateAES3Blocks()
+{
+    MXFPP_ASSERT(!mAES3Blocks.empty());
 
-    return mxfKey_extlen + LLEN + mAES3Block.getSize();
+    unsigned char bytes[32];
+    uint8_t sequence_index = LAST_AES3_BLOCK_SEQ_INDEX;
+
+    DynamicByteArray *aes3_block = mAES3Blocks.back();
+    if (aes3_block->getSize() == 0)
+        InitAES3Block(aes3_block, sequence_index);
+
+    uint32_t rem_block_samples = mAudioSequence[sequence_index] - AES3_BLOCK_NUM_SAMPLES(aes3_block->getSize());
+    if (rem_block_samples <= mMaxFinalPaddingSamples) {
+        uint32_t s, c;
+        for (c = 0; c < 8; c++) {
+            bytes[c * 4    ] = (unsigned char)c; // channel number
+            bytes[c * 4 + 1] = 0;
+            bytes[c * 4 + 2] = 0;
+            bytes[c * 4 + 3] = 0;
+        }
+        for (s = 0; s < rem_block_samples; s++)
+            aes3_block->append(bytes, 32);
+    }
 }
 
 uint8_t D10MXFOP1AWriter::GetAudioSequenceOffset(const D10ContentPackage *next_content_package)
@@ -1053,10 +1179,8 @@ uint8_t D10MXFOP1AWriter::GetAudioSequenceOffset(const D10ContentPackage *next_c
         offset++;
     }
 
-    if (offset >= mAudioSequenceCount) {
-        mxf_log_error("Invalid audio sample sequence\n");
-        throw MXFException("Invalid audio sample sequence");
-    }
+    if (offset >= mAudioSequenceCount)
+        offset = 0; // default to offset 0 for other input sample sequences (e.g. DV sample sequence)
 
     return offset;
 }
