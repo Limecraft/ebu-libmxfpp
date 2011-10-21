@@ -371,7 +371,7 @@ int main(int argc, const char **argv)
 
         writer->CompleteFile();
 
-        printf("Total frames written: %"PRId64"\n", frame_count);
+        printf("Total frames written: %"PRId64"\n", writer->GetDuration());
     }
     catch (MXFException &ex)
     {
