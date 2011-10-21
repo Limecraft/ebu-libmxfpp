@@ -127,6 +127,7 @@ int main(int argc, const char **argv)
     const char *start_timecode_str = 0;
     bool drop_frame = false;
     mxfRational aspect_ratio = {16, 9};
+    bool regtest = false;
     int value, num, den;
     int cmdln_index;
 
@@ -281,6 +282,10 @@ int main(int argc, const char **argv)
             num_audio_files++;
             cmdln_index++;
         }
+        else if (strcmp(argv[cmdln_index], "--regtest") == 0)
+        {
+            regtest = true;
+        }
         else
         {
             break;
@@ -304,6 +309,10 @@ int main(int argc, const char **argv)
         return 1;
     }
     out_filename = argv[cmdln_index];
+
+
+    if (regtest)
+        mxf_set_regtest_funcs();
 
 
     FILE *video_file = fopen(video_filename, "rb");
