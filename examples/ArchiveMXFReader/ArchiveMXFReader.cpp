@@ -101,15 +101,15 @@ _duration(-1), _actualPosition(-1), _startOfEssenceFilePos(0)
 
     // read the header partition pack and check that it has the things we expect for Archive MXF
 
-    auto_ptr<Partition> headerPartition(Partition::findAndReadHeaderPartition(_mxfFile));
-    if (headerPartition.get() == 0)
+    if (!_mxfFile->readHeaderPartition())
     {
         throw MXFException("Failed to find header partition");
     }
+    Partition &headerPartition = _mxfFile->getPartition(0);
 
-    MXFPP_CHECK(is_op_1a(headerPartition->getOperationalPattern()));
+    MXFPP_CHECK(is_op_1a(headerPartition.getOperationalPattern()));
 
-    vector<mxfUL> ecLabels = headerPartition->getEssenceContainers();
+    vector<mxfUL> ecLabels = headerPartition.getEssenceContainers();
     if (ecLabels.size() != 3)
     {
         throw MXFException("Expecting 3 essence container labels in header partition pack");
@@ -133,7 +133,7 @@ _duration(-1), _actualPosition(-1), _startOfEssenceFilePos(0)
     MXFPP_CHECK(mxf_is_header_metadata(&key));
 
     int64_t headerStartPos = _mxfFile->tell() - llen - mxfKey_extlen;
-    _headerMetadata->read(_mxfFile, headerPartition.get(), &key, llen, len);
+    _headerMetadata->read(_mxfFile, &headerPartition, &key, llen, len);
 
     Preface *preface = _headerMetadata->getPreface();
     ContentStorage *content = preface->getContentStorage();
@@ -198,12 +198,12 @@ _duration(-1), _actualPosition(-1), _startOfEssenceFilePos(0)
 
     // position at start of essence
 
-    _mxfFile->seek(headerStartPos + headerPartition->getHeaderByteCount() +
-        headerPartition->getIndexByteCount(), SEEK_SET);
+    _mxfFile->seek(headerStartPos + headerPartition.getHeaderByteCount() +
+        headerPartition.getIndexByteCount(), SEEK_SET);
     _position = 0;
     _actualPosition = 0;
-    _startOfEssenceFilePos = headerStartPos + headerPartition->getHeaderByteCount() +
-        headerPartition->getIndexByteCount();
+    _startOfEssenceFilePos = headerStartPos + headerPartition.getHeaderByteCount() +
+        headerPartition.getIndexByteCount();
 
 
 

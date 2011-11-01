@@ -81,7 +81,6 @@ class Partition
 {
 public:
     static Partition* read(File *file, const mxfKey *key);
-    static Partition* findAndReadHeaderPartition(File *file);
 
     Partition();
     Partition(::MXFPartition *cPartition);

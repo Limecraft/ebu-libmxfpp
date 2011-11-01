@@ -65,7 +65,8 @@ public:
     Partition& getPartition(size_t index);
     const std::vector<Partition*>& getPartitions() const { return _partitions; }
 
-    void readPartitions(mxfpp::Partition *header_partition);
+    bool readHeaderPartition();
+    bool readPartitions();
 
     void readK(mxfKey *key);
     void readL(uint8_t *llen, uint64_t *len);

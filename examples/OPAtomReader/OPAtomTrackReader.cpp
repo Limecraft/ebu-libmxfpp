@@ -67,7 +67,6 @@ const char * const ERROR_STRINGS[] =
 OPAtomOpenResult OPAtomTrackReader::Open(std::string filename, OPAtomTrackReader **track_reader)
 {
     File *file = 0;
-    Partition *header_partition = 0;
 
     try
     {
@@ -82,31 +81,26 @@ OPAtomOpenResult OPAtomTrackReader::Open(std::string filename, OPAtomTrackReader
         }
 
         // read the header partition pack and check the operational pattern
-        header_partition = Partition::findAndReadHeaderPartition(file);
-        if (!header_partition)
+        if (!file->readHeaderPartition())
             throw OP_ATOM_NO_HEADER_PARTITION;
+        Partition &header_partition = file->getPartition(0);
 
-        if (!is_op_atom(header_partition->getOperationalPattern()))
+        if (!is_op_atom(header_partition.getOperationalPattern()))
             throw OP_ATOM_NOT_OP_ATOM;
 
 
-        *track_reader = new OPAtomTrackReader(filename, file, header_partition);
-
-        delete header_partition;
-        header_partition = 0;
+        *track_reader = new OPAtomTrackReader(filename, file);
 
         return OP_ATOM_SUCCESS;
     }
     catch (const OPAtomOpenResult &ex)
     {
         delete file;
-        delete header_partition;
         return ex;
     }
     catch (...)
     {
         delete file;
-        delete header_partition;
         return OP_ATOM_FAIL;
     }
 }
@@ -122,7 +116,7 @@ string OPAtomTrackReader::ErrorToString(OPAtomOpenResult result)
 
 
 
-OPAtomTrackReader::OPAtomTrackReader(string filename, File *file, Partition *header_partition)
+OPAtomTrackReader::OPAtomTrackReader(string filename, File *file)
 {
     mFilename = filename;
 
@@ -144,9 +138,10 @@ OPAtomTrackReader::OPAtomTrackReader(string filename, File *file, Partition *hea
         mxfKey key;
         uint8_t llen;
         uint64_t len;
+        Partition &header_partition = file->getPartition(0);
 
         // get essence container label
-        vector<mxfUL> container_labels = header_partition->getEssenceContainers();
+        vector<mxfUL> container_labels = header_partition.getEssenceContainers();
         MXFPP_CHECK(container_labels.size() == 1);
         essence_label = container_labels[0];
 
@@ -161,7 +156,7 @@ OPAtomTrackReader::OPAtomTrackReader(string filename, File *file, Partition *hea
         if (!mxf_is_header_metadata(&key))
             throw OP_ATOM_FAIL;
 
-        header_metadata->read(file, header_partition, &key, llen, len);
+        header_metadata->read(file, &header_partition, &key, llen, len);
 
 
         Preface *preface = header_metadata->getPreface();

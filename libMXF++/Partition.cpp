@@ -75,20 +75,6 @@ Partition* Partition::read(File *file, const mxfKey *key)
     return new Partition(cPartition);
 }
 
-Partition* Partition::findAndReadHeaderPartition(File *file)
-{
-    mxfKey key;
-    uint8_t llen;
-    uint64_t len;
-
-    if (!mxf_read_header_pp_kl(file->getCFile(), &key, &llen, &len))
-    {
-        return 0;
-    }
-
-    return read(file, &key);
-}
-
 
 Partition::Partition()
 {

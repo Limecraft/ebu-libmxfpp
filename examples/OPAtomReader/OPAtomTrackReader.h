@@ -86,7 +86,7 @@ public:
     bool IsEOF();
 
 private:
-    OPAtomTrackReader(std::string filename, mxfpp::File *mxf_file, mxfpp::Partition *header_partition);
+    OPAtomTrackReader(std::string filename, mxfpp::File *mxf_file);
 
 private:
     std::string mFilename;

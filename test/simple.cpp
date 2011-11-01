@@ -119,18 +119,18 @@ static void testRead(string filename)
 
 
     // read header partition
-    auto_ptr<Partition> headerPartition(Partition::findAndReadHeaderPartition(file.get()));
-    if (headerPartition.get() == 0)
+    if (!file->readHeaderPartition())
     {
         throw "Could not find header partition";
     }
+    Partition &headerPartition = file->getPartition(0);
 
 
     // read header metadata
     file->readNextNonFillerKL(&key, &llen, &len);
     if (HeaderMetadata::isHeaderMetadata(&key))
     {
-        headerMetadata->read(file.get(), headerPartition.get(), &key, llen, len);
+        headerMetadata->read(file.get(), &headerPartition, &key, llen, len);
         printf("Read header metadata\n");
     }
     else
