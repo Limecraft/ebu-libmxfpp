@@ -349,7 +349,6 @@ int main(int argc, const char **argv)
         unsigned char audio[1920*3];
         uint32_t audio_sample_count;
 
-        int64_t frame_count = 0;
         while (true) {
             writer->SetUserTimecode(writer->GenerateUserTimecode());
 
@@ -374,8 +373,6 @@ int main(int argc, const char **argv)
                 break;
 
             writer->WriteContentPackage();
-
-            frame_count++;
         }
 
         writer->CompleteFile();
