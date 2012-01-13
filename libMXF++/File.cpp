@@ -33,6 +33,8 @@
 #include "config.h"
 #endif
 
+#include <cstdio>
+
 #include <algorithm>
 
 #include <libMXF++/MXF.h>
