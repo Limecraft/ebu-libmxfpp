@@ -36,6 +36,7 @@
 #endif
 
 #include <cstring>
+#include <cstdio>
 
 #include <libMXF++/MXF.h>
 

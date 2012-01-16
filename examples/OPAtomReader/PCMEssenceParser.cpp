@@ -35,6 +35,8 @@
 #include "config.h"
 #endif
 
+#include <cstdio>
+
 #include <libMXF++/MXF.h>
 
 #include "PCMEssenceParser.h"
