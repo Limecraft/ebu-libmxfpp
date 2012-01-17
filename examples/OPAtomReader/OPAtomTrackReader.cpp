@@ -42,6 +42,7 @@
 #include <libMXF++/extensions/TaggedValue.h>
 
 #include <mxf/mxf_avid.h>
+#include <mxf/mxf_macros.h>
 
 #include "OPAtomTrackReader.h"
 
@@ -60,8 +61,6 @@ const char * const ERROR_STRINGS[] =
     "no file source package found",
     "essence data not found"
 };
-
-#define ERROR_STRINGS_SIZE      (sizeof(ERROR_STRINGS) / sizeof(char*))
 
 
 
@@ -109,7 +108,7 @@ OPAtomOpenResult OPAtomTrackReader::Open(std::string filename, OPAtomTrackReader
 string OPAtomTrackReader::ErrorToString(OPAtomOpenResult result)
 {
     size_t index = (size_t)(-1 * (int)result);
-    MXFPP_ASSERT(index < ERROR_STRINGS_SIZE);
+    MXFPP_ASSERT(index < ARRAY_SIZE(ERROR_STRINGS));
 
     return ERROR_STRINGS[index];
 }

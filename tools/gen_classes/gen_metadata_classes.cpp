@@ -41,6 +41,7 @@
 #include <ctype.h>
 
 #include <mxf/mxf.h>
+#include <mxf/mxf_macros.h>
 
 #define CHECK(cmd) \
     if (!(cmd)) \
@@ -54,7 +55,7 @@ static const char* get_sw_ref_name(MXFDataModel *dataModel, MXFItemDef *itemDef,
     (void)dataModel;
 
 
-    int i;
+    size_t i;
     struct NameInfo
     {
         const mxfKey *key;
@@ -75,7 +76,7 @@ static const char* get_sw_ref_name(MXFDataModel *dataModel, MXFItemDef *itemDef,
         { &MXF_ITEM_K(Preface, PrimaryPackage), "GenericPackage*" },
     };
 
-    for (i = 0; i < (int)(sizeof(nameInfo) / sizeof(struct NameInfo)); i++)
+    for (i = 0; i < ARRAY_SIZE(nameInfo); i++)
     {
         if (mxf_equals_key(&itemDef->key, nameInfo[i].key))
         {
@@ -83,7 +84,7 @@ static const char* get_sw_ref_name(MXFDataModel *dataModel, MXFItemDef *itemDef,
             break;
         }
     }
-    if (i == sizeof(nameInfo) / sizeof(struct NameInfo))
+    if (i == ARRAY_SIZE(nameInfo))
     {
         fprintf(stderr, "Unknown class strong/weak reference\n");
         strcpy(refName, "XXX");

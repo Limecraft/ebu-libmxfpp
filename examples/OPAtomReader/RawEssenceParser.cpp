@@ -39,6 +39,7 @@
 
 #include <mxf/mxf_labels_and_keys.h>
 #include <mxf/mxf_avid_labels_and_keys.h>
+#include <mxf/mxf_macros.h>
 
 #include "RawEssenceParser.h"
 #include "FixedSizeEssenceParser.h"
@@ -98,8 +99,6 @@ const SupportedFormat SUPPORTED_FORMATS[] =
     {MXF_EC_L(AES3ClipWrapped),                     PCM_PARSER,                      0},
 };
 
-#define NUM_SUPPORTED_FORMATS   (sizeof(SUPPORTED_FORMATS) / sizeof(SupportedFormat))
-
 
 
 
@@ -109,7 +108,7 @@ RawEssenceParser* RawEssenceParser::Create(File *file, int64_t essence_length, m
 {
     int64_t fixed_frame_size;
     size_t i;
-    for (i = 0; i < NUM_SUPPORTED_FORMATS; i++) {
+    for (i = 0; i < ARRAY_SIZE(SUPPORTED_FORMATS); i++) {
         if (mxf_equals_ul(&essence_label, &SUPPORTED_FORMATS[i].essence_label)) {
             switch (SUPPORTED_FORMATS[i].parser_type)
             {
