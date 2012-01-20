@@ -53,14 +53,14 @@ public:
         mxf_initialise_list(&_cPartitions, NULL);
     }
 
-    PartitionList(vector<Partition*> &partitions)
+    PartitionList(vector<Partition*> &partitions, size_t firstPartitionIndex = 0)
     {
         mxf_initialise_list(&_cPartitions, NULL);
 
-        vector<Partition*>::const_iterator iter;
-        for (iter = partitions.begin(); iter != partitions.end(); iter++)
+        size_t i;
+        for (i = firstPartitionIndex; i < partitions.size(); i++)
         {
-            MXFPP_CHECK(mxf_append_partition(&_cPartitions, (*iter)->getCPartition()));
+            MXFPP_CHECK(mxf_append_partition(&_cPartitions, partitions[i]->getCPartition()));
         }
     }
 
@@ -105,12 +105,17 @@ File* File::openModify(string filename)
 }
 
 File::File(::MXFFile *cFile)
-: _cFile(cFile)
-{}
+{
+    _cFile = cFile;
+    _cOriginalFile = 0;
+    _cMemoryFile = 0;
+    _cFirstMemoryPartitionIndex = (size_t)(-1);
+}
 
 File::~File()
 {
     mxf_file_close(&_cFile);
+    mxf_file_close(&_cOriginalFile);
 
     size_t i;
     for (i = 0; i < _partitions.size(); i++)
@@ -156,7 +161,13 @@ void File::writeRIP()
 
 void File::updatePartitions()
 {
-    PartitionList partitionList(_partitions);
+    size_t firstPartitionIndex = 0;
+    if (_cMemoryFile)
+        firstPartitionIndex = _cFirstMemoryPartitionIndex;
+    if (firstPartitionIndex >= _partitions.size())
+        return;
+
+    PartitionList partitionList(_partitions, firstPartitionIndex);
 
     MXFPP_CHECK(mxf_update_partitions(_cFile, partitionList.getList()));
 }
@@ -433,5 +444,39 @@ void File::fillToPosition(uint64_t position)
 void File::writeFill(uint32_t size)
 {
     MXFPP_CHECK(mxf_write_fill(_cFile, size));
+}
+
+void File::openMemoryFile(uint32_t chunkSize)
+{
+    MXFPP_CHECK(!_cMemoryFile);
+
+    MXFMemoryFile *memFile;
+    MXFPP_CHECK(mxf_mem_file_open_new(chunkSize, mxf_file_tell(_cFile), &memFile));
+
+    // set min llen on memory file if already set on the original file
+    MXFFile *mxfMemFile = mxf_mem_file_get_file(memFile);
+    mxf_file_set_min_llen(mxfMemFile, mxf_get_min_llen(_cFile));
+
+    _cOriginalFile = _cFile;
+    _cFile = mxfMemFile;
+    _cMemoryFile = memFile;
+    _cFirstMemoryPartitionIndex = _partitions.size();
+}
+
+void File::closeMemoryFile()
+{
+    if (!_cMemoryFile)
+        return;
+
+    MXFPP_CHECK(mxf_mem_file_flush_to_file(_cMemoryFile, _cOriginalFile));
+
+    // set min llen on original file if it was set on the memory file
+    mxf_file_set_min_llen(_cOriginalFile, mxf_get_min_llen(_cFile));
+
+    mxf_file_close(&_cFile);
+    _cFile = _cOriginalFile;
+    _cOriginalFile = 0;
+    _cMemoryFile = 0;
+    _cFirstMemoryPartitionIndex = (size_t)(-1);
 }
 

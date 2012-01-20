@@ -37,6 +37,8 @@
 
 #include <libMXF++/Partition.h>
 
+#include <mxf/mxf_memory_file.h>
+
 
 
 namespace mxfpp
@@ -106,12 +108,20 @@ public:
     void writeFill(uint32_t size);
 
 
+    void openMemoryFile(uint32_t chunkSize);
+    bool isMemoryFileOpen() const { return _cMemoryFile != 0; }
+    void closeMemoryFile();
+
+
     ::MXFFile* getCFile() const { return _cFile; }
 
 private:
     std::vector<Partition*> _partitions;
 
-    ::MXFFile* _cFile;
+    ::MXFFile *_cFile;
+    ::MXFFile *_cOriginalFile;
+    MXFMemoryFile *_cMemoryFile;
+    size_t _cFirstMemoryPartitionIndex;
 };
 
 
