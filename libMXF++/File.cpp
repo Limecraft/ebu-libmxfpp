@@ -147,6 +147,7 @@ Partition& File::createPartition()
     if (previousPartition)
     {
         MXFPP_CHECK(mxf_initialise_with_partition(previousPartition->getCPartition(), partition->getCPartition()));
+        partition->setPreviousPartition(previousPartition->getThisPartition());
     }
 
     return (*_partitions.back());
