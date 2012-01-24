@@ -113,6 +113,8 @@ public:
     void closeMemoryFile();
 
 
+    ::MXFFile* swapCFile(::MXFFile *newCFile);
+
     ::MXFFile* getCFile() const { return _cFile; }
 
 private:

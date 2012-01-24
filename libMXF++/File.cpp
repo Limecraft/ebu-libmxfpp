@@ -481,3 +481,10 @@ void File::closeMemoryFile()
     _cFirstMemoryPartitionIndex = (size_t)(-1);
 }
 
+::MXFFile* File::swapCFile(::MXFFile *newCFile)
+{
+    ::MXFFile *ret = _cFile;
+    _cFile = newCFile;
+    return ret;
+}
+
