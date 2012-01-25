@@ -53,12 +53,19 @@ public:
         mxf_initialise_list(&_cPartitions, NULL);
     }
 
-    PartitionList(vector<Partition*> &partitions, size_t firstPartitionIndex = 0)
+    PartitionList(vector<Partition*> &partitions, size_t firstPartitionIndex = 0,
+                  size_t lastPartitionIndex = (size_t)(-1))
     {
         mxf_initialise_list(&_cPartitions, NULL);
 
+        size_t end = partitions.size();
+        if (lastPartitionIndex != (size_t)(-1) && lastPartitionIndex + 1 < partitions.size())
+        {
+            end = lastPartitionIndex + 1;
+        }
+
         size_t i;
-        for (i = firstPartitionIndex; i < partitions.size(); i++)
+        for (i = firstPartitionIndex; i < end; i++)
         {
             MXFPP_CHECK(mxf_append_partition(&_cPartitions, partitions[i]->getCPartition()));
         }
@@ -109,7 +116,8 @@ File::File(::MXFFile *cFile)
     _cFile = cFile;
     _cOriginalFile = 0;
     _cMemoryFile = 0;
-    _cFirstMemoryPartitionIndex = (size_t)(-1);
+    _firstMemoryPartitionIndex = (size_t)(-1);
+    _lastMemoryPartitionIndex = (size_t)(-1);
 }
 
 File::~File()
@@ -162,13 +170,15 @@ void File::writeRIP()
 
 void File::updatePartitions()
 {
-    size_t firstPartitionIndex = 0;
-    if (_cMemoryFile)
-        firstPartitionIndex = _cFirstMemoryPartitionIndex;
+    size_t firstPartitionIndex = 0, lastPartitionIndex = (size_t)(-1);
+    if (_cMemoryFile) {
+        firstPartitionIndex = _firstMemoryPartitionIndex;
+        lastPartitionIndex = _lastMemoryPartitionIndex;
+    }
     if (firstPartitionIndex >= _partitions.size())
         return;
 
-    PartitionList partitionList(_partitions, firstPartitionIndex);
+    PartitionList partitionList(_partitions, firstPartitionIndex, lastPartitionIndex);
 
     MXFPP_CHECK(mxf_update_partitions(_cFile, partitionList.getList()));
 }
@@ -461,7 +471,14 @@ void File::openMemoryFile(uint32_t chunkSize)
     _cOriginalFile = _cFile;
     _cFile = mxfMemFile;
     _cMemoryFile = memFile;
-    _cFirstMemoryPartitionIndex = _partitions.size();
+    _firstMemoryPartitionIndex = _partitions.size();
+    _lastMemoryPartitionIndex = (size_t)(-1);
+}
+
+void File::setMemoryPartitionIndexes(size_t first, size_t last)
+{
+    _firstMemoryPartitionIndex = first;
+    _lastMemoryPartitionIndex = last;
 }
 
 void File::closeMemoryFile()
@@ -478,7 +495,8 @@ void File::closeMemoryFile()
     _cFile = _cOriginalFile;
     _cOriginalFile = 0;
     _cMemoryFile = 0;
-    _cFirstMemoryPartitionIndex = (size_t)(-1);
+    _firstMemoryPartitionIndex = (size_t)(-1);
+    _lastMemoryPartitionIndex = (size_t)(-1);
 }
 
 ::MXFFile* File::swapCFile(::MXFFile *newCFile)

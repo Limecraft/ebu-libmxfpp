@@ -109,6 +109,7 @@ public:
 
 
     void openMemoryFile(uint32_t chunkSize);
+    void setMemoryPartitionIndexes(size_t first, size_t last = (size_t)(-1));
     bool isMemoryFileOpen() const { return _cMemoryFile != 0; }
     void closeMemoryFile();
 
@@ -123,7 +124,8 @@ private:
     ::MXFFile *_cFile;
     ::MXFFile *_cOriginalFile;
     MXFMemoryFile *_cMemoryFile;
-    size_t _cFirstMemoryPartitionIndex;
+    size_t _firstMemoryPartitionIndex;
+    size_t _lastMemoryPartitionIndex;
 };
 
 
