@@ -281,8 +281,13 @@ bool File::readPartitions()
             // start from footer partition and work back to the header partition
 
             this_partition = header_partition->getFooterPartition();
-            if (this_partition <= header_partition->getThisPartition())
-                throw false;
+
+            if (this_partition <= header_partition->getThisPartition()) {
+                mxf_log_warn("File is missing both a RIP and a footer partition offset in the header partition pack\n");
+                if (!mxf_find_footer_partition(_cFile))
+                    throw false;
+                this_partition = mxf_file_tell(_cFile) - mxf_get_runin_len(_cFile);
+            }
 
             do {
                 seek(mxf_get_runin_len(_cFile) + this_partition, SEEK_SET);
