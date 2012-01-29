@@ -48,7 +48,7 @@ using namespace mxfpp;
 
 #define UNKNOWN_SEQUENCE_OFFSET         255
 
-#define LAST_AES3_BLOCK_SEQ_INDEX       ((mAudioSequenceIndex + mAES3Blocks.size() - 1) % mAudioSequenceCount)
+#define LAST_AES3_BLOCK_SEQ_INDEX       (uint8_t)((mAudioSequenceIndex + mAES3Blocks.size() - 1) % mAudioSequenceCount)
 #define AES3_BLOCK_SIZE(num_samples)    (4 + num_samples * 32)
 #define AES3_BLOCK_NUM_SAMPLES(size)    ((size - 4) / 32)
 
