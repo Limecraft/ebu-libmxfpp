@@ -1,4 +1,5 @@
 EXTRA_DIST = \
+	inttypes.h \
 	libMXF++.sln \
 	libMXF++/libMXF++.vcproj \
 	examples/archivemxfreader/archivemxfreader.vcproj \
