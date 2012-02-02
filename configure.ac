@@ -1,4 +1,4 @@
-AC_INIT([libMXF++], [1.0.1], [], [libmxf++])
+AC_INIT([libMXF++], [1.0.2], [], [libmxf++])
 AC_CONFIG_SRCDIR([libMXF++/File.cpp])
 AC_CONFIG_HEADER([config.h])
 AC_CONFIG_MACRO_DIR([m4])
@@ -15,7 +15,7 @@ dnl - library source changed -> increment REVISION
 dnl - interfaces added/removed/changed -> increment CURRENT, REVISION = 0
 dnl - interfaces added -> increment AGE
 dnl - interfaces removed -> AGE = 0
-LIBMXFPP_LIBVERSION="2:0:0"
+LIBMXFPP_LIBVERSION="3:0:0"
 AC_SUBST(LIBMXFPP_LIBVERSION)
 
 
@@ -119,7 +119,7 @@ dnl-----------------------------------------------------------------------------
 dnl -- Check for modules
 dnl-----------------------------------------------------------------------------
 
-PKG_CHECK_MODULES(LIBMXF, libMXF-1.0 >= 1.0.1)
+PKG_CHECK_MODULES(LIBMXF, libMXF-1.0 >= 1.0.2)
 AC_SUBST(LIBMXF_CFLAGS)
 AC_SUBST(LIBMXF_LIBS)
 
