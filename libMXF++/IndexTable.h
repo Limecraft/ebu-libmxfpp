@@ -53,19 +53,19 @@ public:
     IndexTableSegment(::MXFIndexTableSegment *cSegment);
     virtual ~IndexTableSegment();
 
-    mxfUUID getInstanceUID();
-    mxfRational getIndexEditRate();
-    int64_t getIndexStartPosition();
-    int64_t getIndexDuration();
-    uint32_t getEditUnitByteCount();
-    uint32_t getIndexSID();
-    uint32_t getBodySID();
-    uint8_t getSliceCount();
-    uint8_t getPosTableCount();
+    mxfUUID getInstanceUID() const;
+    mxfRational getIndexEditRate() const;
+    int64_t getIndexStartPosition() const;
+    int64_t getIndexDuration() const;
+    uint32_t getEditUnitByteCount() const;
+    uint32_t getIndexSID() const;
+    uint32_t getBodySID() const;
+    uint8_t getSliceCount() const;
+    uint8_t getPosTableCount() const;
     // deltaEntryArray
     // indexEntryArray
-    bool haveDeltaEntryAtDelta(uint32_t delta, uint8_t slice);
-    const MXFDeltaEntry* getDeltaEntryAtDelta(uint32_t delta, uint8_t slice);
+    bool haveDeltaEntryAtDelta(uint32_t delta, uint8_t slice) const;
+    const MXFDeltaEntry* getDeltaEntryAtDelta(uint32_t delta, uint8_t slice) const;
 
     void setInstanceUID(mxfUUID value);
     void setIndexEditRate(mxfRational value);

@@ -90,7 +90,7 @@ public:
     ~DataModel();
 
     void finalise();
-    bool check();
+    bool check() const;
 
     void registerSetDef(std::string name, const mxfKey *parentKey, const mxfKey *key);
     void registerItemDef(std::string name, const mxfKey *setKey,  const mxfKey *key,
@@ -104,13 +104,13 @@ public:
     ItemType* registerInterpretType(std::string name, unsigned int typeId, unsigned int interpretedTypeId,
                                     unsigned int fixedArraySize);
 
-    bool findSetDef(const mxfKey *key, SetDef **setDef);
-    bool findItemDef(const mxfKey *key, ItemDef **itemDef);
+    bool findSetDef(const mxfKey *key, SetDef **setDef) const;
+    bool findItemDef(const mxfKey *key, ItemDef **itemDef) const;
 
-    ItemType* getItemDefType(unsigned int typeId);
+    ItemType* getItemDefType(unsigned int typeId) const;
 
-    bool isSubclassOf(const mxfKey *setKey, const mxfKey *parentSetKey);
-    bool isSubclassOf(const MetadataSet *set, const mxfKey *parentSetKey);
+    bool isSubclassOf(const mxfKey *setKey, const mxfKey *parentSetKey) const;
+    bool isSubclassOf(const MetadataSet *set, const mxfKey *parentSetKey) const;
 
 
     ::MXFDataModel* getCDataModel() const { return _cDataModel; }

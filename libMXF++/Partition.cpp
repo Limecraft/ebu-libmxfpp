@@ -171,72 +171,72 @@ void Partition::addEssenceContainer(mxfUL essenceContainer)
     MXFPP_CHECK(mxf_append_partition_esscont_label(_cPartition, &essenceContainer));
 }
 
-const mxfKey* Partition::getKey()
+const mxfKey* Partition::getKey() const
 {
     return &_cPartition->key;
 }
 
-uint16_t Partition::getMajorVersion()
+uint16_t Partition::getMajorVersion() const
 {
     return _cPartition->majorVersion;
 }
 
-uint16_t Partition::getMinorVersion()
+uint16_t Partition::getMinorVersion() const
 {
     return _cPartition->minorVersion;
 }
 
-uint32_t Partition::getKagSize()
+uint32_t Partition::getKagSize() const
 {
     return _cPartition->kagSize;
 }
 
-uint64_t Partition::getThisPartition()
+uint64_t Partition::getThisPartition() const
 {
     return _cPartition->thisPartition;
 }
 
-uint64_t Partition::getPreviousPartition()
+uint64_t Partition::getPreviousPartition() const
 {
     return _cPartition->previousPartition;
 }
 
-uint64_t Partition::getFooterPartition()
+uint64_t Partition::getFooterPartition() const
 {
     return _cPartition->footerPartition;
 }
 
-uint64_t Partition::getHeaderByteCount()
+uint64_t Partition::getHeaderByteCount() const
 {
     return _cPartition->headerByteCount;
 }
 
-uint64_t Partition::getIndexByteCount()
+uint64_t Partition::getIndexByteCount() const
 {
     return _cPartition->indexByteCount;
 }
 
-uint32_t Partition::getIndexSID()
+uint32_t Partition::getIndexSID() const
 {
     return _cPartition->indexSID;
 }
 
-uint64_t Partition::getBodyOffset()
+uint64_t Partition::getBodyOffset() const
 {
     return _cPartition->bodyOffset;
 }
 
-uint32_t Partition::getBodySID()
+uint32_t Partition::getBodySID() const
 {
     return _cPartition->bodySID;
 }
 
-const mxfUL* Partition::getOperationalPattern()
+const mxfUL* Partition::getOperationalPattern() const
 {
     return &_cPartition->operationalPattern;
 }
 
-vector<mxfUL> Partition::getEssenceContainers()
+vector<mxfUL> Partition::getEssenceContainers() const
 {
     vector<mxfUL> result;
     ::MXFListIterator iter;

@@ -103,7 +103,7 @@ void DataModel::finalise()
     MXFPP_CHECK(mxf_finalise_data_model(_cDataModel));
 }
 
-bool DataModel::check()
+bool DataModel::check() const
 {
     return mxf_check_data_model(_cDataModel) != 0;
 }
@@ -155,7 +155,7 @@ ItemType* DataModel::registerInterpretType(string name, unsigned int typeId, uns
     return new ItemType(cItemType);
 }
 
-bool DataModel::findSetDef(const mxfKey *key, SetDef **setDef)
+bool DataModel::findSetDef(const mxfKey *key, SetDef **setDef) const
 {
     ::MXFSetDef *cSetDef;
     if (mxf_find_set_def(_cDataModel, key, &cSetDef))
@@ -166,7 +166,7 @@ bool DataModel::findSetDef(const mxfKey *key, SetDef **setDef)
     return false;
 }
 
-bool DataModel::findItemDef(const mxfKey *key, ItemDef **itemDef)
+bool DataModel::findItemDef(const mxfKey *key, ItemDef **itemDef) const
 {
     ::MXFItemDef *cItemDef;
     if (mxf_find_item_def(_cDataModel, key, &cItemDef))
@@ -177,19 +177,19 @@ bool DataModel::findItemDef(const mxfKey *key, ItemDef **itemDef)
     return false;
 }
 
-ItemType* DataModel::getItemDefType(unsigned int typeId)
+ItemType* DataModel::getItemDefType(unsigned int typeId) const
 {
     ::MXFItemType *cItemType = mxf_get_item_def_type(_cDataModel, typeId);
     MXFPP_CHECK(cItemType != 0);
     return new ItemType(cItemType);
 }
 
-bool DataModel::isSubclassOf(const mxfKey *setKey, const mxfKey *parentSetKey)
+bool DataModel::isSubclassOf(const mxfKey *setKey, const mxfKey *parentSetKey) const
 {
     return mxf_is_subclass_of(_cDataModel, setKey, parentSetKey) != 0;
 }
 
-bool DataModel::isSubclassOf(const MetadataSet *set, const mxfKey *parentSetKey)
+bool DataModel::isSubclassOf(const MetadataSet *set, const mxfKey *parentSetKey) const
 {
     return isSubclassOf(set->getKey(), parentSetKey);
 }

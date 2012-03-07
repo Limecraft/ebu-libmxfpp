@@ -103,20 +103,20 @@ public:
     void addEssenceContainer(const mxfUL *essenceContainer);
     void addEssenceContainer(mxfUL essenceContainer);
 
-    const mxfKey* getKey();
-    uint16_t getMajorVersion();
-    uint16_t getMinorVersion();
-    uint32_t getKagSize();
-    uint64_t getThisPartition();
-    uint64_t getPreviousPartition();
-    uint64_t getFooterPartition();
-    uint64_t getHeaderByteCount();
-    uint64_t getIndexByteCount();
-    uint32_t getIndexSID();
-    uint64_t getBodyOffset();
-    uint32_t getBodySID();
-    const mxfUL* getOperationalPattern();
-    std::vector<mxfUL> getEssenceContainers();
+    const mxfKey* getKey() const;
+    uint16_t getMajorVersion() const;
+    uint16_t getMinorVersion() const;
+    uint32_t getKagSize() const;
+    uint64_t getThisPartition() const;
+    uint64_t getPreviousPartition() const;
+    uint64_t getFooterPartition() const;
+    uint64_t getHeaderByteCount() const;
+    uint64_t getIndexByteCount() const;
+    uint32_t getIndexSID() const;
+    uint64_t getBodyOffset() const;
+    uint32_t getBodySID() const;
+    const mxfUL* getOperationalPattern() const;
+    std::vector<mxfUL> getEssenceContainers() const;
 
     void markHeaderStart(File *file);
     void markHeaderEnd(File *file);

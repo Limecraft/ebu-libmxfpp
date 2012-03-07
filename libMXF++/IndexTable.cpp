@@ -71,52 +71,52 @@ IndexTableSegment::~IndexTableSegment()
 }
 
 
-mxfUUID IndexTableSegment::getInstanceUID()
+mxfUUID IndexTableSegment::getInstanceUID() const
 {
     return _cSegment->instanceUID;
 }
 
-mxfRational IndexTableSegment::getIndexEditRate()
+mxfRational IndexTableSegment::getIndexEditRate() const
 {
     return _cSegment->indexEditRate;
 }
 
-int64_t IndexTableSegment::getIndexStartPosition()
+int64_t IndexTableSegment::getIndexStartPosition() const
 {
     return _cSegment->indexStartPosition;
 }
 
-int64_t IndexTableSegment::getIndexDuration()
+int64_t IndexTableSegment::getIndexDuration() const
 {
     return _cSegment->indexDuration;
 }
 
-uint32_t IndexTableSegment::getEditUnitByteCount()
+uint32_t IndexTableSegment::getEditUnitByteCount() const
 {
     return _cSegment->editUnitByteCount;
 }
 
-uint32_t IndexTableSegment::getIndexSID()
+uint32_t IndexTableSegment::getIndexSID() const
 {
     return _cSegment->indexSID;
 }
 
-uint32_t IndexTableSegment::getBodySID()
+uint32_t IndexTableSegment::getBodySID() const
 {
     return _cSegment->bodySID;
 }
 
-uint8_t IndexTableSegment::getSliceCount()
+uint8_t IndexTableSegment::getSliceCount() const
 {
     return _cSegment->sliceCount;
 }
 
-uint8_t IndexTableSegment::getPosTableCount()
+uint8_t IndexTableSegment::getPosTableCount() const
 {
     return _cSegment->posTableCount;
 }
 
-bool IndexTableSegment::haveDeltaEntryAtDelta(uint32_t delta, uint8_t slice)
+bool IndexTableSegment::haveDeltaEntryAtDelta(uint32_t delta, uint8_t slice) const
 {
     MXFDeltaEntry *entry = _cSegment->deltaEntryArray;
     while (entry &&
@@ -129,7 +129,7 @@ bool IndexTableSegment::haveDeltaEntryAtDelta(uint32_t delta, uint8_t slice)
     return (entry && entry->slice == slice && entry->elementData == delta);
 }
 
-const MXFDeltaEntry* IndexTableSegment::getDeltaEntryAtDelta(uint32_t delta, uint8_t slice)
+const MXFDeltaEntry* IndexTableSegment::getDeltaEntryAtDelta(uint32_t delta, uint8_t slice) const
 {
     MXFDeltaEntry *entry = _cSegment->deltaEntryArray;
     while (entry &&
