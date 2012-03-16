@@ -150,7 +150,9 @@ public:
     mxfRGBALayoutComponent getRGBALayoutComponentItem(const mxfKey *itemKey) const;
     std::string getStringItem(const mxfKey *itemKey) const;
     MetadataSet* getStrongRefItem(const mxfKey *itemKey) const;
+    MetadataSet* getStrongRefItemLight(const mxfKey *itemKey) const;
     MetadataSet* getWeakRefItem(const mxfKey *itemKey) const;
+    MetadataSet* getWeakRefItemLight(const mxfKey *itemKey) const;
 
     std::vector<uint8_t> getUInt8ArrayItem(const mxfKey *itemKey) const;
     std::vector<uint16_t> getUInt16ArrayItem(const mxfKey *itemKey) const;

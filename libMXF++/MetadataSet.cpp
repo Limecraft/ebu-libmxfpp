@@ -355,6 +355,16 @@ MetadataSet* MetadataSet::getStrongRefItem(const mxfKey *itemKey) const
     return _headerMetadata->wrap(cSet);
 }
 
+MetadataSet* MetadataSet::getStrongRefItemLight(const mxfKey *itemKey) const
+{
+    ::MXFMetadataSet *cSet;
+    if (!mxf_get_strongref_item_light(_cMetadataSet, itemKey, &cSet))
+    {
+        return 0;
+    }
+    return _headerMetadata->wrap(cSet);
+}
+
 MetadataSet* MetadataSet::getWeakRefItem(const mxfKey *itemKey) const
 {
     ::MXFMetadataSet *cSet;
@@ -363,6 +373,16 @@ MetadataSet* MetadataSet::getWeakRefItem(const mxfKey *itemKey) const
         char keyStr[KEY_STR_SIZE];
         mxf_sprint_key(keyStr, itemKey);
         mxf_log_warn("Failed to de-reference weak reference property (item key = %s)\n", keyStr);
+        return 0;
+    }
+    return _headerMetadata->wrap(cSet);
+}
+
+MetadataSet* MetadataSet::getWeakRefItemLight(const mxfKey *itemKey) const
+{
+    ::MXFMetadataSet *cSet;
+    if (!mxf_get_weakref_item_light(_cMetadataSet, itemKey, &cSet))
+    {
         return 0;
     }
     return _headerMetadata->wrap(cSet);

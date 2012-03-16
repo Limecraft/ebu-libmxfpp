@@ -52,4 +52,8 @@ DMSegment::DMSegment(HeaderMetadata *headerMetadata, ::MXFMetadataSet *cMetadata
 DMSegment::~DMSegment()
 {}
 
+DMFramework* DMSegment::getDMFrameworkLight() const
+{
+    return dynamic_cast<DMFramework*>(getStrongRefItemLight(&MXF_ITEM_K(DMSegment, DMFramework)));
+}
 

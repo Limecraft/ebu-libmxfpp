@@ -50,8 +50,7 @@ public:
     DMSegment(HeaderMetadata *headerMetadata);
     virtual ~DMSegment();
 
-
-
+    DMFramework* getDMFrameworkLight() const;
 
 protected:
     DMSegment(HeaderMetadata *headerMetadata, ::MXFMetadataSet *cMetadataSet);
