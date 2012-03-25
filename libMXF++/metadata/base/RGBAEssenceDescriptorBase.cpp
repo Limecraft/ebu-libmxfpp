@@ -112,9 +112,9 @@ bool RGBAEssenceDescriptorBase::havePixelLayout() const
     return haveItem(&MXF_ITEM_K(RGBAEssenceDescriptor, PixelLayout));
 }
 
-std::vector<mxfRGBALayoutComponent> RGBAEssenceDescriptorBase::getPixelLayout() const
+mxfRGBALayout RGBAEssenceDescriptorBase::getPixelLayout() const
 {
-    return getRGBALayoutComponentArrayItem(&MXF_ITEM_K(RGBAEssenceDescriptor, PixelLayout));
+    return getRGBALayoutItem(&MXF_ITEM_K(RGBAEssenceDescriptor, PixelLayout));
 }
 
 bool RGBAEssenceDescriptorBase::havePalette() const
@@ -132,9 +132,9 @@ bool RGBAEssenceDescriptorBase::havePaletteLayout() const
     return haveItem(&MXF_ITEM_K(RGBAEssenceDescriptor, PaletteLayout));
 }
 
-std::vector<mxfRGBALayoutComponent> RGBAEssenceDescriptorBase::getPaletteLayout() const
+mxfRGBALayout RGBAEssenceDescriptorBase::getPaletteLayout() const
 {
-    return getRGBALayoutComponentArrayItem(&MXF_ITEM_K(RGBAEssenceDescriptor, PaletteLayout));
+    return getRGBALayoutItem(&MXF_ITEM_K(RGBAEssenceDescriptor, PaletteLayout));
 }
 
 void RGBAEssenceDescriptorBase::setComponentMaxRef(uint32_t value)
@@ -162,14 +162,9 @@ void RGBAEssenceDescriptorBase::setScanningDirection(uint8_t value)
     setUInt8Item(&MXF_ITEM_K(RGBAEssenceDescriptor, ScanningDirection), value);
 }
 
-void RGBAEssenceDescriptorBase::setPixelLayout(const std::vector<mxfRGBALayoutComponent> &value)
+void RGBAEssenceDescriptorBase::setPixelLayout(mxfRGBALayout value)
 {
-    setRGBALayoutComponentArrayItem(&MXF_ITEM_K(RGBAEssenceDescriptor, PixelLayout), value);
-}
-
-void RGBAEssenceDescriptorBase::appendPixelLayout(mxfRGBALayoutComponent value)
-{
-    appendRGBALayoutComponentArrayItem(&MXF_ITEM_K(RGBAEssenceDescriptor, PixelLayout), value);
+    setRGBALayoutItem(&MXF_ITEM_K(RGBAEssenceDescriptor, PixelLayout), value);
 }
 
 void RGBAEssenceDescriptorBase::setPalette(ByteArray value)
@@ -177,13 +172,8 @@ void RGBAEssenceDescriptorBase::setPalette(ByteArray value)
     setRawBytesItem(&MXF_ITEM_K(RGBAEssenceDescriptor, Palette), value);
 }
 
-void RGBAEssenceDescriptorBase::setPaletteLayout(const std::vector<mxfRGBALayoutComponent> &value)
+void RGBAEssenceDescriptorBase::setPaletteLayout(mxfRGBALayout value)
 {
-    setRGBALayoutComponentArrayItem(&MXF_ITEM_K(RGBAEssenceDescriptor, PaletteLayout), value);
-}
-
-void RGBAEssenceDescriptorBase::appendPaletteLayout(mxfRGBALayoutComponent value)
-{
-    appendRGBALayoutComponentArrayItem(&MXF_ITEM_K(RGBAEssenceDescriptor, PaletteLayout), value);
+    setRGBALayoutItem(&MXF_ITEM_K(RGBAEssenceDescriptor, PaletteLayout), value);
 }
 

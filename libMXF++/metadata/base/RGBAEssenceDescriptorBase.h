@@ -65,11 +65,11 @@ public:
    bool haveScanningDirection() const;
    uint8_t getScanningDirection() const;
    bool havePixelLayout() const;
-   std::vector<mxfRGBALayoutComponent> getPixelLayout() const;
+   mxfRGBALayout getPixelLayout() const;
    bool havePalette() const;
    ByteArray getPalette() const;
    bool havePaletteLayout() const;
-   std::vector<mxfRGBALayoutComponent> getPaletteLayout() const;
+   mxfRGBALayout getPaletteLayout() const;
 
 
    // setters
@@ -79,11 +79,9 @@ public:
    void setAlphaMaxRef(uint32_t value);
    void setAlphaMinRef(uint32_t value);
    void setScanningDirection(uint8_t value);
-   void setPixelLayout(const std::vector<mxfRGBALayoutComponent> &value);
-   void appendPixelLayout(mxfRGBALayoutComponent value);
+   void setPixelLayout(mxfRGBALayout value);
    void setPalette(ByteArray value);
-   void setPaletteLayout(const std::vector<mxfRGBALayoutComponent> &value);
-   void appendPaletteLayout(mxfRGBALayoutComponent value);
+   void setPaletteLayout(mxfRGBALayout value);
 
 
 protected:

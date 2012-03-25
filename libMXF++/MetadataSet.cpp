@@ -303,10 +303,10 @@ mxfProductVersion MetadataSet::getProductVersionItem(const mxfKey *itemKey) cons
     return result;
 }
 
-mxfRGBALayoutComponent MetadataSet::getRGBALayoutComponentItem(const mxfKey *itemKey) const
+mxfRGBALayout MetadataSet::getRGBALayoutItem(const mxfKey *itemKey) const
 {
-    mxfRGBALayoutComponent result;
-    MXFPP_CHECK(mxf_get_rgba_layout_component_item(_cMetadataSet, itemKey, &result));
+    mxfRGBALayout result;
+    MXFPP_CHECK(mxf_get_rgba_layout_item(_cMetadataSet, itemKey, &result));
     return result;
 }
 
@@ -730,24 +730,6 @@ vector<mxfProductVersion> MetadataSet::getProductVersionArrayItem(const mxfKey *
     return result;
 }
 
-vector<mxfRGBALayoutComponent> MetadataSet::getRGBALayoutComponentArrayItem(const mxfKey *itemKey) const
-{
-    vector<mxfRGBALayoutComponent> result;
-    ::MXFArrayItemIterator iter;
-    uint8_t *element;
-    uint32_t elementLength;
-    mxfRGBALayoutComponent value;
-
-    MXFPP_CHECK(mxf_initialise_array_item_iterator(_cMetadataSet, itemKey, &iter));
-    while (mxf_next_array_item_element(&iter, &element, &elementLength))
-    {
-        MXFPP_CHECK(elementLength == mxfRGBALayoutComponent_extlen);
-        mxf_get_rgba_layout_component(element, &value);
-        result.push_back(value);
-    }
-    return result;
-}
-
 ObjectIterator* MetadataSet::getStrongRefArrayItem(const mxfKey *itemKey) const
 {
     return new ReferencedObjectIterator(_headerMetadata, this, itemKey);
@@ -859,9 +841,9 @@ void MetadataSet::setProductVersionItem(const mxfKey *itemKey, mxfProductVersion
     MXFPP_CHECK(mxf_set_product_version_item(_cMetadataSet, itemKey, &value));
 }
 
-void MetadataSet::setRGBALayoutComponentItem(const mxfKey *itemKey, mxfRGBALayoutComponent value)
+void MetadataSet::setRGBALayoutItem(const mxfKey *itemKey, mxfRGBALayout value)
 {
-    MXFPP_CHECK(mxf_set_rgba_layout_component_item(_cMetadataSet, itemKey, &value));
+    MXFPP_CHECK(mxf_set_rgba_layout_item(_cMetadataSet, itemKey, &value));
 }
 
 void MetadataSet::setStringItem(const mxfKey *itemKey, string value)
@@ -1152,18 +1134,6 @@ void MetadataSet::setProductVersionArrayItem(const mxfKey *itemKey, const vector
     }
 }
 
-void MetadataSet::setRGBALayoutComponentArrayItem(const mxfKey *itemKey, const vector<mxfRGBALayoutComponent> &value)
-{
-    size_t i;
-    uint8_t *data = 0;
-    MXFPP_CHECK(mxf_alloc_array_item_elements(_cMetadataSet, itemKey, mxfRGBALayoutComponent_extlen, (uint32_t)value.size(), &data));
-    for (i = 0; i < value.size(); i++)
-    {
-        mxf_set_rgba_layout_component(&value.at(i), data);
-        data += mxfRGBALayoutComponent_extlen;
-    }
-}
-
 void MetadataSet::setStrongRefArrayItem(const mxfKey *itemKey, ObjectIterator *iter)
 {
     uint8_t *data = 0;
@@ -1319,13 +1289,6 @@ void MetadataSet::appendProductVersionArrayItem(const mxfKey *itemKey, mxfProduc
     uint8_t *data = 0;
     MXFPP_CHECK(mxf_grow_array_item(_cMetadataSet, itemKey, mxfProductVersion_extlen, 1, &data));
     mxf_set_product_version(&value, data);
-}
-
-void MetadataSet::appendRGBALayoutComponentArrayItem(const mxfKey *itemKey, mxfRGBALayoutComponent value)
-{
-    uint8_t *data = 0;
-    MXFPP_CHECK(mxf_grow_array_item(_cMetadataSet, itemKey, mxfRGBALayoutComponent_extlen, 1, &data));
-    mxf_set_rgba_layout_component(&value, data);
 }
 
 void MetadataSet::appendStrongRefArrayItem(const mxfKey *itemKey, MetadataSet *value)

@@ -147,7 +147,7 @@ public:
     int64_t getPositionItem(const mxfKey *itemKey) const;
     bool getBooleanItem(const mxfKey *itemKey) const;
     mxfProductVersion getProductVersionItem(const mxfKey *itemKey) const;
-    mxfRGBALayoutComponent getRGBALayoutComponentItem(const mxfKey *itemKey) const;
+    mxfRGBALayout getRGBALayoutItem(const mxfKey *itemKey) const;
     std::string getStringItem(const mxfKey *itemKey) const;
     MetadataSet* getStrongRefItem(const mxfKey *itemKey) const;
     MetadataSet* getStrongRefItemLight(const mxfKey *itemKey) const;
@@ -173,7 +173,6 @@ public:
     std::vector<int64_t> getPositionArrayItem(const mxfKey *itemKey) const;
     std::vector<bool> getBooleanArrayItem(const mxfKey *itemKey) const;
     std::vector<mxfProductVersion> getProductVersionArrayItem(const mxfKey *itemKey) const;
-    std::vector<mxfRGBALayoutComponent> getRGBALayoutComponentArrayItem(const mxfKey *itemKey) const;
 
     ObjectIterator* getStrongRefArrayItem(const mxfKey *itemKey) const;
     ObjectIterator* getWeakRefArrayItem(const mxfKey *itemKey) const;
@@ -200,7 +199,7 @@ public:
     void setPositionItem(const mxfKey *itemKey, int64_t value);
     void setBooleanItem(const mxfKey *itemKey, bool value);
     void setProductVersionItem(const mxfKey *itemKey, mxfProductVersion value);
-    void setRGBALayoutComponentItem(const mxfKey *itemKey, mxfRGBALayoutComponent value);
+    void setRGBALayoutItem(const mxfKey *itemKey, mxfRGBALayout value);
     void setStringItem(const mxfKey *itemKey, std::string value);
     void setFixedSizeStringItem(const mxfKey *itemKey, std::string value, uint16_t size);
     void setStrongRefItem(const mxfKey *itemKey, MetadataSet *value);
@@ -225,7 +224,6 @@ public:
     void setPositionArrayItem(const mxfKey *itemKey, const std::vector<int64_t> &value);
     void setBooleanArrayItem(const mxfKey *itemKey, const std::vector<bool> &value);
     void setProductVersionArrayItem(const mxfKey *itemKey, const std::vector<mxfProductVersion> &value);
-    void setRGBALayoutComponentArrayItem(const mxfKey *itemKey, const std::vector<mxfRGBALayoutComponent> &value);
 
     void setStrongRefArrayItem(const mxfKey *itemKey, ObjectIterator *iter);
     void setWeakRefArrayItem(const mxfKey *itemKey, ObjectIterator *iter);
@@ -249,7 +247,6 @@ public:
     void appendPositionArrayItem(const mxfKey *itemKey, int64_t value);
     void appendBooleanArrayItem(const mxfKey *itemKey, bool value);
     void appendProductVersionArrayItem(const mxfKey *itemKey, mxfProductVersion value);
-    void appendRGBALayoutComponentArrayItem(const mxfKey *itemKey, mxfRGBALayoutComponent value);
 
     void appendStrongRefArrayItem(const mxfKey *itemKey, MetadataSet *value);
     void appendWeakRefArrayItem(const mxfKey *itemKey, MetadataSet *value);
