@@ -50,8 +50,7 @@ public:
     SourcePackage(HeaderMetadata *headerMetadata);
     virtual ~SourcePackage();
 
-
-
+    GenericDescriptor* getDescriptorLight() const;
 
 protected:
     SourcePackage(HeaderMetadata *headerMetadata, ::MXFMetadataSet *cMetadataSet);

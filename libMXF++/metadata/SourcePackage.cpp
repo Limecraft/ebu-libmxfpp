@@ -52,4 +52,8 @@ SourcePackage::SourcePackage(HeaderMetadata *headerMetadata, ::MXFMetadataSet *c
 SourcePackage::~SourcePackage()
 {}
 
+GenericDescriptor* SourcePackage::getDescriptorLight() const
+{
+    return dynamic_cast<GenericDescriptor*>(getStrongRefItemLight(&MXF_ITEM_K(SourcePackage, Descriptor)));
+}
 
