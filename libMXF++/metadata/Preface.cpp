@@ -89,7 +89,8 @@ vector<SourcePackage*> Preface::findFileSourcePackages() const
     for (i = 0; i < packages.size(); i++) {
         file_package = dynamic_cast<SourcePackage*>(packages[i]);
         if (!file_package ||
-            !file_package->haveDescriptor() || !dynamic_cast<FileDescriptor*>(file_package->getDescriptor()))
+            !file_package->haveDescriptor() ||
+            !dynamic_cast<FileDescriptor*>(file_package->getDescriptorLight()))
         {
             continue;
         }
