@@ -391,7 +391,7 @@ HeaderMetadata* D10MXFOP1AWriter::CreateHeaderMetadata()
     // Preface
     Preface *preface = new Preface(mHeaderMetadata);
     preface->setLastModifiedDate(now);
-    preface->setVersion(258);
+    preface->setVersion(MXF_PREFACE_VER(1, 2));
     preface->setOperationalPattern(MXF_OP_L(1a, MultiTrack_Stream_Internal));
     preface->appendEssenceContainers(mEssenceContainerUL);
     preface->setDMSchemes(vector<mxfUL>());

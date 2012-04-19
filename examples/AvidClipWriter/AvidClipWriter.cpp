@@ -666,7 +666,7 @@ void AvidClipWriter::prepareToWrite()
         Preface *preface = new Preface(trackData->headerMetadata);
         preface->setInt16Item(&MXF_ITEM_K(Preface, ByteOrder), 0x4949); // little-endian
         preface->setUInt32Item(&MXF_ITEM_K(Preface, ObjectModelVersion), 0x00000001);
-        preface->setVersion(0x0101); // AAF SDK version
+        preface->setVersion(MXF_PREFACE_VER(1, 1)); // AAF SDK version
         preface->setLastModifiedDate(now);
         preface->setOperationalPattern((_tracks.size() <= 1) ? MXF_OP_L(atom, 1Track_1SourceClip) : MXF_OP_L(atom, NTracks_1SourceClip));
         preface->appendEssenceContainers(trackData->essenceContainerLabel);

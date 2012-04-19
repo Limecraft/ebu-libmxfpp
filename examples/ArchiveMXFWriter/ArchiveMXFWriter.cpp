@@ -290,7 +290,7 @@ _isComplete(false), _writeState(0)
     // Preface
     Preface *preface = new Preface(_headerMetadata);
     preface->setLastModifiedDate(now);
-    preface->setVersion(258);
+    preface->setVersion(MXF_PREFACE_VER(1, 2));
     preface->setOperationalPattern(MXF_OP_L(1a, MultiTrack_Stream_Internal));
     if (numAudioTracks > 0)
     {

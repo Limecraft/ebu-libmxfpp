@@ -72,7 +72,7 @@ static void testWrite()
     headerMetadata->createDefaultMetaDictionary();
 
     Preface *preface = new Preface(headerMetadata.get());
-    preface->setVersion(258);
+    preface->setVersion(MXF_PREFACE_VER(1, 2));
     preface->appendIdentifications(new Identification(headerMetadata.get()));
     preface->getIdentifications()[0]->setCompanyName("a company");
     preface->setEssenceContainers(vector<mxfUL>());
