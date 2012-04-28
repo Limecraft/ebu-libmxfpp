@@ -12,6 +12,7 @@ libMXF___@LIBMXFPP_MAJORMINOR@_la_SOURCES = \
 	MetadataSet.cpp \
 	MXFException.cpp \
 	MXFTypes.cpp \
+	MXFVersion.cpp \
 	Partition.cpp
 
 libMXF___@LIBMXFPP_MAJORMINOR@_la_CXXFLAGS = $(LIBMXFPP_CFLAGS)
@@ -35,4 +36,5 @@ library_include_HEADERS = \
 	MXFException.h \
 	MXFTypes.h \
 	MXF.h \
+	MXFVersion.h \
 	Partition.h

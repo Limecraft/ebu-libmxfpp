@@ -189,6 +189,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\libMXF++\MXFVersion.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\libMXF++\Partition.cpp"
 				>
 			</File>
@@ -490,6 +494,10 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath="..\..\..\scm_version.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\libMXF++\AvidHeaderMetadata.h"
 				>
 			</File>
@@ -523,6 +531,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\libMXF++\MXFTypes.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\libMXF++\MXFVersion.h"
 				>
 			</File>
 			<File

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008, British Broadcasting Corporation
+ * Copyright (C) 2012, British Broadcasting Corporation
  * All Rights Reserved.
  *
  * Author: Philip de Nier
@@ -29,25 +29,17 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __MXFPP_MXF_H__
-#define __MXFPP_MXF_H__
+#ifndef __MXFPP_MXF_VERSION_H__
+#define __MXFPP_MXF_VERSION_H__
 
 
-#include <mxf/mxf.h>
 
+namespace mxfpp
+{
 
-#include <libMXF++/MXFVersion.h>
-#include <libMXF++/MXFTypes.h>
-#include <libMXF++/MXFException.h>
-#include <libMXF++/File.h>
-#include <libMXF++/Partition.h>
-#include <libMXF++/IndexTable.h>
-#include <libMXF++/DataModel.h>
-#include <libMXF++/MetadataSet.h>
-#include <libMXF++/HeaderMetadata.h>
-#include <libMXF++/AvidHeaderMetadata.h>
+const char* get_mxfpp_scm_version_string();
 
-#include <libMXF++/metadata/Metadata.h>
+};
 
 
 
