@@ -33,7 +33,7 @@
 #include "config.h"
 #endif
 
-#include "scm_version.h"
+#include "mxfpp_scm_version.h"
 
 #include <libMXF++/MXFVersion.h>
 
