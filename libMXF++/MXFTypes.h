@@ -51,6 +51,10 @@ bool operator == (const mxfUMID &left, const mxfUMID &right);
 bool operator != (const mxfUMID &left, const mxfUMID &right);
 bool operator <  (const mxfUMID &left, const mxfUMID &right);
 
+bool operator == (const mxfExtendedUMID &left, const mxfExtendedUMID &right);
+bool operator != (const mxfExtendedUMID &left, const mxfExtendedUMID &right);
+bool operator <  (const mxfExtendedUMID &left, const mxfExtendedUMID &right);
+
 
 
 #endif

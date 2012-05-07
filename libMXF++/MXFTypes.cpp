@@ -96,3 +96,18 @@ bool operator < (const mxfUMID &left, const mxfUMID &right)
     return memcmp(&left, &right, sizeof(left)) < 0;
 }
 
+bool operator == (const mxfExtendedUMID &left, const mxfExtendedUMID &right)
+{
+    return memcmp(left.bytes, right.bytes, sizeof(left.bytes)) == 0;
+}
+
+bool operator != (const mxfExtendedUMID &left, const mxfExtendedUMID &right)
+{
+    return memcmp(left.bytes, right.bytes, sizeof(left.bytes)) != 0;
+}
+
+bool operator < (const mxfExtendedUMID &left, const mxfExtendedUMID &right)
+{
+    return memcmp(left.bytes, right.bytes, sizeof(left.bytes)) < 0;
+}
+
