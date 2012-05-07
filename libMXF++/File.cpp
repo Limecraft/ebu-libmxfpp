@@ -322,6 +322,62 @@ bool File::readPartitions()
     }
 }
 
+uint8_t File::readUInt8()
+{
+    uint8_t value;
+    MXFPP_CHECK(mxf_read_uint8(_cFile, &value));
+    return value;
+}
+
+uint16_t File::readUInt16()
+{
+    uint16_t value;
+    MXFPP_CHECK(mxf_read_uint16(_cFile, &value));
+    return value;
+}
+
+uint32_t File::readUInt32()
+{
+    uint32_t value;
+    MXFPP_CHECK(mxf_read_uint32(_cFile, &value));
+    return value;
+}
+
+uint64_t File::readUInt64()
+{
+    uint64_t value;
+    MXFPP_CHECK(mxf_read_uint64(_cFile, &value));
+    return value;
+}
+
+int8_t File::readInt8()
+{
+    int8_t value;
+    MXFPP_CHECK(mxf_read_int8(_cFile, &value));
+    return value;
+}
+
+int16_t File::readInt16()
+{
+    int16_t value;
+    MXFPP_CHECK(mxf_read_int16(_cFile, &value));
+    return value;
+}
+
+int32_t File::readInt32()
+{
+    int32_t value;
+    MXFPP_CHECK(mxf_read_int32(_cFile, &value));
+    return value;
+}
+
+int64_t File::readInt64()
+{
+    int64_t value;
+    MXFPP_CHECK(mxf_read_int64(_cFile, &value));
+    return value;
+}
+
 void File::readK(mxfKey *key)
 {
     MXFPP_CHECK(mxf_read_k(_cFile, key));
@@ -340,6 +396,16 @@ void File::readKL(mxfKey *key, uint8_t *llen, uint64_t *len)
 void File::readNextNonFillerKL(mxfKey *key, uint8_t *llen, uint64_t *len)
 {
     MXFPP_CHECK(mxf_read_next_nonfiller_kl(_cFile, key, llen, len));
+}
+
+void File::readLocalTL(mxfLocalTag *tag, uint16_t *len)
+{
+    MXFPP_CHECK(mxf_read_local_tl(_cFile, tag, len));
+}
+
+void File::readBatchHeader(uint32_t *len, uint32_t *elementLen)
+{
+    MXFPP_CHECK(mxf_read_batch_header(_cFile, len, elementLen));
 }
 
 uint32_t File::read(unsigned char *data, uint32_t count)

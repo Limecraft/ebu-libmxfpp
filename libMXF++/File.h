@@ -70,10 +70,21 @@ public:
     bool readHeaderPartition();
     bool readPartitions();
 
+    uint8_t readUInt8();
+    uint16_t readUInt16();
+    uint32_t readUInt32();
+    uint64_t readUInt64();
+    int8_t readInt8();
+    int16_t readInt16();
+    int32_t readInt32();
+    int64_t readInt64();
+
     void readK(mxfKey *key);
     void readL(uint8_t *llen, uint64_t *len);
     void readKL(mxfKey *key, uint8_t *llen, uint64_t *len);
     void readNextNonFillerKL(mxfKey *key, uint8_t *llen, uint64_t *len);
+    void readLocalTL(mxfLocalTag *tag, uint16_t *len);
+    void readBatchHeader(uint32_t *len, uint32_t *elementLen);
 
     uint32_t read(unsigned char *data, uint32_t count);
     int64_t tell();
