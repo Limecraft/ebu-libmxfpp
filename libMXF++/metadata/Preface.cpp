@@ -101,3 +101,13 @@ vector<SourcePackage*> Preface::findFileSourcePackages() const
     return file_packages;
 }
 
+vector<mxfUL> Preface::getDMSchemes(bool allow_missing) const
+{
+    if (!allow_missing || haveItem(&MXF_ITEM_K(Preface, DMSchemes))) {
+        return getULArrayItem(&MXF_ITEM_K(Preface, DMSchemes));
+    } else {
+        mxf_log_warn("Missing Preface::DMSchemes property\n");
+        return vector<mxfUL>();
+    }
+}
+

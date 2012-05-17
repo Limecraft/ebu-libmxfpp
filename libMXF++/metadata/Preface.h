@@ -57,6 +57,8 @@ public:
     MaterialPackage* findMaterialPackage() const;
     std::vector<SourcePackage*> findFileSourcePackages() const;
 
+    std::vector<mxfUL> getDMSchemes(bool allow_missing = true) const;
+
 protected:
     Preface(HeaderMetadata *headerMetadata, ::MXFMetadataSet *cMetadataSet);
 };
