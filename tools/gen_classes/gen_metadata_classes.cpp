@@ -338,7 +338,7 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
     /* get names */
 
     strcpy(className, setDef->name);
-    className[0] = toupper(className[0]);
+    //className[0] = toupper(className[0]);
     strcpy(classNameU, setDef->name);
     for (i = 0; i < (int)strlen(classNameU); i++)
     {
@@ -346,7 +346,7 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
     }
     strcpy(baseClassName, setDef->name);
     strcat(baseClassName, "Base");
-    className[0] = toupper(className[0]);
+    //className[0] = toupper(className[0]);
     strcpy(baseClassNameU, setDef->name);
     strcat(baseClassNameU, "_Base");
     baseClassNameU[0] = toupper(baseClassNameU[0]);
@@ -470,7 +470,7 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
         "\n"
         "\n"
         "\n"
-        "#include <libMXF++/metadata/base/%s.h>\n"
+        "#include <metadata/base/%s.h>\n"
         "\n"
         "\n"
         "namespace mxfpp\n"
@@ -537,6 +537,7 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
         "#include <memory>\n"
         "\n"
         "#include <libMXF++/MXF.h>\n"
+		"#include <metadata/EBUCoreDMS++.h>\n"
         "\n"
         "\n"
         "using namespace std;\n"
@@ -606,6 +607,7 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
         "#endif\n"
         "\n"
         "#include <libMXF++/MXF.h>\n"
+		"#include <metadata/EBUCoreDMS++.h>\n"
         "\n"
         "\n"
         "using namespace std;\n"
@@ -652,7 +654,7 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
         CHECK(itemType != NULL);
 
         strcpy(itemName, itemDef->name);
-        itemName[0] = toupper(itemName[0]);
+        //itemName[0] = toupper(itemName[0]);
 
         if (itemType->category == MXF_BASIC_TYPE_CAT ||
             itemType->category == MXF_INTERPRET_TYPE_CAT ||
@@ -1113,7 +1115,7 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
         CHECK(itemType != NULL);
 
         strcpy(itemName, itemDef->name);
-        itemName[0] = toupper(itemName[0]);
+        //itemName[0] = toupper(itemName[0]);
 
         if (itemType->category == MXF_BASIC_TYPE_CAT ||
             itemType->category == MXF_INTERPRET_TYPE_CAT ||
@@ -1124,6 +1126,10 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
         else
         {
             if (itemType->typeId == MXF_UTF16STRING_TYPE)
+            {
+                strcpy(typeName, "std::string");
+            }
+			else if (itemType->typeId == MXF_ISO7STRING_TYPE)
             {
                 strcpy(typeName, "std::string");
             }
