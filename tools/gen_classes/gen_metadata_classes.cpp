@@ -77,7 +77,9 @@ static const char* get_sw_ref_name(MXFDataModel *dataModel, MXFItemDef *itemDef,
         { &MXF_ITEM_K(ContentStorage, EssenceContainerData), "EssenceContainerData*" },
         { &MXF_ITEM_K(Preface, PrimaryPackage), "GenericPackage*" },
 
-	    { &MXF_ITEM_K(ebucoreMainFramework, metadataSchemeInformation), "ebucoreMetadataSchemeInformation*" },
+#include "ebucore_declare_references.inc"
+
+	    /*{ &MXF_ITEM_K(ebucoreMainFramework, metadataSchemeInformation), "ebucoreMetadataSchemeInformation*" },
 
 		{ &MXF_ITEM_K(ebucoreMetadataSchemeInformation, ebucoreMetadataProvider), "ebucoreEntity*" },
 
@@ -96,7 +98,7 @@ static const char* get_sw_ref_name(MXFDataModel *dataModel, MXFItemDef *itemDef,
 		{ &MXF_ITEM_K(ebucoreOrganisation, organisationDetails), "ebucoreContactDetails*" },
 		{ &MXF_ITEM_K(ebucoreOrganisation, organisationRelatedContacts), "ebucoreContact*" },
 
-		{ &MXF_ITEM_K(ebucoreRole, roleType), "ebucoreTypeGroup*" },
+		{ &MXF_ITEM_K(ebucoreRole, roleType), "ebucoreTypeGroup*" },*/
 	};
 
     for (i = 0; i < ARRAY_SIZE(nameInfo); i++)
