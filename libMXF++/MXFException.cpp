@@ -50,7 +50,7 @@ MXFException::MXFException()
 
 MXFException::MXFException(const char *format, ...)
 {
-    char message[512];
+    char message[1024];
 
     va_list varg;
     va_start(varg, format);
