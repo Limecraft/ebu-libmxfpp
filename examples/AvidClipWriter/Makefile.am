@@ -7,7 +7,9 @@ libavidclipwriter_la_SOURCES = \
 	AvidClipWriter.h
 
 libavidclipwriter_la_CXXFLAGS = $(LIBMXFPP_CFLAGS)
-libavidclipwriter_la_LIBADD = ${top_builddir}/examples/Common/libexamplescommon.la
+libavidclipwriter_la_LIBADD = \
+	${top_builddir}/examples/Common/libexamplescommon.la \
+	$(LIBMXFPP_LDADDLIBS)
 
 
 if ENABLE_AVID_WRITER

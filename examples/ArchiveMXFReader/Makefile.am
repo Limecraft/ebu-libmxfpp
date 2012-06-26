@@ -9,7 +9,9 @@ libarchivemxfreader_la_SOURCES = \
 	ArchiveMXFReader.h
 
 libarchivemxfreader_la_CXXFLAGS = $(LIBMXFPP_CFLAGS) "-I${top_srcdir}/examples/Common"
-libarchivemxfreader_la_LIBADD = ${top_builddir}/examples/Common/libexamplescommon.la
+libarchivemxfreader_la_LIBADD = \
+	${top_builddir}/examples/Common/libexamplescommon.la \
+	$(LIBMXFPP_LDADDLIBS)
 
 
 if ENABLE_ARCHIVE_READER

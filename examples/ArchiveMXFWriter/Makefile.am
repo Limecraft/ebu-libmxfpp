@@ -11,7 +11,9 @@ libarchivemxfwriter_la_SOURCES = \
 libarchivemxfwriter_la_CXXFLAGS = $(LIBMXFPP_CFLAGS) \
 	"-I${top_srcdir}/examples/Common" \
 	"-I${top_srcdir}/examples/ArchiveMXFReader"
-libarchivemxfwriter_la_LIBADD = ${top_builddir}/examples/Common/libexamplescommon.la
+libarchivemxfwriter_la_LIBADD = \
+	${top_builddir}/examples/Common/libexamplescommon.la \
+	$(LIBMXFPP_LDADDLIBS)
 
 
 if ENABLE_ARCHIVE_WRITER
