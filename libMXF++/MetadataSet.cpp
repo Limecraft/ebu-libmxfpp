@@ -51,7 +51,7 @@ public:
     : _headerMetadata(headerMetadata), _itemKey(*itemKey), _value(0), _length(0), _haveNext(true),
       _referencedMetadataSet(0)
     {
-        initialise_sets_iter(headerMetadata->getCHeaderMetadata(), &_setsIter);
+        mxf_initialise_sets_iter(headerMetadata->getCHeaderMetadata(), &_setsIter);
         MXFPP_CHECK(mxf_initialise_array_item_iterator(metadataSet->getCMetadataSet(), itemKey, &_arrayIter));
     }
 

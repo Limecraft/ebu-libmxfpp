@@ -109,7 +109,7 @@ _duration(-1), _actualPosition(-1), _startOfEssenceFilePos(0)
     }
     Partition &headerPartition = _mxfFile->getPartition(0);
 
-    MXFPP_CHECK(is_op_1a(headerPartition.getOperationalPattern()));
+    MXFPP_CHECK(mxf_is_op_1a(headerPartition.getOperationalPattern()));
 
     vector<mxfUL> ecLabels = headerPartition.getEssenceContainers();
     if (ecLabels.size() != 3)
