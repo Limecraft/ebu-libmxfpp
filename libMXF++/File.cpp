@@ -546,6 +546,18 @@ void File::openMemoryFile(uint32_t chunkSize)
     _lastMemoryPartitionIndex = (size_t)(-1);
 }
 
+void File::setMemoryFile(MXFMemoryFile *memFile) {
+	MXFPP_CHECK(memFile);
+    MXFPP_CHECK(!_cMemoryFile);
+
+    MXFFile *mxfMemFile = mxf_mem_file_get_file(memFile);
+	_cOriginalFile = _cFile;
+	_cFile = mxfMemFile;
+	_cMemoryFile = memFile;
+    _firstMemoryPartitionIndex = _partitions.size();
+    _lastMemoryPartitionIndex = (size_t)(-1);
+}
+
 void File::setMemoryPartitionIndexes(size_t first, size_t last)
 {
     _firstMemoryPartitionIndex = first;

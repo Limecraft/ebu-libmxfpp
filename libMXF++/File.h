@@ -123,7 +123,7 @@ public:
     void setMemoryPartitionIndexes(size_t first, size_t last = (size_t)(-1));
     bool isMemoryFileOpen() const { return _cMemoryFile != 0; }
     void closeMemoryFile();
-
+	void setMemoryFile(MXFMemoryFile *memFile);
 
     ::MXFFile* swapCFile(::MXFFile *newCFile);
 
