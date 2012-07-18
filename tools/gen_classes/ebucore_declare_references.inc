@@ -1,3 +1,4 @@
+{ &MXF_ITEM_K(ebucoreMainFramework, coreMetadata), "ebucoreCoreMetadata*" },
 { &MXF_ITEM_K(ebucoreMainFramework, metadataSchemeInformation), "ebucoreMetadataSchemeInformation*" },
 
 { &MXF_ITEM_K(ebucoreMetadataSchemeInformation, ebucoreMetadataProvider), "ebucoreEntity*" },
@@ -12,6 +13,8 @@
 
 { &MXF_ITEM_K(ebucoreContactDetails, detailsType), "ebucoreTypeGroup*" },
 { &MXF_ITEM_K(ebucoreContactDetails, address), "ebucoreAddress*" },
+
+{ &MXF_ITEM_K(ebucoreAddress, addressLines), "ebucoreAddressLine*" },
 
 
 
@@ -51,7 +54,7 @@
 
 
 { &MXF_ITEM_K(ebucoreSubject, subjectTypeGroup), "ebucoreTypeGroup*" },
-{ &MXF_ITEM_K(ebucoreSubject, ubjectAttributorEntity), "ebucoreEntity*" },
+{ &MXF_ITEM_K(ebucoreSubject, subjectAttributorEntity), "ebucoreEntity*" },
 
 { &MXF_ITEM_K(ebucoreDescription, descriptionTypeGroup), "ebucoreTypeGroup*" },
 
@@ -67,7 +70,7 @@
 
 { &MXF_ITEM_K(ebucoreTargetAudience, targetAudienceKindGroup), "ebucoreTypeGroup*" },
 
-{ &MXF_ITEM_K(ebucoreLanguage, languagePurposeSet), "ebucoreLangaugePurpose*" },
+{ &MXF_ITEM_K(ebucoreLanguage, languagePurposeSet), "ebucoreLanguagePurpose*" },
 
 { &MXF_ITEM_K(ebucoreLanguagePurpose, languagePurposeTypeGroup), "ebucoreTypeGroup*" },
 
