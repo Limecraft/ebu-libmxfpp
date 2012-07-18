@@ -15,7 +15,9 @@ libopatomreader_@LIBMXFPP_MAJORMINOR@_la_SOURCES = \
 
 libopatomreader_@LIBMXFPP_MAJORMINOR@_la_CXXFLAGS = $(LIBMXFPP_CFLAGS)
 libopatomreader_@LIBMXFPP_MAJORMINOR@_la_LDFLAGS = -version-info $(LIBMXFPP_LIBVERSION)
-libopatomreader_@LIBMXFPP_MAJORMINOR@_la_LIBADD = ${top_builddir}/examples/Common/libexamplescommon.la
+libopatomreader_@LIBMXFPP_MAJORMINOR@_la_LIBADD = \
+	${top_builddir}/examples/Common/libexamplescommon.la \
+	$(LIBMXFPP_LDADDLIBS)
 
 
 if ENABLE_OPATOM_READER

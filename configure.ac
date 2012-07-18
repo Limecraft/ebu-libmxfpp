@@ -208,9 +208,6 @@ AC_CONFIG_FILES([
     examples/Common/Makefile
     examples/D10MXFOP1AWriter/Makefile
     examples/OPAtomReader/Makefile
-    examples/ArchiveMXFReader/Makefile
-    examples/ArchiveMXFWriter/Makefile
-    examples/AvidClipWriter/Makefile
     test/Makefile
     tools/Makefile
     tools/gen_classes/Makefile

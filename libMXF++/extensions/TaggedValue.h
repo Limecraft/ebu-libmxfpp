@@ -36,6 +36,11 @@
 #include <libMXF++/metadata/InterchangeObject.h>
 
 
+
+namespace mxfpp
+{
+
+
 class TaggedValue : public mxfpp::InterchangeObject
 {
 public:
@@ -64,6 +69,9 @@ public:
 
 protected:
     TaggedValue(mxfpp::HeaderMetadata *header_metadata, ::MXFMetadataSet *c_metadata_set);
+};
+
+
 };
 
 

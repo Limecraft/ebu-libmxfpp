@@ -85,7 +85,7 @@ OPAtomOpenResult OPAtomTrackReader::Open(std::string filename, OPAtomTrackReader
             throw OP_ATOM_NO_HEADER_PARTITION;
         Partition &header_partition = file->getPartition(0);
 
-        if (!is_op_atom(header_partition.getOperationalPattern()))
+        if (!mxf_is_op_atom(header_partition.getOperationalPattern()))
             throw OP_ATOM_NOT_OP_ATOM;
 
 

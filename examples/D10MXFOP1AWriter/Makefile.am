@@ -8,7 +8,9 @@ libd10mxfop1awriter_@LIBMXFPP_MAJORMINOR@_la_SOURCES = \
 
 libd10mxfop1awriter_@LIBMXFPP_MAJORMINOR@_la_CXXFLAGS = $(LIBMXFPP_CFLAGS)
 libd10mxfop1awriter_@LIBMXFPP_MAJORMINOR@_la_LDFLAGS = -version-info $(LIBMXFPP_LIBVERSION)
-libd10mxfop1awriter_@LIBMXFPP_MAJORMINOR@_la_LIBADD = ${top_builddir}/examples/Common/libexamplescommon.la
+libd10mxfop1awriter_@LIBMXFPP_MAJORMINOR@_la_LIBADD = \
+	${top_builddir}/examples/Common/libexamplescommon.la \
+	$(LIBMXFPP_LDADDLIBS)
 
 
 if ENABLE_D10_WRITER

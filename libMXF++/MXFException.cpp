@@ -50,15 +50,11 @@ MXFException::MXFException()
 
 MXFException::MXFException(const char *format, ...)
 {
-    char message[512];
+    char message[1024];
 
     va_list varg;
     va_start(varg, format);
-#if defined(_MSC_VER)
-    _vsnprintf(message, 512, format, varg);
-#else
-    vsnprintf(message, 512, format, varg);
-#endif
+    mxf_vsnprintf(message, sizeof(message), format, varg);
     va_end(varg);
 
     _message = message;
