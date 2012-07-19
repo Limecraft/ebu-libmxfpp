@@ -29,8 +29,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __MXFPP_INDEX_TABLE_H__
-#define __MXFPP_INDEX_TABLE_H__
+#ifndef MXFPP_INDEX_TABLE_H_
+#define MXFPP_INDEX_TABLE_H_
 
 #include <vector>
 

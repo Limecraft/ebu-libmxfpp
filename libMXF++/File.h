@@ -29,8 +29,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __MXFPP_FILE_H__
-#define __MXFPP_FILE_H__
+#ifndef MXFPP_FILE_H_
+#define MXFPP_FILE_H_
 
 #include <string>
 #include <vector>

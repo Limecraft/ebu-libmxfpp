@@ -29,8 +29,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __MXFPP_MXFEXCEPTION_H__
-#define __MXFPP_MXFEXCEPTION_H__
+#ifndef MXFPP_MXFEXCEPTION_H_
+#define MXFPP_MXFEXCEPTION_H_
 
 #include <string>
 #include <cassert>

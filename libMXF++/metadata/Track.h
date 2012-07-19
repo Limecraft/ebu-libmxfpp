@@ -29,8 +29,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __MXFPP_TRACK_H__
-#define __MXFPP_TRACK_H__
+#ifndef MXFPP_TRACK_H_
+#define MXFPP_TRACK_H_
 
 
 

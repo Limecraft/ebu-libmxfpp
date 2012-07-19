@@ -29,8 +29,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __MXFPP_METADATA_SET_H__
-#define __MXFPP_METADATA_SET_H__
+#ifndef MXFPP_METADATA_SET_H_
+#define MXFPP_METADATA_SET_H_
 
 #include <map>
 #include <vector>

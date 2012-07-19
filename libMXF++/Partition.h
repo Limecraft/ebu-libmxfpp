@@ -29,8 +29,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __MXFPP_PARTITION_H__
-#define __MXFPP_PARTITION_H__
+#ifndef MXFPP_PARTITION_H_
+#define MXFPP_PARTITION_H_
 
 
 

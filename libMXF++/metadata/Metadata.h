@@ -29,8 +29,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __MXFPP_METADATA_H__
-#define __MXFPP_METADATA_H__
+#ifndef MXFPP_METADATA_H_
+#define MXFPP_METADATA_H_
 
 
 
