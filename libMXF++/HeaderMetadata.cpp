@@ -137,6 +137,10 @@ void HeaderMetadata::write(File *file, Partition *partition, FillerWriter *fille
     {
         filler->write(file);
     }
+    else
+    {
+        partition->fillToKag(file);
+    }
 
     partition->markHeaderEnd(file);
 }
