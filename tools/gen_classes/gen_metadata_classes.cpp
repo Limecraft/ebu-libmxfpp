@@ -43,8 +43,6 @@
 #include <mxf/mxf.h>
 #include <mxf/mxf_macros.h>
 
-#include "EBUCoreDMS.h"
-
 #define CHECK(cmd) \
     if (!(cmd)) \
     { \
@@ -76,30 +74,7 @@ static const char* get_sw_ref_name(MXFDataModel *dataModel, MXFItemDef *itemDef,
         { &MXF_ITEM_K(ContentStorage, Packages), "GenericPackage*" },
         { &MXF_ITEM_K(ContentStorage, EssenceContainerData), "EssenceContainerData*" },
         { &MXF_ITEM_K(Preface, PrimaryPackage), "GenericPackage*" },
-
-#include "ebucore_declare_references.inc"
-
-	    /*{ &MXF_ITEM_K(ebucoreMainFramework, metadataSchemeInformation), "ebucoreMetadataSchemeInformation*" },
-
-		{ &MXF_ITEM_K(ebucoreMetadataSchemeInformation, ebucoreMetadataProvider), "ebucoreEntity*" },
-
-		{ &MXF_ITEM_K(ebucoreEntity, entityContact), "ebucoreContact*" },
-		{ &MXF_ITEM_K(ebucoreEntity, entityOrganisation), "ebucoreOrganisation*" },
-		{ &MXF_ITEM_K(ebucoreEntity, entityRole), "ebucoreRole*" },
-
-		{ &MXF_ITEM_K(ebucoreContact, contactType), "ebucoreTypeGroup*" },
-		{ &MXF_ITEM_K(ebucoreContact, contactDetails), "ebucoreContactDetails*" },
-		{ &MXF_ITEM_K(ebucoreContact, contactRelatedContacts), "ebucoreContact*" },
-
-		{ &MXF_ITEM_K(ebucoreContactDetails, detailsType), "ebucoreTypeGroup*" },
-		{ &MXF_ITEM_K(ebucoreContactDetails, address), "ebucoreAddress*" },
-
-		{ &MXF_ITEM_K(ebucoreOrganisation, organisationType), "ebucoreTypeGroup*" },
-		{ &MXF_ITEM_K(ebucoreOrganisation, organisationDetails), "ebucoreContactDetails*" },
-		{ &MXF_ITEM_K(ebucoreOrganisation, organisationRelatedContacts), "ebucoreContact*" },
-
-		{ &MXF_ITEM_K(ebucoreRole, roleType), "ebucoreTypeGroup*" },*/
-	};
+    };
 
     for (i = 0; i < ARRAY_SIZE(nameInfo); i++)
     {
@@ -340,7 +315,7 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
     /* get names */
 
     strcpy(className, setDef->name);
-    //className[0] = toupper(className[0]);
+    className[0] = toupper(className[0]);
     strcpy(classNameU, setDef->name);
     for (i = 0; i < (int)strlen(classNameU); i++)
     {
@@ -348,7 +323,7 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
     }
     strcpy(baseClassName, setDef->name);
     strcat(baseClassName, "Base");
-    //className[0] = toupper(className[0]);
+    className[0] = toupper(className[0]);
     strcpy(baseClassNameU, setDef->name);
     strcat(baseClassNameU, "_Base");
     baseClassNameU[0] = toupper(baseClassNameU[0]);
@@ -472,7 +447,7 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
         "\n"
         "\n"
         "\n"
-        "#include <metadata/base/%s.h>\n"
+        "#include <libMXF++/metadata/base/%s.h>\n"
         "\n"
         "\n"
         "namespace mxfpp\n"
@@ -539,7 +514,6 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
         "#include <memory>\n"
         "\n"
         "#include <libMXF++/MXF.h>\n"
-		"#include <metadata/EBUCoreDMS++.h>\n"
         "\n"
         "\n"
         "using namespace std;\n"
@@ -609,7 +583,6 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
         "#endif\n"
         "\n"
         "#include <libMXF++/MXF.h>\n"
-		"#include <metadata/EBUCoreDMS++.h>\n"
         "\n"
         "\n"
         "using namespace std;\n"
@@ -656,7 +629,7 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
         CHECK(itemType != NULL);
 
         strcpy(itemName, itemDef->name);
-        //itemName[0] = toupper(itemName[0]);
+        itemName[0] = toupper(itemName[0]);
 
         if (itemType->category == MXF_BASIC_TYPE_CAT ||
             itemType->category == MXF_INTERPRET_TYPE_CAT ||
@@ -667,10 +640,6 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
         else
         {
             if (itemType->typeId == MXF_UTF16STRING_TYPE)
-            {
-                strcpy(typeName, "std::string");
-            }
-			else if (itemType->typeId == MXF_ISO7STRING_TYPE)
             {
                 strcpy(typeName, "std::string");
             }
@@ -887,12 +856,7 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
         }
         else
         {
-			if (itemType->typeId == MXF_UTF16STRING_TYPE)
-            {
-                fprintf(baseSourceFile, "    return getStringItem(&MXF_ITEM_K(%s, %s));\n",
-                    className, itemName);
-            }
-			else if (itemType->typeId == MXF_ISO7STRING_TYPE)
+            if (itemType->typeId == MXF_UTF16STRING_TYPE)
             {
                 fprintf(baseSourceFile, "    return getStringItem(&MXF_ITEM_K(%s, %s));\n",
                     className, itemName);
@@ -1117,7 +1081,7 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
         CHECK(itemType != NULL);
 
         strcpy(itemName, itemDef->name);
-        //itemName[0] = toupper(itemName[0]);
+        itemName[0] = toupper(itemName[0]);
 
         if (itemType->category == MXF_BASIC_TYPE_CAT ||
             itemType->category == MXF_INTERPRET_TYPE_CAT ||
@@ -1128,10 +1092,6 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
         else
         {
             if (itemType->typeId == MXF_UTF16STRING_TYPE)
-            {
-                strcpy(typeName, "std::string");
-            }
-			else if (itemType->typeId == MXF_ISO7STRING_TYPE)
             {
                 strcpy(typeName, "std::string");
             }
@@ -1316,11 +1276,6 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
         else
         {
             if (itemType->typeId == MXF_UTF16STRING_TYPE)
-            {
-                fprintf(baseSourceFile, "    setStringItem(&MXF_ITEM_K(%s, %s), value);\n",
-                    className, itemName);
-            }
-			else if (itemType->typeId == MXF_ISO7STRING_TYPE)
             {
                 fprintf(baseSourceFile, "    setStringItem(&MXF_ITEM_K(%s, %s), value);\n",
                     className, itemName);
@@ -1518,10 +1473,6 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
             get_type_name(dataModel, itemDef, elementType, elementTypeName);
 
             if (itemType->typeId == MXF_UTF16STRING_TYPE)
-            {
-                // do nothing
-            } 
-			else if (itemType->typeId == MXF_ISO7STRING_TYPE)
             {
                 // do nothing
             }
@@ -2025,15 +1976,13 @@ int main(int argc, const char** argv)
     CHECK(mxf_load_data_model(&dataModel));
     CHECK(mxf_finalise_data_model(dataModel));
 
-	CHECK(EBUCore::EBUCoreDMS::RegisterCExtensions(dataModel));
-
     /* create the directories */
 
-    strcpy(mkdirCmd, "mkdir ");
+    strcpy(mkdirCmd, "mkdir -p ");
     strcat(mkdirCmd, directory);
     CHECK(system(mkdirCmd) == 0);
 
-    strcat(mkdirCmd, "\\base");
+    strcat(mkdirCmd, "/base");
     CHECK(system(mkdirCmd) == 0);
 
 
