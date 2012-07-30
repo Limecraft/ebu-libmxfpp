@@ -68,7 +68,7 @@
     <Link>
       <AdditionalDependencies>libMXF.lib;libMXF++.lib;avidclipwriter.lib;ole32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)test_avidclipwriter.exe</OutputFile>
-      <AdditionalLibraryDirectories>Debug\;..\..\libMXF++\Debug\;..\..\..\..\..\ebu-libMXF\msvc_build\vs8\mxf\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>Debug\;..\..\libMXF++\Debug\;..\..\..\..\..\ebu-libMXF\msvc_build\vs10\mxf\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(OutDir)test_avidclipwriter.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
@@ -90,7 +90,7 @@
     <Link>
       <AdditionalDependencies>libMXF.lib;libMXF++.lib;avidclipwriter.lib;ole32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)test_avidclipwriter.exe</OutputFile>
-      <AdditionalLibraryDirectories>Release;..\..\libMXF++\Release;..\..\..\..\..\ebu-libMXF\msvc_build\vs8\mxf\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>Release;..\..\libMXF++\Release;..\..\..\..\..\ebu-libMXF\msvc_build\vs10\mxf\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>

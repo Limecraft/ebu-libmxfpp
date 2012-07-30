@@ -251,7 +251,7 @@
     <ClInclude Include="..\..\..\libMXF++\extensions\TaggedValue.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\ebu-libMXF\msvc_build\vs8\mxf\libMXF.vcxproj">
+    <ProjectReference Include="..\..\..\..\ebu-libMXF\msvc_build\vs10\mxf\libMXF.vcxproj">
       <Project>{580f8e65-f910-46a6-8a9c-6a8e58d95e53}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
