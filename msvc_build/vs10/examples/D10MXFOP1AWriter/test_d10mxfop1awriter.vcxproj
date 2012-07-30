@@ -53,7 +53,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\..\..\libMXF;..\..;..\..\..\..\;..\..\..\..\examples\Common;..\..\..\..\examples\D10MXFOP1AWriter;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\..\ebu-libMXF;..\..;..\..\..\..\;..\..\..\..\examples\Common;..\..\..\..\examples\D10MXFOP1AWriter;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -68,7 +68,7 @@
     <Link>
       <AdditionalDependencies>libMXF.lib;libMXF++.lib;D10MXFOP1AWriter.lib;ole32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)test_d10mxfop1awriter.exe</OutputFile>
-      <AdditionalLibraryDirectories>Debug\;..\..\libMXF++\Debug\;..\..\..\..\..\libMXF\msvc_build\vs8\mxf\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>Debug\;..\..\libMXF++\Debug\;..\..\..\..\..\ebu-libMXF\msvc_build\vs8\mxf\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(OutDir)test_d10mxfop1awriter.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
@@ -77,7 +77,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\..\..\libMXF;..\..;..\..\..\..\;..\..\..\..\examples\Common;..\..\..\..\examples\D10MXFOP1AWriter;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\..\ebu-libMXF;..\..;..\..\..\..\;..\..\..\..\examples\Common;..\..\..\..\examples\D10MXFOP1AWriter;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
@@ -90,7 +90,7 @@
     <Link>
       <AdditionalDependencies>libMXF.lib;libMXF++.lib;D10MXFOP1AWriter.lib;ole32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)test_d10mxfop1awriter.exe</OutputFile>
-      <AdditionalLibraryDirectories>Release;..\..\libMXF++\Release;..\..\..\..\..\libMXF\msvc_build\vs8\mxf\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>Release;..\..\libMXF++\Release;..\..\..\..\..\ebu-libMXF\msvc_build\vs8\mxf\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
