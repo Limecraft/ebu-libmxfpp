@@ -9,7 +9,7 @@
 
 { &MXF_ITEM_K(ebucoreContact, contactType), "ebucoreTypeGroup*" },
 { &MXF_ITEM_K(ebucoreContact, contactDetails), "ebucoreContactDetails*" },
-{ &MXF_ITEM_K(ebucoreContact, contactRelatedContacts), "ebucoreContact*" },
+{ &MXF_ITEM_K(ebucoreContact, contactRelatedContacts), "ebucoreEntity*" },
 
 { &MXF_ITEM_K(ebucoreContactDetails, detailsType), "ebucoreTypeGroup*" },
 { &MXF_ITEM_K(ebucoreContactDetails, address), "ebucoreAddress*" },
@@ -20,7 +20,7 @@
 
 { &MXF_ITEM_K(ebucoreOrganisation, organisationType), "ebucoreTypeGroup*" },
 { &MXF_ITEM_K(ebucoreOrganisation, organisationDetails), "ebucoreContactDetails*" },
-{ &MXF_ITEM_K(ebucoreOrganisation, organisationRelatedContacts), "ebucoreContact*" },
+{ &MXF_ITEM_K(ebucoreOrganisation, organisationRelatedContacts), "ebucoreEntity*" },
 
 { &MXF_ITEM_K(ebucoreRole, roleType), "ebucoreTypeGroup*" },
 
