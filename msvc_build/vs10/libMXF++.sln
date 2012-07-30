@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libMXF++", "libMXF++\libMXF++.vcxproj", "{33E3C49F-5483-4081-9446-9238A59B761A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libMXF", "..\..\..\libmxf\msvc_build\vs8\mxf\libMXF.vcxproj", "{580F8E65-F910-46A6-8A9C-6A8E58D95E53}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libMXF", "..\..\..\ebu-libmxf\msvc_build\vs8\mxf\libMXF.vcxproj", "{580F8E65-F910-46A6-8A9C-6A8E58D95E53}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "archivemxfreader", "examples\archivemxfreader\archivemxfreader.vcxproj", "{D5E39577-DA0F-4176-A49D-64B04B8F8FB7}"
 EndProject
