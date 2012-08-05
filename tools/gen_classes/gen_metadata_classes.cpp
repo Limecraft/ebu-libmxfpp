@@ -43,12 +43,22 @@
 #include <mxf/mxf.h>
 #include <mxf/mxf_macros.h>
 
+
 #define CHECK(cmd) \
     if (!(cmd)) \
     { \
         fprintf(stderr, "'%s' failed at line %d\n", #cmd, __LINE__); \
         exit(1); \
     }
+
+typedef struct
+{
+    FILE *baseHeaderFile;
+    const char *directory;
+    MXFDataModel *dataModel;
+} SetDefsData;
+
+
 
 static const char* get_sw_ref_name(MXFDataModel *dataModel, MXFItemDef *itemDef, char refName[256])
 {
@@ -1949,6 +1959,35 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
     fclose(headerFile);
 }
 
+static int process_set_defs(void *setDefIn, void *dataIn)
+{
+    MXFSetDef *setDef = (MXFSetDef*)setDefIn;
+    SetDefsData *data = (SetDefsData*)dataIn;
+    char className[256];
+
+    if (mxf_equals_key(&setDef->key, &g_Null_Key))
+    {
+        /* root set */
+        return 1;
+    }
+
+    strcpy(className, setDef->name);
+    className[0] = toupper(className[0]);
+
+    /* include */
+    fprintf(data->baseHeaderFile,
+        "#include <libMXF++/metadata/%s.h>\n",
+        className);
+
+
+    gen_class(data->directory, data->dataModel, setDef);
+
+    printf("    REGISTER_CLASS(%s);\n", className);
+
+    return 1;
+}
+
+
 static void usage(const char *cmd)
 {
     fprintf(stderr, "Usage: %s <directory>\n", cmd);
@@ -1957,12 +1996,11 @@ static void usage(const char *cmd)
 int main(int argc, const char** argv)
 {
     MXFDataModel *dataModel;
-    MXFListIterator iter;
     char mkdirCmd[FILENAME_MAX];
     FILE *baseHeaderFile;
     char filename[FILENAME_MAX];
     const char *directory;
-    char className[256];
+    SetDefsData setDefsData;
 
     if (argc != 2)
     {
@@ -2038,29 +2076,10 @@ int main(int argc, const char** argv)
         "\n"
         "\n");
 
-    mxf_initialise_list_iter(&iter, &dataModel->setDefs);
-    while (mxf_next_list_iter_element(&iter))
-    {
-        MXFSetDef *setDef = (MXFSetDef*)mxf_get_iter_element(&iter);
-        if (mxf_equals_key(&setDef->key, &g_Null_Key))
-        {
-            /* root set */
-            continue;
-        }
-
-        strcpy(className, setDef->name);
-        className[0] = toupper(className[0]);
-
-        /* include */
-        fprintf(baseHeaderFile,
-            "#include <libMXF++/metadata/%s.h>\n",
-            className);
-
-
-        gen_class(directory, dataModel, setDef);
-
-        printf("    REGISTER_CLASS(%s);\n", className);
-    }
+    setDefsData.baseHeaderFile = baseHeaderFile;
+    setDefsData.directory = directory;
+    setDefsData.dataModel = dataModel;
+    mxf_tree_traverse(&dataModel->setDefs, process_set_defs, &setDefsData);
 
 
     /* footer */
