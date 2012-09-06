@@ -79,26 +79,6 @@ static const char* get_sw_ref_name(MXFDataModel *dataModel, MXFItemDef *itemDef,
 
 #include "ebucore_declare_references.inc"
 
-	    /*{ &MXF_ITEM_K(ebucoreMainFramework, metadataSchemeInformation), "ebucoreMetadataSchemeInformation*" },
-
-		{ &MXF_ITEM_K(ebucoreMetadataSchemeInformation, ebucoreMetadataProvider), "ebucoreEntity*" },
-
-		{ &MXF_ITEM_K(ebucoreEntity, entityContact), "ebucoreContact*" },
-		{ &MXF_ITEM_K(ebucoreEntity, entityOrganisation), "ebucoreOrganisation*" },
-		{ &MXF_ITEM_K(ebucoreEntity, entityRole), "ebucoreRole*" },
-
-		{ &MXF_ITEM_K(ebucoreContact, contactType), "ebucoreTypeGroup*" },
-		{ &MXF_ITEM_K(ebucoreContact, contactDetails), "ebucoreContactDetails*" },
-		{ &MXF_ITEM_K(ebucoreContact, contactRelatedContacts), "ebucoreContact*" },
-
-		{ &MXF_ITEM_K(ebucoreContactDetails, detailsType), "ebucoreTypeGroup*" },
-		{ &MXF_ITEM_K(ebucoreContactDetails, address), "ebucoreAddress*" },
-
-		{ &MXF_ITEM_K(ebucoreOrganisation, organisationType), "ebucoreTypeGroup*" },
-		{ &MXF_ITEM_K(ebucoreOrganisation, organisationDetails), "ebucoreContactDetails*" },
-		{ &MXF_ITEM_K(ebucoreOrganisation, organisationRelatedContacts), "ebucoreContact*" },
-
-		{ &MXF_ITEM_K(ebucoreRole, roleType), "ebucoreTypeGroup*" },*/
 	};
 
     for (i = 0; i < ARRAY_SIZE(nameInfo); i++)
@@ -157,6 +137,9 @@ static const char* get_type_name(MXFDataModel *dataModel, MXFItemDef *itemDef,
                 break;
             case MXF_RAW_TYPE:
                 strcpy(typeName, "ByteArray");
+                break;
+            case MXF_FLOAT_TYPE:
+                strcpy(typeName, "float");
                 break;
             default:
                 fprintf(stderr, "Warning: unknown basic type %d\n", itemType->typeId);
@@ -364,7 +347,7 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
     {
         strcpy(parentClassName, setDef->parentSetDef->name);
     }
-    parentClassName[0] = toupper(parentClassName[0]);
+    //parentClassName[0] = toupper(parentClassName[0]);
 
 
 
@@ -428,7 +411,7 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
         "\n",
         baseClassNameU,
         baseClassNameU,
-        (setDef->parentSetDef != NULL) ? "libMXF++/metadata" : "libMXF++",
+        strstr(parentClassName, "ebucore") ? "metadata" : (setDef->parentSetDef != NULL) ? "libMXF++/metadata" : "libMXF++",
         (setDef->parentSetDef != NULL) ? parentClassName : "MetadataSet",
         baseClassName, parentClassName,
         baseClassName,
@@ -759,6 +742,10 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
                     fprintf(baseSourceFile, "    return getRawBytesItem(&MXF_ITEM_K(%s, %s));\n",
                         className, itemName);
                     break;
+                case MXF_FLOAT_TYPE:
+                    fprintf(baseSourceFile, "    return getFloatItem(&MXF_ITEM_K(%s, %s));\n",
+                        className, itemName);
+                    break;
                 default:
                     fprintf(stderr, "Warning: unknown basic type %d\n", itemType->typeId);
                     fprintf(baseSourceFile, "    XXX;\n");
@@ -947,7 +934,11 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
                             fprintf(baseSourceFile, "    return getRawBytesItem(&MXF_ITEM_K(%s, %s));\n",
                                 className, itemName);
                             break;
-                        default:
+                        case MXF_FLOAT_TYPE:
+                            fprintf(baseSourceFile, "    return getFloatArrayItem(&MXF_ITEM_K(%s, %s));\n",
+                                className, itemName);
+                            break;
+						default:
                             fprintf(stderr, "Warning: unknown basic type array %d\n", itemType->typeId);
                             fprintf(baseSourceFile, "    XXX;\n");
                             break;
@@ -1199,6 +1190,10 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
                     fprintf(baseSourceFile, "    setRawBytesItem(&MXF_ITEM_K(%s, %s), value);\n",
                         className, itemName);
                     break;
+				case MXF_FLOAT_TYPE:
+                    fprintf(baseSourceFile, "    setFloatItem(&MXF_ITEM_K(%s, %s), value);\n",
+                        className, itemName);
+                    break;
                 default:
                     fprintf(stderr, "Warning: unknown basic type %d\n", itemType->typeId);
                     fprintf(baseSourceFile, "    XXX;\n");
@@ -1374,7 +1369,10 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
                             fprintf(baseSourceFile, "    setRawBytesItem(&MXF_ITEM_K(%s, %s), value);\n",
                                 className, itemName);
                             break;
-                        default:
+                        case MXF_FLOAT_TYPE:
+                            fprintf(baseSourceFile, "    setFloatArrayItem(&MXF_ITEM_K(%s, %s), value);\n",
+                                className, itemName);
+                            break;                        default:
                             fprintf(stderr, "Warning: unknown basic type array %d\n", itemType->typeId);
                             fprintf(baseSourceFile, "    XXX;\n");
                             break;
