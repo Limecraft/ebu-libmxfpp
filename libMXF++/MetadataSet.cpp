@@ -216,6 +216,14 @@ int64_t MetadataSet::getInt64Item(const mxfKey *itemKey) const
     return result;
 }
 
+float MetadataSet::getFloatItem(const mxfKey *itemKey) const
+{
+    float result;
+    MXFPP_CHECK(mxf_get_float_item(_cMetadataSet, itemKey, &result));
+    return result;
+}
+
+
 mxfVersionType MetadataSet::getVersionTypeItem(const mxfKey *itemKey) const
 {
     mxfVersionType result;
@@ -532,6 +540,24 @@ vector<int64_t> MetadataSet::getInt64ArrayItem(const mxfKey *itemKey) const
     return result;
 }
 
+vector<float> MetadataSet::getFloatArrayItem(const mxfKey *itemKey) const
+{
+    vector<float> result;
+    ::MXFArrayItemIterator iter;
+    uint8_t *element;
+    uint32_t elementLength;
+    float value;
+
+    MXFPP_CHECK(mxf_initialise_array_item_iterator(_cMetadataSet, itemKey, &iter));
+    while (mxf_next_array_item_element(&iter, &element, &elementLength))
+    {
+        MXFPP_CHECK(elementLength == 4);
+        mxf_get_float(element, &value);
+        result.push_back(value);
+    }
+    return result;
+}
+
 vector<mxfVersionType> MetadataSet::getVersionTypeArrayItem(const mxfKey *itemKey) const
 {
     vector<mxfVersionType> result;
@@ -786,6 +812,11 @@ void MetadataSet::setInt64Item(const mxfKey *itemKey, int64_t value)
     MXFPP_CHECK(mxf_set_int64_item(_cMetadataSet, itemKey, value));
 }
 
+void MetadataSet::setFloatItem(const mxfKey *itemKey, float value)
+{
+    MXFPP_CHECK(mxf_set_float_item(_cMetadataSet, itemKey, value));
+}
+
 void MetadataSet::setVersionTypeItem(const mxfKey *itemKey, mxfVersionType value)
 {
     MXFPP_CHECK(mxf_set_version_type_item(_cMetadataSet, itemKey, value));
@@ -1002,6 +1033,18 @@ void MetadataSet::setInt64ArrayItem(const mxfKey *itemKey, const vector<int64_t>
     }
 }
 
+void MetadataSet::setFloatArrayItem(const mxfKey *itemKey, const vector<float> &value)
+{
+    size_t i;
+    uint8_t *data = 0;
+    MXFPP_CHECK(mxf_alloc_array_item_elements(_cMetadataSet, itemKey, 4, (uint32_t)value.size(), &data));
+    for (i = 0; i < value.size(); i++)
+    {
+        mxf_set_float(value.at(i), data);
+        data += 4;
+    }
+}
+
 void MetadataSet::setVersionTypeArrayItem(const mxfKey *itemKey, const vector<mxfVersionType> &value)
 {
     size_t i;
@@ -1212,6 +1255,13 @@ void MetadataSet::appendInt64ArrayItem(const mxfKey *itemKey, int64_t value)
     uint8_t *data = 0;
     MXFPP_CHECK(mxf_grow_array_item(_cMetadataSet, itemKey, 8, 1, &data));
     mxf_set_int64(value, data);
+}
+
+void MetadataSet::appendFloatArrayItem(const mxfKey *itemKey, float value)
+{
+    uint8_t *data = 0;
+    MXFPP_CHECK(mxf_grow_array_item(_cMetadataSet, itemKey, 4, 1, &data));
+    mxf_set_float(value, data);
 }
 
 void MetadataSet::appendVersionTypeArrayItem(const mxfKey *itemKey, mxfVersionType value)

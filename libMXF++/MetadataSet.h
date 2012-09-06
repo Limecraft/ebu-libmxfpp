@@ -136,6 +136,7 @@ public:
     int16_t getInt16Item(const mxfKey *itemKey) const;
     int32_t getInt32Item(const mxfKey *itemKey) const;
     int64_t getInt64Item(const mxfKey *itemKey) const;
+    float getFloatItem(const mxfKey *itemKey) const;
     mxfVersionType getVersionTypeItem(const mxfKey *itemKey) const;
     mxfUUID getUUIDItem(const mxfKey *itemKey) const;
     mxfUL getULItem(const mxfKey *itemKey) const;
@@ -162,6 +163,7 @@ public:
     std::vector<int16_t> getInt16ArrayItem(const mxfKey *itemKey) const;
     std::vector<int32_t> getInt32ArrayItem(const mxfKey *itemKey) const;
     std::vector<int64_t> getInt64ArrayItem(const mxfKey *itemKey) const;
+    std::vector<float> getFloatArrayItem(const mxfKey *itemKey) const;
     std::vector<mxfVersionType> getVersionTypeArrayItem(const mxfKey *itemKey) const;
     std::vector<mxfUUID> getUUIDArrayItem(const mxfKey *itemKey) const;
     std::vector<mxfUL> getULArrayItem(const mxfKey *itemKey) const;
@@ -188,7 +190,8 @@ public:
     void setInt16Item(const mxfKey *itemKey, int16_t value);
     void setInt32Item(const mxfKey *itemKey, int32_t value);
     void setInt64Item(const mxfKey *itemKey, int64_t value);
-    void setVersionTypeItem(const mxfKey *itemKey, mxfVersionType value);
+	void setFloatItem(const mxfKey *itemKey, float value);
+	void setVersionTypeItem(const mxfKey *itemKey, mxfVersionType value);
     void setUUIDItem(const mxfKey *itemKey, mxfUUID value);
     void setULItem(const mxfKey *itemKey, mxfUL value);
     void setAUIDItem(const mxfKey *itemKey, mxfAUID value);
@@ -213,6 +216,7 @@ public:
     void setInt16ArrayItem(const mxfKey *itemKey, const std::vector<int16_t> &value);
     void setInt32ArrayItem(const mxfKey *itemKey, const std::vector<int32_t> &value);
     void setInt64ArrayItem(const mxfKey *itemKey, const std::vector<int64_t> &value);
+    void setFloatArrayItem(const mxfKey *itemKey, const std::vector<float> &value);
     void setVersionTypeArrayItem(const mxfKey *itemKey, const std::vector<mxfVersionType> &value);
     void setUUIDArrayItem(const mxfKey *itemKey, const std::vector<mxfUUID> &value);
     void setULArrayItem(const mxfKey *itemKey, const std::vector<mxfUL> &value);
@@ -236,6 +240,7 @@ public:
     void appendInt16ArrayItem(const mxfKey *itemKey, int16_t value);
     void appendInt32ArrayItem(const mxfKey *itemKey, int32_t value);
     void appendInt64ArrayItem(const mxfKey *itemKey, int64_t value);
+    void appendFloatArrayItem(const mxfKey *itemKey, float value);
     void appendVersionTypeArrayItem(const mxfKey *itemKey, mxfVersionType value);
     void appendUUIDArrayItem(const mxfKey *itemKey, mxfUUID value);
     void appendULArrayItem(const mxfKey *itemKey, mxfUL value);
