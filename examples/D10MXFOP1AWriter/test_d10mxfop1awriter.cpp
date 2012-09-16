@@ -128,6 +128,7 @@ int main(int argc, const char **argv)
     bool drop_frame = false;
     mxfRational aspect_ratio = {16, 9};
     bool regtest = false;
+    char errorBuf[128];
     int value, num, den;
     int cmdln_index;
 
@@ -317,7 +318,8 @@ int main(int argc, const char **argv)
 
     FILE *video_file = fopen(video_filename, "rb");
     if (!video_file) {
-        fprintf(stderr, "Failed to open video file '%s': %s\n", video_filename, strerror(errno));
+        fprintf(stderr, "Failed to open video file '%s': %s\n",
+                video_filename, mxf_strerror(errno, errorBuf, sizeof(errorBuf)));
         return 1;
     }
 
@@ -326,7 +328,8 @@ int main(int argc, const char **argv)
     for (i = 0; i < num_audio_files; i++) {
         audio_file[i] = fopen(audio_filename[i], "rb");
         if (!audio_file[i]) {
-            fprintf(stderr, "Failed to open audio file '%s': %s\n", audio_filename[i], strerror(errno));
+            fprintf(stderr, "Failed to open audio file '%s': %s\n",
+                    audio_filename[i], mxf_strerror(errno, errorBuf, sizeof(errorBuf)));
             return 1;
         }
     }
@@ -353,8 +356,10 @@ int main(int argc, const char **argv)
             writer->SetUserTimecode(writer->GenerateUserTimecode());
 
             if (fread(video, video_frame_size, 1, video_file) != 1) {
-                if (ferror(video_file))
-                    fprintf(stderr, "Failed to read from video file: %s\n", strerror(errno));
+                if (ferror(video_file)) {
+                    fprintf(stderr, "Failed to read from video file: %s\n",
+                            mxf_strerror(errno, errorBuf, sizeof(errorBuf)));
+                }
                 break;
             }
             writer->SetVideo(video, video_frame_size);
@@ -363,8 +368,10 @@ int main(int argc, const char **argv)
 
             for (i = 0; i < num_audio_files; i++) {
                 if (fread(audio, audio_sample_count * audio_bytes_ps, 1, audio_file[i]) != 1) {
-                    if (ferror(audio_file[i]))
-                        fprintf(stderr, "Failed to read from audio file %d: %s\n", i, strerror(errno));
+                    if (ferror(audio_file[i])) {
+                        fprintf(stderr, "Failed to read from audio file %d: %s\n",
+                                i, mxf_strerror(errno, errorBuf, sizeof(errorBuf)));
+                    }
                     break;
                 }
                 writer->SetAudio(i, audio, audio_sample_count * audio_bytes_ps);
