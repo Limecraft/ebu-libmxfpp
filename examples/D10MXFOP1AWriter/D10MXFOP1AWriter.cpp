@@ -93,7 +93,7 @@ static void convert_timecode_to_12m(Timecode tc, unsigned char *t12m)
 static string get_track_name(string prefix, int number)
 {
     char buf[16];
-    sprintf(buf, "%d", number);
+    mxf_snprintf(buf, sizeof(buf), "%d", number);
     return prefix.append(buf);
 }
 
