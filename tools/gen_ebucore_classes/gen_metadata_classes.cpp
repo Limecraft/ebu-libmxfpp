@@ -2027,7 +2027,7 @@ int main(int argc, const char** argv)
     CHECK(mxf_load_data_model(&dataModel));
     CHECK(mxf_finalise_data_model(dataModel));
 
-	CHECK(EBUCore::EBUCoreDMS::RegisterCExtensions(dataModel));
+	CHECK(EBUSDK::EBUCore::EBUCoreDMS::RegisterCExtensions(dataModel));
 
     /* create the directories */
 
