@@ -118,6 +118,10 @@ public:
     const mxfUL* getOperationalPattern() const;
     std::vector<mxfUL> getEssenceContainers() const;
 
+    bool isClosed() const;
+    bool isComplete() const;
+    bool isClosedAndComplete() const;
+
     void markHeaderStart(File *file);
     void markHeaderEnd(File *file);
     void markIndexStart(File *file);

@@ -253,8 +253,20 @@ vector<mxfUL> Partition::getEssenceContainers() const
     return result;
 }
 
+bool Partition::isClosed() const
+{
+    return mxf_partition_is_closed(&_cPartition->key);
+}
 
+bool Partition::isComplete() const
+{
+    return mxf_partition_is_complete(&_cPartition->key);
+}
 
+bool Partition::isClosedAndComplete() const
+{
+    return mxf_partition_is_closed_and_complete(&_cPartition->key);
+}
 
 void Partition::markHeaderStart(File *file)
 {
