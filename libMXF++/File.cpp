@@ -233,7 +233,7 @@ bool File::readPartitions()
 
     // read the header partition if not already done so and clear the partition list
 
-    if ((!_partitions.empty() && mxf_is_header_partition_pack(_partitions[0]->getKey())) ||
+    if ((!_partitions.empty() && _partitions[0]->isHeader()) ||
         readHeaderPartition())
     {
         header_partition = _partitions[0];

@@ -268,6 +268,21 @@ bool Partition::isClosedAndComplete() const
     return mxf_partition_is_closed_and_complete(&_cPartition->key);
 }
 
+bool Partition::isHeader() const
+{
+    return mxf_is_header_partition_pack(&_cPartition->key);
+}
+
+bool Partition::isBody() const
+{
+    return mxf_is_body_partition_pack(&_cPartition->key);
+}
+
+bool Partition::isFooter() const
+{
+    return mxf_is_footer_partition_pack(&_cPartition->key);
+}
+
 void Partition::markHeaderStart(File *file)
 {
     MXFPP_CHECK(mxf_mark_header_start(file->getCFile(), _cPartition));

@@ -122,6 +122,10 @@ public:
     bool isComplete() const;
     bool isClosedAndComplete() const;
 
+    bool isHeader() const;
+    bool isBody() const;
+    bool isFooter() const;
+
     void markHeaderStart(File *file);
     void markHeaderEnd(File *file);
     void markIndexStart(File *file);
