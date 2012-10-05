@@ -273,6 +273,7 @@ bool File::readPartitions()
             }
             catch (...)
             {
+                mxf_log_error("Failed to read partitions listed in RIP\n");
                 mxf_clear_rip(&rip);
                 throw;
             }
@@ -283,9 +284,13 @@ bool File::readPartitions()
             this_partition = header_partition->getFooterPartition();
 
             if (this_partition <= header_partition->getThisPartition()) {
-                mxf_log_warn("File is missing both a RIP and a footer partition offset in the header partition pack\n");
+                if (header_partition->isClosed())
+                    mxf_log_warn("Header partition is marked Closed but footer partition offset is not set\n");
+
                 if (!mxf_find_footer_partition(_cFile))
                     throw false;
+
+                mxf_log_warn("File is missing both a RIP and a footer partition offset in the header partition pack\n");
                 this_partition = mxf_file_tell(_cFile) - mxf_get_runin_len(_cFile);
             }
 
