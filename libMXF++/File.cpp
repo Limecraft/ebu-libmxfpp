@@ -206,7 +206,7 @@ bool File::readHeaderPartition()
         if (!mxf_read_header_pp_kl(_cFile, &key, &llen, &len))
             return false;
 
-        _partitions.push_back(Partition::read(this, &key));
+        _partitions.push_back(Partition::read(this, &key, len));
         // file is positioned after the partition pack
 
         return true;
@@ -266,7 +266,7 @@ bool File::readPartitions()
 
                     seek(mxf_get_runin_len(_cFile) + rip_entry->thisPartition, SEEK_SET);
                     readKL(&key, &llen, &len);
-                    _partitions.push_back(Partition::read(this, &key));
+                    _partitions.push_back(Partition::read(this, &key, len));
                 }
 
                 mxf_clear_rip(&rip);
@@ -297,7 +297,7 @@ bool File::readPartitions()
             do {
                 seek(mxf_get_runin_len(_cFile) + this_partition, SEEK_SET);
                 readKL(&key, &llen, &len);
-                _partitions.push_back(Partition::read(this, &key));
+                _partitions.push_back(Partition::read(this, &key, len));
 
                 this_partition = _partitions.back()->getPreviousPartition();
             }

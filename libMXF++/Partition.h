@@ -80,7 +80,7 @@ private:
 class Partition
 {
 public:
-    static Partition* read(File *file, const mxfKey *key);
+    static Partition* read(File *file, const mxfKey *key, uint64_t len);
 
     Partition();
     Partition(::MXFPartition *cPartition);
