@@ -69,6 +69,7 @@ public:
 
     bool readHeaderPartition();
     bool readPartitions();
+    void readNextPartition(const mxfKey *key, uint64_t len);
 
     uint8_t readUInt8();
     uint16_t readUInt16();

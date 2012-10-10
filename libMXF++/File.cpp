@@ -327,6 +327,11 @@ bool File::readPartitions()
     }
 }
 
+void File::readNextPartition(const mxfKey *key, uint64_t len)
+{
+    _partitions.push_back(Partition::read(this, key, len));
+}
+
 uint8_t File::readUInt8()
 {
     uint8_t value;
