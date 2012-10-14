@@ -45,7 +45,7 @@ namespace mxfpp
     do {                                                                              \
         if (!(cmd)) {                                                                 \
             mxf_log_error("'%s' failed, at %s:%d\n", #cmd, __FILE__, __LINE__);       \
-            throw MXFException("'%s' failed, at %s:%d\n", #cmd, __FILE__, __LINE__);  \
+            throw MXFException("'%s' failed, at %s:%d", #cmd, __FILE__, __LINE__);    \
         }                                                                             \
     } while (0)
 
