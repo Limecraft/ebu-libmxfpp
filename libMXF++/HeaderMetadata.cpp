@@ -128,6 +128,11 @@ void HeaderMetadata::read(File *file, Partition *partition, const mxfKey *key, u
                                          partition->getCPartition()->headerByteCount, key, llen, len));
 }
 
+void HeaderMetadata::readFiltered(File *file, Partition *partition, MXFReadFilter *filter, const mxfKey *key, uint8_t llen, uint64_t len) {
+    MXFPP_CHECK(mxf_read_filtered_header_metadata(file->getCFile(), filter, _cHeaderMetadata,
+                                         partition->getCPartition()->headerByteCount, key, llen, len));
+}
+
 void HeaderMetadata::write(File *file, Partition *partition, FillerWriter *filler)
 {
     partition->markHeaderStart(file);

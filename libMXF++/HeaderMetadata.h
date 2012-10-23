@@ -73,6 +73,7 @@ public:
 
 
     virtual void read(File *file, Partition *partition, const mxfKey *key, uint8_t llen, uint64_t len);
+	virtual void readFiltered(File *file, Partition *partition, MXFReadFilter *filter, const mxfKey *key, uint8_t llen, uint64_t len);
 
     virtual void write(File *file, Partition *partition, FillerWriter *filler);
 
