@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008, British Broadcasting Corporation
+ * Copyright (C) 2012, British Broadcasting Corporation
  * All Rights Reserved.
  *
  * Author: Philip de Nier
@@ -52,10 +52,52 @@ public:
     virtual ~AES3AudioDescriptorBase();
 
 
+    // getters
+
+    bool haveEmphasis() const;
+    uint8_t getEmphasis() const;
+    bool haveBlockStartOffset() const;
+    uint16_t getBlockStartOffset() const;
+    bool haveAuxiliaryBitsMode() const;
+    uint8_t getAuxiliaryBitsMode() const;
+    bool haveChannelStatusMode() const;
+    std::vector<uint8_t> getChannelStatusMode() const;
+    bool haveFixedChannelStatusData() const;
+    std::vector<mxfAES3FixedData> getFixedChannelStatusData() const;
+    bool haveUserDataMode() const;
+    std::vector<uint8_t> getUserDataMode() const;
+    bool haveFixedUserData() const;
+    std::vector<mxfAES3FixedData> getFixedUserData() const;
+    bool haveLinkedTimecodeTrackID() const;
+    uint32_t getLinkedTimecodeTrackID() const;
+    bool haveSMPTE377MDataStreamNumber() const;
+    uint8_t getSMPTE377MDataStreamNumber() const;
+
+
+    // setters
+
+    void setEmphasis(uint8_t value);
+    void setBlockStartOffset(uint16_t value);
+    void setAuxiliaryBitsMode(uint8_t value);
+    void setChannelStatusMode(const std::vector<uint8_t> &value);
+    void appendChannelStatusMode(uint8_t value);
+    void setFixedChannelStatusData(const std::vector<mxfAES3FixedData> &value);
+    void appendFixedChannelStatusData(const mxfAES3FixedData &value);
+    void setUserDataMode(const std::vector<uint8_t> &value);
+    void appendUserDataMode(uint8_t value);
+    void setFixedUserData(const std::vector<mxfAES3FixedData> &value);
+    void appendFixedUserData(const mxfAES3FixedData &value);
+    void setLinkedTimecodeTrackID(uint32_t value);
+    void setSMPTE377MDataStreamNumber(uint8_t value);
 
 
 protected:
     AES3AudioDescriptorBase(HeaderMetadata *headerMetadata, ::MXFMetadataSet *cMetadataSet);
+
+private:
+    std::vector<mxfAES3FixedData> getAES3FixedDataArrayItem(const mxfKey *itemKey) const;
+    void setAES3FixedArrayItem(const mxfKey *itemKey, const std::vector<mxfAES3FixedData> &value);
+    void appendAES3FixedArrayItem(const mxfKey *itemKey, const mxfAES3FixedData &value);
 };
 
 
