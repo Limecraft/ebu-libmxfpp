@@ -170,17 +170,54 @@ void File::writeRIP()
 
 void File::updatePartitions()
 {
-    size_t firstPartitionIndex = 0, lastPartitionIndex = (size_t)(-1);
+    size_t firstIndex = 0, lastIndex = (size_t)(-1);
     if (_cMemoryFile) {
-        firstPartitionIndex = _firstMemoryPartitionIndex;
-        lastPartitionIndex = _lastMemoryPartitionIndex;
+        firstIndex = _firstMemoryPartitionIndex;
+        lastIndex  = _lastMemoryPartitionIndex;
     }
-    if (firstPartitionIndex >= _partitions.size())
+    if (firstIndex >= _partitions.size())
         return;
 
-    PartitionList partitionList(_partitions, firstPartitionIndex, lastPartitionIndex);
+    updatePartitions(firstIndex, lastIndex);
+}
 
-    MXFPP_CHECK(mxf_update_partitions(_cFile, partitionList.getList()));
+void File::updateBodyPartitions(const mxfKey *pp_key)
+{
+    size_t firstIndex = 0, lastIndex = (size_t)(-1);
+    if (_cMemoryFile) {
+        firstIndex = _firstMemoryPartitionIndex;
+        lastIndex  = _lastMemoryPartitionIndex;
+    }
+    if (firstIndex >= _partitions.size())
+        return;
+
+    if (lastIndex == (size_t)(-1))
+        lastIndex = _partitions.size() - 1;
+
+    size_t firstBodyIndex = firstIndex;
+    while (firstBodyIndex <= lastIndex && !_partitions[firstBodyIndex]->isBody())
+        firstBodyIndex++;
+    size_t lastBodyIndex = firstBodyIndex;
+    while (lastBodyIndex + 1 <= lastIndex && _partitions[lastBodyIndex + 1]->isBody())
+        lastBodyIndex++;
+
+    if (lastBodyIndex <= lastIndex) {
+        if (pp_key) {
+            size_t i;
+            for (i = firstBodyIndex; i <= lastBodyIndex; i++)
+                _partitions[i]->setKey(pp_key);
+        }
+        updatePartitions(firstBodyIndex, lastBodyIndex);
+    }
+}
+
+void File::updatePartitions(size_t rewriteFirstIndex, size_t rewriteLastIndex)
+{
+    PartitionList completePartitionList(_partitions);
+    mxf_update_partitions_in_memory(completePartitionList.getList());
+
+    PartitionList partitionList(_partitions, rewriteFirstIndex, rewriteLastIndex);
+    MXFPP_CHECK(mxf_rewrite_partitions(_cFile, partitionList.getList()));
 }
 
 Partition& File::getPartition(size_t index)
