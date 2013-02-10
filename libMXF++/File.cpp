@@ -485,6 +485,11 @@ bool File::eof()
     return mxf_file_eof(_cFile) == 1;
 }
 
+bool File::isSeekable()
+{
+    return mxf_file_is_seekable(_cFile) == 1;
+}
+
 uint32_t File::write(const unsigned char *data, uint32_t count)
 {
     return mxf_file_write(_cFile, data, count);

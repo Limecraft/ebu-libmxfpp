@@ -95,6 +95,7 @@ public:
     void skip(uint64_t len);
     int64_t size();
     bool eof();
+    bool isSeekable();
 
 
     uint32_t write(const unsigned char *data, uint32_t count);
