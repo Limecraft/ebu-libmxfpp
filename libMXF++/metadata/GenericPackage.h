@@ -40,6 +40,7 @@
 namespace mxfpp
 {
 
+class TaggedValue;
 
 class GenericPackage : public GenericPackageBase
 {
@@ -49,6 +50,15 @@ public:
 public:
     GenericPackage(HeaderMetadata *headerMetadata);
     virtual ~GenericPackage();
+
+    std::vector<TaggedValue*> getAvidAttributes();
+    std::vector<TaggedValue*> getAvidUserComments();
+
+    TaggedValue* appendAvidAttribute(std::string name, std::string value);
+    TaggedValue* appendAvidAttribute(std::string name, int32_t value);
+    TaggedValue* appendAvidAttribute(TaggedValue *taggedValue);
+    TaggedValue* appendAvidUserComment(std::string name, std::string value);
+    TaggedValue* appendAvidUserComment(TaggedValue *taggedValue);
 
 
     GenericTrack* findTrack(uint32_t trackId) const;

@@ -260,8 +260,6 @@ public:
     bool validate(bool logErrors);
 
     // Avid extensions
-    void attachAvidAttribute(std::string name, std::string value);
-    void attachAvidUserComment(std::string name, std::string value);
     void setAvidRGBColor(const mxfKey *itemKey, uint16_t red, uint16_t green, uint16_t blue);
     void setAvidProductVersion(const mxfKey *itemKey, mxfProductVersion value);
 
