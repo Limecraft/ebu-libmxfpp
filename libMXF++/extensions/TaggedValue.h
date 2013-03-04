@@ -44,6 +44,14 @@ namespace mxfpp
 class TaggedValue : public mxfpp::InterchangeObject
 {
 public:
+    typedef enum
+    {
+        UNKNOWN_VALUE_TYPE,
+        STRING_VALUE_TYPE,
+        INT32_VALUE_TYPE,
+    } ValueType;
+
+public:
     static void registerObjectFactory(mxfpp::HeaderMetadata *header_metadata);
 
 public:
@@ -54,18 +62,27 @@ public:
 
 public:
     TaggedValue(mxfpp::HeaderMetadata *header_metadata);
+    TaggedValue(mxfpp::HeaderMetadata *header_metadata, std::string name);
+    TaggedValue(mxfpp::HeaderMetadata *header_metadata, std::string name, std::string value);
+    TaggedValue(mxfpp::HeaderMetadata *header_metadata, std::string name, int32_t value);
     virtual ~TaggedValue();
 
 
-   // getters
-   std::string getName();
-   bool isStringValue();
-   std::string getStringValue();
+    // getters
+    std::string getName();
+    ValueType getValueType();
+    std::string getStringValue();
+    int32_t getInt32Value();
+    std::vector<TaggedValue*> getAvidAttributes();
 
 
-   // setters
-   void setName(std::string value);
-   void setStringValue(std::string value);
+    // setters
+    void setName(std::string value);
+    void setValue(std::string value);
+    void setValue(int32_t value);
+    TaggedValue* appendAvidAttribute(std::string name, std::string value);
+    TaggedValue* appendAvidAttribute(std::string name, int32_t value);
+    TaggedValue* appendAvidAttribute(TaggedValue *value);
 
 protected:
     TaggedValue(mxfpp::HeaderMetadata *header_metadata, ::MXFMetadataSet *c_metadata_set);

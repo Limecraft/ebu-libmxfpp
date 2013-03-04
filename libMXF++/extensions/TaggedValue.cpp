@@ -36,6 +36,8 @@
 #include <cstring>
 #include <cstdlib>
 
+#include <memory>
+
 #include <libMXF++/MXF.h>
 
 #include <mxf/mxf_avid.h>
@@ -44,13 +46,6 @@
 
 using namespace std;
 using namespace mxfpp;
-
-
-// prefix is 0x42 ('B') for big endian or 0x4c ('L') for little endian, followed by half-swapped key for String type
-static const unsigned char g_prefix_be[17] =
-    {0x42, 0x01, 0x10, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x06, 0x0e, 0x2b, 0x34, 0x01, 0x04, 0x01, 0x01};
-static const unsigned char g_prefix_le[17] =
-    {0x4C, 0x00, 0x02, 0x10, 0x01, 0x00, 0x00, 0x00, 0x00, 0x06, 0x0e, 0x2b, 0x34, 0x01, 0x04, 0x01, 0x01};
 
 
 
@@ -69,6 +64,32 @@ TaggedValue::TaggedValue(HeaderMetadata *header_metadata)
     header_metadata->add(this);
 }
 
+TaggedValue::TaggedValue(HeaderMetadata *header_metadata, string name)
+: InterchangeObject(header_metadata, header_metadata->createCSet(&set_key))
+{
+    header_metadata->add(this);
+
+    setName(name);
+}
+
+TaggedValue::TaggedValue(HeaderMetadata *header_metadata, string name, string value)
+: InterchangeObject(header_metadata, header_metadata->createCSet(&set_key))
+{
+    header_metadata->add(this);
+
+    setName(name);
+    setValue(value);
+}
+
+TaggedValue::TaggedValue(HeaderMetadata *header_metadata, string name, int32_t value)
+: InterchangeObject(header_metadata, header_metadata->createCSet(&set_key))
+{
+    header_metadata->add(this);
+
+    setName(name);
+    setValue(value);
+}
+
 TaggedValue::TaggedValue(HeaderMetadata *header_metadata, ::MXFMetadataSet *c_metadata_set)
 : InterchangeObject(header_metadata, c_metadata_set)
 {}
@@ -81,69 +102,25 @@ string TaggedValue::getName()
     return getStringItem(&MXF_ITEM_K(TaggedValue, Name));
 }
 
-bool TaggedValue::isStringValue()
+TaggedValue::ValueType TaggedValue::getValueType()
 {
-    ByteArray bytes;
-    bool is_big_endian;
-
-    bytes = getRawBytesItem(&MXF_ITEM_K(TaggedValue, Value));
-
-    if (bytes.length <= sizeof(g_prefix_be) || (bytes.data[0] != 0x42 && bytes.data[0] != 0x4C))
-    {
-        return false;
-    }
-
-    is_big_endian = (bytes.data[0] == 0x42);
-
-    if ((is_big_endian && memcmp(&bytes.data[1], &g_prefix_be[1], sizeof(g_prefix_be) - 1) != 0) ||
-        (!is_big_endian && memcmp(&bytes.data[1], &g_prefix_le[1], sizeof(g_prefix_le) - 1) != 0))
-    {
-        return false;
-    }
-
-    return true;
+    if (mxf_avid_is_string_tagged_value(_cMetadataSet))
+        return STRING_VALUE_TYPE;
+    else if (mxf_avid_is_int32_tagged_value(_cMetadataSet))
+        return INT32_VALUE_TYPE;
+    else
+        return UNKNOWN_VALUE_TYPE;
 }
 
 string TaggedValue::getStringValue()
 {
-    ByteArray bytes;
-    bool is_big_endian;
     mxfUTF16Char *utf16_value = 0;
     char *utf8_value = 0;
     size_t utf8_size;
-    uint16_t i;
-    uint8_t *value_ptr;
-    uint16_t str_size;
     string result;
 
-    MXFPP_CHECK(isStringValue());
-
     try {
-        bytes = getRawBytesItem(&MXF_ITEM_K(TaggedValue, Value));
-        is_big_endian = (bytes.data[0] == 0x42);
-
-        str_size = (bytes.length - sizeof(g_prefix_be)) / 2;
-        if (str_size == 0 ||
-            (bytes.data[sizeof(g_prefix_be)] == 0 && bytes.data[sizeof(g_prefix_be) + 1] == 0))
-        {
-            return "";
-        }
-
-        utf16_value = new mxfUTF16Char[str_size + 1];
-
-        value_ptr = &bytes.data[sizeof(g_prefix_be)];
-        for (i = 0; i < str_size; i++) {
-            if (is_big_endian)
-                utf16_value[i] = ((*value_ptr) << 8) | (*(value_ptr + 1));
-            else
-                utf16_value[i] = (*value_ptr) | ((*(value_ptr + 1)) << 8);
-
-            if (utf16_value[i] == 0)
-                break;
-
-            value_ptr += 2;
-        }
-        utf16_value[str_size] = 0;
+        MXFPP_CHECK(mxf_avid_get_string_tagged_value(_cMetadataSet, &utf16_value));
 
         utf8_size = mxf_utf16_to_utf8(0, utf16_value, 0);
         MXFPP_CHECK(utf8_size != (size_t)(-1));
@@ -167,14 +144,32 @@ string TaggedValue::getStringValue()
     }
 }
 
+int32_t TaggedValue::getInt32Value()
+{
+    int32_t int32_value;
+    MXFPP_CHECK(mxf_avid_get_int32_tagged_value(_cMetadataSet, &int32_value));
+    return int32_value;
+}
+
+vector<TaggedValue*> TaggedValue::getAvidAttributes()
+{
+    vector<TaggedValue*> result;
+    auto_ptr<ObjectIterator> iter(getStrongRefArrayItem(&MXF_ITEM_K(TaggedValue, TaggedValueAttributeList)));
+    while (iter->next())
+    {
+        MXFPP_CHECK(dynamic_cast<TaggedValue*>(iter->get()) != 0);
+        result.push_back(dynamic_cast<TaggedValue*>(iter->get()));
+    }
+    return result;
+}
+
 void TaggedValue::setName(string value)
 {
     setStringItem(&MXF_ITEM_K(TaggedValue, Name), value);
 }
 
-void TaggedValue::setStringValue(string value)
+void TaggedValue::setValue(string value)
 {
-    ByteArray indirectVal = {0, 0};
     mxfUTF16Char *utf16Val = 0;
     size_t utf16ValSize;
     try
@@ -182,24 +177,38 @@ void TaggedValue::setStringValue(string value)
         utf16ValSize = mxf_utf8_to_utf16(NULL, value.c_str(), 0);
         MXFPP_CHECK(utf16ValSize != (size_t)(-1));
         utf16ValSize += 1;
-        utf16Val = new wchar_t[utf16ValSize];
+        utf16Val = new mxfUTF16Char[utf16ValSize];
         mxf_utf8_to_utf16(utf16Val, value.c_str(), utf16ValSize);
 
-        indirectVal.length = (uint16_t)(sizeof(g_prefix_be) + utf16ValSize * mxfUTF16Char_extlen);
-        indirectVal.data = new uint8_t[indirectVal.length];
-        memcpy(indirectVal.data, g_prefix_be, sizeof(g_prefix_be));
-        mxf_set_utf16string(utf16Val, &indirectVal.data[sizeof(g_prefix_be)]);
-
-        setRawBytesItem(&MXF_ITEM_K(TaggedValue, Value), indirectVal);
+        MXFPP_CHECK(mxf_avid_set_indirect_string_item(_cMetadataSet, &MXF_ITEM_K(TaggedValue, Value), utf16Val));
 
         delete [] utf16Val;
-        delete [] indirectVal.data;
     }
     catch (...)
     {
         delete [] utf16Val;
-        delete [] indirectVal.data;
         throw;
     }
+}
+
+void TaggedValue::setValue(int32_t value)
+{
+    MXFPP_CHECK(mxf_avid_set_indirect_int32_item(_cMetadataSet, &MXF_ITEM_K(TaggedValue, Value), value));
+}
+
+TaggedValue* TaggedValue::appendAvidAttribute(string name, string value)
+{
+    return appendAvidAttribute(new TaggedValue(_headerMetadata, name, value));
+}
+
+TaggedValue* TaggedValue::appendAvidAttribute(string name, int32_t value)
+{
+    return appendAvidAttribute(new TaggedValue(_headerMetadata, name, value));
+}
+
+TaggedValue* TaggedValue::appendAvidAttribute(TaggedValue *taggedValue)
+{
+    appendStrongRefArrayItem(&MXF_ITEM_K(TaggedValue, TaggedValueAttributeList), taggedValue);
+    return taggedValue;
 }
 
