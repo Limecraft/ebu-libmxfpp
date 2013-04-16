@@ -4,6 +4,7 @@ noinst_LTLIBRARIES = libmetadata.la
 
 libmetadata_la_SOURCES = \
 	AES3AudioDescriptor.cpp \
+	ANCDataDescriptor.cpp \
 	CDCIEssenceDescriptor.cpp \
 	ContentStorage.cpp \
 	DMFramework.cpp \
@@ -36,6 +37,7 @@ libmetadata_la_SOURCES = \
 	TextLocator.cpp \
 	TimecodeComponent.cpp \
 	Track.cpp \
+	VBIDataDescriptor.cpp \
 	WaveAudioDescriptor.cpp
 
 
@@ -46,6 +48,7 @@ libmetadata_la_CXXFLAGS = $(LIBMXFPP_CFLAGS)
 library_includedir = ${includedir}/libMXF++-@LIBMXFPP_MAJORMINOR@/libMXF++/metadata
 library_include_HEADERS = \
 	AES3AudioDescriptor.h \
+	ANCDataDescriptor.h \
 	CDCIEssenceDescriptor.h \
 	ContentStorage.h \
 	DMFramework.h \
@@ -79,4 +82,5 @@ library_include_HEADERS = \
 	TextLocator.h \
 	TimecodeComponent.h \
 	Track.h \
+	VBIDataDescriptor.h \
 	WaveAudioDescriptor.h

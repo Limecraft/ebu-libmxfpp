@@ -2,6 +2,7 @@ noinst_LTLIBRARIES = libbase.la
 
 libbase_la_SOURCES = \
 	AES3AudioDescriptorBase.cpp \
+	ANCDataDescriptorBase.cpp \
 	CDCIEssenceDescriptorBase.cpp \
 	ContentStorageBase.cpp \
 	DMFrameworkBase.cpp \
@@ -34,6 +35,7 @@ libbase_la_SOURCES = \
 	TextLocatorBase.cpp \
 	TimecodeComponentBase.cpp \
 	TrackBase.cpp \
+	VBIDataDescriptorBase.cpp \
 	WaveAudioDescriptorBase.cpp
 
 
@@ -44,6 +46,7 @@ libbase_la_CXXFLAGS = $(LIBMXFPP_CFLAGS)
 library_includedir = ${includedir}/libMXF++-@LIBMXFPP_MAJORMINOR@/libMXF++/metadata/base
 library_include_HEADERS = \
 	AES3AudioDescriptorBase.h \
+	ANCDataDescriptorBase.h \
 	CDCIEssenceDescriptorBase.h \
 	ContentStorageBase.h \
 	DMFrameworkBase.h \
@@ -76,4 +79,5 @@ library_include_HEADERS = \
 	TextLocatorBase.h \
 	TimecodeComponentBase.h \
 	TrackBase.h \
+	VBIDataDescriptorBase.h \
 	WaveAudioDescriptorBase.h

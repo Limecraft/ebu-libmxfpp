@@ -67,6 +67,8 @@
 #include <libMXF++/metadata/MaterialPackage.h>
 #include <libMXF++/metadata/SourcePackage.h>
 #include <libMXF++/metadata/Preface.h>
+#include <libMXF++/metadata/ANCDataDescriptor.h>
+#include <libMXF++/metadata/VBIDataDescriptor.h>
 #include <libMXF++/metadata/DMSet.h>
 
 
