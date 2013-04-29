@@ -205,6 +205,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\libMXF++\metadata\ANCDataDescriptor.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\libMXF++\metadata\CDCIEssenceDescriptor.cpp"
 					>
 				</File>
@@ -333,6 +337,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\libMXF++\metadata\VBIDataDescriptor.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\libMXF++\metadata\WaveAudioDescriptor.cpp"
 					>
 				</File>
@@ -342,6 +350,10 @@
 					>
 					<File
 						RelativePath="..\..\..\libMXF++\metadata\base\AES3AudioDescriptorBase.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\libMXF++\metadata\base\ANCDataDescriptorBase.cpp"
 						>
 					</File>
 					<File
@@ -473,6 +485,10 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\libMXF++\metadata\base\VBIDataDescriptorBase.cpp"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\libMXF++\metadata\base\WaveAudioDescriptorBase.cpp"
 						>
 					</File>
@@ -547,6 +563,10 @@
 				>
 				<File
 					RelativePath="..\..\..\libMXF++\metadata\AES3AudioDescriptor.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\libMXF++\metadata\ANCDataDescriptor.h"
 					>
 				</File>
 				<File
@@ -682,6 +702,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\libMXF++\metadata\VBIDataDescriptor.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\libMXF++\metadata\WaveAudioDescriptor.h"
 					>
 				</File>
@@ -691,6 +715,10 @@
 					>
 					<File
 						RelativePath="..\..\..\libMXF++\metadata\base\AES3AudioDescriptorBase.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\libMXF++\metadata\base\ANCDataDescriptorBase.h"
 						>
 					</File>
 					<File
@@ -819,6 +847,10 @@
 					</File>
 					<File
 						RelativePath="..\..\..\libMXF++\metadata\base\TrackBase.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\libMXF++\metadata\base\VBIDataDescriptorBase.h"
 						>
 					</File>
 					<File
