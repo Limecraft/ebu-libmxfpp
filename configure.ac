@@ -188,6 +188,20 @@ LIBMXFPP_LDADDLIBS="$LIBMXFPP_LIBADDLIBS \
 	\$(top_builddir)/libMXF++/libMXF++-$LIBMXFPP_MAJORMINOR.la"
 AC_SUBST(LIBMXFPP_LDADDLIBS)
 
+LIBMXFPP_LDFLAGS=
+AC_MSG_CHECKING([whether $CC supports -Wl,--no-undefined])
+orig_ldflags="$LDFLAGS"
+LDFLAGS="$LDFLAGS -Werror -Wl,--no-undefined"
+AC_LINK_IFELSE([AC_LANG_PROGRAM()],
+			[support_ld_flag=yes],
+			[support_ld_flag=no])
+if test "x$support_ld_flag" = "xyes"; then
+	LIBMXFPP_LDFLAGS="$LIBMXFPP_LDFLAGS -Wl,--no-undefined"
+fi
+LDFLAGS="$orig_ldflags"
+AC_MSG_RESULT([$support_ld_flag])
+AC_SUBST(LIBMXFPP_LDFLAGS)
+
 
 dnl-----------------------------------------------------------------------------
 dnl -- Package Config
