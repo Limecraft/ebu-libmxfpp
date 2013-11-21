@@ -70,6 +70,8 @@
 #include <libMXF++/metadata/ANCDataDescriptor.h>
 #include <libMXF++/metadata/VBIDataDescriptor.h>
 #include <libMXF++/metadata/DMSet.h>
+#include <libMXF++/metadata/SubDescriptor.h>
+#include <libMXF++/metadata/AVCSubDescriptor.h>
 
 
 #endif

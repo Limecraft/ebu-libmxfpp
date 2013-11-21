@@ -5,6 +5,7 @@ noinst_LTLIBRARIES = libmetadata.la
 libmetadata_la_SOURCES = \
 	AES3AudioDescriptor.cpp \
 	ANCDataDescriptor.cpp \
+	AVCSubDescriptor.cpp \
 	CDCIEssenceDescriptor.cpp \
 	ContentStorage.cpp \
 	DMFramework.cpp \
@@ -34,6 +35,7 @@ libmetadata_la_SOURCES = \
 	SourcePackage.cpp \
 	StaticTrack.cpp \
 	StructuralComponent.cpp \
+	SubDescriptor.cpp \
 	TextLocator.cpp \
 	TimecodeComponent.cpp \
 	Track.cpp \
@@ -49,6 +51,7 @@ library_includedir = ${includedir}/libMXF++-@LIBMXFPP_MAJORMINOR@/libMXF++/metad
 library_include_HEADERS = \
 	AES3AudioDescriptor.h \
 	ANCDataDescriptor.h \
+	AVCSubDescriptor.h \
 	CDCIEssenceDescriptor.h \
 	ContentStorage.h \
 	DMFramework.h \
@@ -79,6 +82,7 @@ library_include_HEADERS = \
 	SourcePackage.h \
 	StaticTrack.h \
 	StructuralComponent.h \
+	SubDescriptor.h \
 	TextLocator.h \
 	TimecodeComponent.h \
 	Track.h \

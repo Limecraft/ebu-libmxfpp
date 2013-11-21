@@ -280,6 +280,8 @@ void HeaderMetadata::initialiseObjectFactory()
     REGISTER_CLASS(VBIDataDescriptor);
     REGISTER_CLASS(DMFramework);
     REGISTER_CLASS(DMSet);
+    REGISTER_CLASS(SubDescriptor);
+    REGISTER_CLASS(AVCSubDescriptor);
 
     // Add new classes here
 

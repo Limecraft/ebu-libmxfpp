@@ -209,6 +209,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\libMXF++\metadata\AVCSubDescriptor.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\libMXF++\metadata\CDCIEssenceDescriptor.cpp"
 					>
 				</File>
@@ -325,6 +329,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\libMXF++\metadata\SubDescriptor.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\libMXF++\metadata\TextLocator.cpp"
 					>
 				</File>
@@ -354,6 +362,10 @@
 					</File>
 					<File
 						RelativePath="..\..\..\libMXF++\metadata\base\ANCDataDescriptorBase.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\libMXF++\metadata\base\AVCSubDescriptorBase.cpp"
 						>
 					</File>
 					<File
@@ -473,6 +485,10 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\libMXF++\metadata\base\SubDescriptorBase.cpp"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\libMXF++\metadata\base\TextLocatorBase.cpp"
 						>
 					</File>
@@ -567,6 +583,10 @@
 				</File>
 				<File
 					RelativePath="..\..\..\libMXF++\metadata\ANCDataDescriptor.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\libMXF++\metadata\AVCSubDescriptor.h"
 					>
 				</File>
 				<File
@@ -690,6 +710,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\libMXF++\metadata\SubDescriptor.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\libMXF++\metadata\TextLocator.h"
 					>
 				</File>
@@ -719,6 +743,10 @@
 					</File>
 					<File
 						RelativePath="..\..\..\libMXF++\metadata\base\ANCDataDescriptorBase.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\libMXF++\metadata\base\AVCSubDescriptorBase.h"
 						>
 					</File>
 					<File
@@ -835,6 +863,10 @@
 					</File>
 					<File
 						RelativePath="..\..\..\libMXF++\metadata\base\StructuralComponentBase.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\libMXF++\metadata\base\SubDescriptorBase.h"
 						>
 					</File>
 					<File
