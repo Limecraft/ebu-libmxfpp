@@ -172,11 +172,8 @@ dnl -- Compiler flags etc.
 dnl-----------------------------------------------------------------------------
 
 WARN_CFLAGS=
-if test x"$GCC" = xyes; then
-	WARN_CFLAGS="-W -Wall"
-fi
+AC_APPEND_SUPPORTED_CFLAGS(WARN_CFLAGS, [-W -Wall])
 AC_SUBST(WARN_CFLAGS)
-
 
 LIBMXFPP_CFLAGS="$WARN_CFLAGS $LIBMXF_CFLAGS -I\$(top_srcdir)"
 AC_SUBST(LIBMXFPP_CFLAGS)
@@ -189,17 +186,7 @@ LIBMXFPP_LDADDLIBS="$LIBMXFPP_LIBADDLIBS \
 AC_SUBST(LIBMXFPP_LDADDLIBS)
 
 LIBMXFPP_LDFLAGS=
-AC_MSG_CHECKING([whether $CC supports -Wl,--no-undefined])
-orig_ldflags="$LDFLAGS"
-LDFLAGS="$LDFLAGS -Werror -Wl,--no-undefined"
-AC_LINK_IFELSE([AC_LANG_PROGRAM()],
-			[support_ld_flag=yes],
-			[support_ld_flag=no])
-if test "x$support_ld_flag" = "xyes"; then
-	LIBMXFPP_LDFLAGS="$LIBMXFPP_LDFLAGS -Wl,--no-undefined"
-fi
-LDFLAGS="$orig_ldflags"
-AC_MSG_RESULT([$support_ld_flag])
+AC_APPEND_SUPPORTED_LDFLAGS(LIBMXFPP_LDFLAGS, [-Wl,--no-undefined])
 AC_SUBST(LIBMXFPP_LDFLAGS)
 
 
