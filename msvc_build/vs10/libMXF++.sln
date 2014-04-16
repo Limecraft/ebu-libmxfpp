@@ -1,21 +1,15 @@
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual C++ Express 2005
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libMXF++", "libMXF++\libMXF++.vcproj", "{33E3C49F-5483-4081-9446-9238A59B761A}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C++ Express 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libMXF++", "libMXF++\libMXF++.vcxproj", "{33E3C49F-5483-4081-9446-9238A59B761A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{580F8E65-F910-46A6-8A9C-6A8E58D95E53} = {580F8E65-F910-46A6-8A9C-6A8E58D95E53}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libMXF", "..\..\..\libMXF\msvc_build\vs8\mxf\libMXF.vcproj", "{580F8E65-F910-46A6-8A9C-6A8E58D95E53}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "D10MXFOP1AWriter", "examples\D10MXFOP1AWriter\D10MXFOP1AWriter.vcxproj", "{F1E02AC9-B382-4770-A783-319F29E12D78}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "D10MXFOP1AWriter", "examples\D10MXFOP1AWriter\D10MXFOP1AWriter.vcproj", "{F1E02AC9-B382-4770-A783-319F29E12D78}"
-	ProjectSection(ProjectDependencies) = postProject
-		{33E3C49F-5483-4081-9446-9238A59B761A} = {33E3C49F-5483-4081-9446-9238A59B761A}
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_d10mxfop1awriter", "examples\D10MXFOP1AWriter\test_d10mxfop1awriter.vcxproj", "{C40B9905-DF1C-43BA-B5EE-E4EB329EC4CE}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_d10mxfop1awriter", "examples\D10MXFOP1AWriter\test_d10mxfop1awriter.vcproj", "{C40B9905-DF1C-43BA-B5EE-E4EB329EC4CE}"
-	ProjectSection(ProjectDependencies) = postProject
-		{F1E02AC9-B382-4770-A783-319F29E12D78} = {F1E02AC9-B382-4770-A783-319F29E12D78}
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libMXF", "..\..\..\libMXF\msvc_build\vs10\mxf\libMXF.vcxproj", "{580F8E65-F910-46A6-8A9C-6A8E58D95E53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,8 +21,6 @@ Global
 		{33E3C49F-5483-4081-9446-9238A59B761A}.Debug|Win32.Build.0 = Debug|Win32
 		{33E3C49F-5483-4081-9446-9238A59B761A}.Release|Win32.ActiveCfg = Release|Win32
 		{33E3C49F-5483-4081-9446-9238A59B761A}.Release|Win32.Build.0 = Release|Win32
-		{580F8E65-F910-46A6-8A9C-6A8E58D95E53}.Debug|Win32.ActiveCfg = Debug|Win32
-		{580F8E65-F910-46A6-8A9C-6A8E58D95E53}.Release|Win32.ActiveCfg = Release|Win32
 		{F1E02AC9-B382-4770-A783-319F29E12D78}.Debug|Win32.ActiveCfg = Debug|Win32
 		{F1E02AC9-B382-4770-A783-319F29E12D78}.Debug|Win32.Build.0 = Debug|Win32
 		{F1E02AC9-B382-4770-A783-319F29E12D78}.Release|Win32.ActiveCfg = Release|Win32
@@ -37,6 +29,10 @@ Global
 		{C40B9905-DF1C-43BA-B5EE-E4EB329EC4CE}.Debug|Win32.Build.0 = Debug|Win32
 		{C40B9905-DF1C-43BA-B5EE-E4EB329EC4CE}.Release|Win32.ActiveCfg = Release|Win32
 		{C40B9905-DF1C-43BA-B5EE-E4EB329EC4CE}.Release|Win32.Build.0 = Release|Win32
+		{580F8E65-F910-46A6-8A9C-6A8E58D95E53}.Debug|Win32.ActiveCfg = Debug|Win32
+		{580F8E65-F910-46A6-8A9C-6A8E58D95E53}.Debug|Win32.Build.0 = Debug|Win32
+		{580F8E65-F910-46A6-8A9C-6A8E58D95E53}.Release|Win32.ActiveCfg = Release|Win32
+		{580F8E65-F910-46A6-8A9C-6A8E58D95E53}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

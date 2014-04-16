@@ -216,7 +216,7 @@ AC_CONFIG_FILES([
     tools/Makefile
     tools/gen_classes/Makefile
     msvc_build/Makefile
-    msvc_build/vs8/Makefile
+    msvc_build/vs10/Makefile
     libMXF++.pc])
 
 AC_OUTPUT

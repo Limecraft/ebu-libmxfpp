@@ -1,0 +1,575 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\metadata">
+      <UniqueIdentifier>{c241dd1b-cfc2-4499-af0a-2a1a395eb048}</UniqueIdentifier>
+      <Extensions>c;cpp</Extensions>
+    </Filter>
+    <Filter Include="Source Files\metadata\base">
+      <UniqueIdentifier>{720911cc-2a11-49e4-aa39-bbca3c7b6e20}</UniqueIdentifier>
+      <Extensions>c;cpp</Extensions>
+    </Filter>
+    <Filter Include="Source Files\extensions">
+      <UniqueIdentifier>{2431ec8a-de8c-4552-b767-6f06c1be4000}</UniqueIdentifier>
+      <Extensions>c;cpp</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\metadata">
+      <UniqueIdentifier>{dafd341d-c2dc-4bd4-bfa4-6155426bae89}</UniqueIdentifier>
+      <Extensions>h;hpp</Extensions>
+    </Filter>
+    <Filter Include="Header Files\metadata\base">
+      <UniqueIdentifier>{cc44958f-57de-4d49-974b-d80b803228fe}</UniqueIdentifier>
+      <Extensions>h;hpp</Extensions>
+    </Filter>
+    <Filter Include="Header Files\extensions">
+      <UniqueIdentifier>{7c8da1d1-61fb-41f4-a1b5-6883793803ca}</UniqueIdentifier>
+      <Extensions>h;hpp</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\libMXF++\AvidHeaderMetadata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\DataModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\File.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\HeaderMetadata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\IndexTable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\MetadataSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\MXFException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\MXFTypes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\MXFVersion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\Partition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\AES3AudioDescriptor.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\ANCDataDescriptor.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\AVCSubDescriptor.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\CDCIEssenceDescriptor.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\ContentStorage.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\DMFramework.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\DMSegment.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\DMSet.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\DMSourceClip.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\EssenceContainerData.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\EventTrack.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\FileDescriptor.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\GenericDataEssenceDescriptor.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\GenericDescriptor.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\GenericPackage.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\GenericPictureEssenceDescriptor.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\GenericSoundEssenceDescriptor.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\GenericTrack.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\Identification.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\InterchangeObject.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\Locator.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\MaterialPackage.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\MPEGVideoDescriptor.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\MultipleDescriptor.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\NetworkLocator.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\Preface.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\RGBAEssenceDescriptor.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\Sequence.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\SourceClip.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\SourcePackage.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\StaticTrack.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\StructuralComponent.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\SubDescriptor.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\TextLocator.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\TimecodeComponent.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\Track.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\VBIDataDescriptor.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\WaveAudioDescriptor.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\AES3AudioDescriptorBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\ANCDataDescriptorBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\AVCSubDescriptorBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\CDCIEssenceDescriptorBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\ContentStorageBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\DMFrameworkBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\DMSegmentBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\DMSetBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\DMSourceClipBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\EssenceContainerDataBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\EventTrackBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\FileDescriptorBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\GenericDataEssenceDescriptorBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\GenericDescriptorBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\GenericPackageBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\GenericPictureEssenceDescriptorBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\GenericSoundEssenceDescriptorBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\GenericTrackBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\IdentificationBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\InterchangeObjectBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\LocatorBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\MaterialPackageBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\MPEGVideoDescriptorBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\MultipleDescriptorBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\NetworkLocatorBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\PrefaceBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\RGBAEssenceDescriptorBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\SequenceBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\SourceClipBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\SourcePackageBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\StaticTrackBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\StructuralComponentBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\SubDescriptorBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\TextLocatorBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\TimecodeComponentBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\TrackBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\VBIDataDescriptorBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\WaveAudioDescriptorBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\extensions\TaggedValue.cpp">
+      <Filter>Source Files\extensions</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="mxfpp_scm_version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\AvidHeaderMetadata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\DataModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\File.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\HeaderMetadata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\IndexTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\MetadataSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\MXF.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\MXFException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\MXFTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\MXFVersion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\Partition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\AES3AudioDescriptor.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\ANCDataDescriptor.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\AVCSubDescriptor.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\CDCIEssenceDescriptor.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\ContentStorage.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\DMFramework.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\DMSegment.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\DMSet.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\DMSourceClip.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\EssenceContainerData.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\EventTrack.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\FileDescriptor.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\GenericDataEssenceDescriptor.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\GenericDescriptor.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\GenericPackage.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\GenericPictureEssenceDescriptor.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\GenericSoundEssenceDescriptor.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\GenericTrack.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\Identification.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\InterchangeObject.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\Locator.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\MaterialPackage.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\Metadata.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\MPEGVideoDescriptor.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\MultipleDescriptor.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\NetworkLocator.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\Preface.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\RGBAEssenceDescriptor.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\Sequence.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\SourceClip.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\SourcePackage.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\StaticTrack.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\StructuralComponent.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\SubDescriptor.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\TextLocator.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\TimecodeComponent.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\Track.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\VBIDataDescriptor.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\WaveAudioDescriptor.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\AES3AudioDescriptorBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\ANCDataDescriptorBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\AVCSubDescriptorBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\CDCIEssenceDescriptorBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\ContentStorageBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\DMFrameworkBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\DMSegmentBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\DMSetBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\DMSourceClipBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\EssenceContainerDataBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\EventTrackBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\FileDescriptorBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\GenericDataEssenceDescriptorBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\GenericDescriptorBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\GenericPackageBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\GenericPictureEssenceDescriptorBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\GenericSoundEssenceDescriptorBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\GenericTrackBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\IdentificationBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\InterchangeObjectBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\LocatorBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\MaterialPackageBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\MPEGVideoDescriptorBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\MultipleDescriptorBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\NetworkLocatorBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\PrefaceBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\RGBAEssenceDescriptorBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\SequenceBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\SourceClipBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\SourcePackageBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\StaticTrackBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\StructuralComponentBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\SubDescriptorBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\TextLocatorBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\TimecodeComponentBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\TrackBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\VBIDataDescriptorBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\WaveAudioDescriptorBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\extensions\TaggedValue.h">
+      <Filter>Header Files\extensions</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="gen_scm_version.cmd" />
+  </ItemGroup>
+</Project>
