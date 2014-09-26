@@ -116,6 +116,31 @@ uint8_t IndexTableSegment::getPosTableCount() const
     return _cSegment->posTableCount;
 }
 
+uint64_t IndexTableSegment::getExtStartOffset() const
+{
+    return _cSegment->extStartOffset;
+}
+
+uint64_t IndexTableSegment::getVBEByteCount() const
+{
+    return _cSegment->vbeByteCount;
+}
+
+mxfOptBool IndexTableSegment::getSingleIndexLocation() const
+{
+    return _cSegment->singleIndexLocation;
+}
+
+mxfOptBool IndexTableSegment::getSingleEssenceLocation() const
+{
+    return _cSegment->singleEssenceLocation;
+}
+
+mxfOptBool IndexTableSegment::getForwardIndexDirection() const
+{
+    return _cSegment->forwardIndexDirection;
+}
+
 bool IndexTableSegment::haveDeltaEntryAtDelta(uint32_t delta, uint8_t slice) const
 {
     MXFDeltaEntry *entry = _cSegment->deltaEntryArray;
@@ -192,6 +217,31 @@ void IndexTableSegment::setSliceCount(uint8_t value)
 void IndexTableSegment::setPosTableCount(uint8_t value)
 {
     _cSegment->posTableCount = value;
+}
+
+void IndexTableSegment::setExtStartOffset(uint64_t value)
+{
+    _cSegment->extStartOffset = value;
+}
+
+void IndexTableSegment::setVBEByteCount(uint64_t value)
+{
+    _cSegment->vbeByteCount = value;
+}
+
+void IndexTableSegment::setSingleIndexLocation(mxfOptBool value)
+{
+    _cSegment->singleIndexLocation = value;
+}
+
+void IndexTableSegment::setSingleEssenceLocation(mxfOptBool value)
+{
+    _cSegment->singleEssenceLocation = value;
+}
+
+void IndexTableSegment::setForwardIndexDirection(mxfOptBool value)
+{
+    _cSegment->forwardIndexDirection = value;
 }
 
 void IndexTableSegment::appendDeltaEntry(int8_t posTableIndex, uint8_t slice, uint32_t elementData)
