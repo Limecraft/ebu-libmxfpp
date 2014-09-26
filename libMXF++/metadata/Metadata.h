@@ -53,6 +53,7 @@
 #include <libMXF++/metadata/DMFramework.h>
 #include <libMXF++/metadata/DMSegment.h>
 #include <libMXF++/metadata/DMSourceClip.h>
+#include <libMXF++/metadata/SubDescriptor.h>
 #include <libMXF++/metadata/GenericDescriptor.h>
 #include <libMXF++/metadata/FileDescriptor.h>
 #include <libMXF++/metadata/GenericPictureEssenceDescriptor.h>
@@ -70,7 +71,6 @@
 #include <libMXF++/metadata/ANCDataDescriptor.h>
 #include <libMXF++/metadata/VBIDataDescriptor.h>
 #include <libMXF++/metadata/DMSet.h>
-#include <libMXF++/metadata/SubDescriptor.h>
 #include <libMXF++/metadata/AVCSubDescriptor.h>
 
 
