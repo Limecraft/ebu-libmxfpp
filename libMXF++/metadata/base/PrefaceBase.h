@@ -65,6 +65,8 @@ public:
    mxfUL getOperationalPattern() const;
    std::vector<mxfUL> getEssenceContainers() const;
    std::vector<mxfUL> getDMSchemes() const;
+   bool haveIsRIPPresent() const;
+   bool getIsRIPPresent() const;
 
 
    // setters
@@ -81,6 +83,7 @@ public:
    void appendEssenceContainers(mxfUL value);
    void setDMSchemes(const std::vector<mxfUL> &value);
    void appendDMSchemes(mxfUL value);
+   void setIsRIPPresent(bool value);
 
 
 protected:
