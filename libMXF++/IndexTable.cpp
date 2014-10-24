@@ -214,6 +214,11 @@ void IndexTableSegment::setSliceCount(uint8_t value)
     _cSegment->sliceCount = value;
 }
 
+void IndexTableSegment::forceWriteSliceCount(bool enable)
+{
+    _cSegment->forceWriteSliceCount = enable;
+}
+
 void IndexTableSegment::setPosTableCount(uint8_t value)
 {
     _cSegment->posTableCount = value;
