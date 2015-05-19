@@ -47,6 +47,7 @@ libbase_la_SOURCES = \
 	UTF8TextBasedSetBase.cpp \
 	UTF16TextBasedSetBase.cpp \
 	VBIDataDescriptorBase.cpp \
+	VC2SubDescriptorBase.cpp \
 	WaveAudioDescriptorBase.cpp
 
 
@@ -102,4 +103,5 @@ library_include_HEADERS = \
 	UTF8TextBasedSetBase.h \
 	UTF16TextBasedSetBase.h \
 	VBIDataDescriptorBase.h \
+	VC2SubDescriptorBase.h \
 	WaveAudioDescriptorBase.h

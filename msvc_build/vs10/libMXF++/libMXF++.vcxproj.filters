@@ -203,6 +203,9 @@
     <ClCompile Include="..\..\..\libMXF++\metadata\VBIDataDescriptor.cpp">
       <Filter>Source Files\metadata</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\VC2SubDescriptor.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\libMXF++\metadata\WaveAudioDescriptor.cpp">
       <Filter>Source Files\metadata</Filter>
     </ClCompile>
@@ -342,6 +345,9 @@
       <Filter>Source Files\metadata\base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\libMXF++\metadata\base\VBIDataDescriptorBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\VC2SubDescriptorBase.cpp">
       <Filter>Source Files\metadata\base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\libMXF++\metadata\base\WaveAudioDescriptorBase.cpp">
@@ -529,6 +535,9 @@
     <ClInclude Include="..\..\..\libMXF++\metadata\VBIDataDescriptor.h">
       <Filter>Header Files\metadata</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\VC2SubDescriptor.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\libMXF++\metadata\WaveAudioDescriptor.h">
       <Filter>Header Files\metadata</Filter>
     </ClInclude>
@@ -668,6 +677,9 @@
       <Filter>Header Files\metadata\base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libMXF++\metadata\base\VBIDataDescriptorBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\VC2SubDescriptorBase.h">
       <Filter>Header Files\metadata\base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libMXF++\metadata\base\WaveAudioDescriptorBase.h">

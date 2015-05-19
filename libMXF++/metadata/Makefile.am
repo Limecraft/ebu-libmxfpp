@@ -49,6 +49,7 @@ libmetadata_la_SOURCES = \
 	UTF8TextBasedSet.cpp \
 	UTF16TextBasedSet.cpp \
 	VBIDataDescriptor.cpp \
+	VC2SubDescriptor.cpp \
 	WaveAudioDescriptor.cpp
 
 
@@ -105,4 +106,5 @@ library_include_HEADERS = \
 	UTF8TextBasedSet.h \
 	UTF16TextBasedSet.h \
 	VBIDataDescriptor.h \
+	VC2SubDescriptor.h \
 	WaveAudioDescriptor.h

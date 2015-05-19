@@ -81,6 +81,7 @@
 #include <libMXF++/metadata/AudioChannelLabelSubDescriptor.h>
 #include <libMXF++/metadata/SoundfieldGroupLabelSubDescriptor.h>
 #include <libMXF++/metadata/GroupOfSoundfieldGroupsLabelSubDescriptor.h>
+#include <libMXF++/metadata/VC2SubDescriptor.h>
 
 
 #endif

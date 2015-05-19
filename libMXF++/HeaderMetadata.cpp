@@ -307,6 +307,7 @@ void HeaderMetadata::initialiseObjectFactory()
     REGISTER_CLASS(AudioChannelLabelSubDescriptor);
     REGISTER_CLASS(SoundfieldGroupLabelSubDescriptor);
     REGISTER_CLASS(GroupOfSoundfieldGroupsLabelSubDescriptor);
+    REGISTER_CLASS(VC2SubDescriptor);
 
     // Add new classes here
 
