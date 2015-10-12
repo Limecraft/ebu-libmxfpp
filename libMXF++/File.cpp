@@ -195,11 +195,17 @@ void File::updateBodyPartitions(const mxfKey *pp_key)
         lastIndex = _partitions.size() - 1;
 
     size_t firstBodyIndex = firstIndex;
-    while (firstBodyIndex <= lastIndex && !_partitions[firstBodyIndex]->isBody())
+    while (firstBodyIndex <= lastIndex &&
+           !(_partitions[firstBodyIndex]->isBody() && !_partitions[firstBodyIndex]->isGenericStream()))
+    {
         firstBodyIndex++;
+    }
     size_t lastBodyIndex = firstBodyIndex;
-    while (lastBodyIndex + 1 <= lastIndex && _partitions[lastBodyIndex + 1]->isBody())
+    while (lastBodyIndex + 1 <= lastIndex &&
+           (_partitions[lastBodyIndex + 1]->isBody() && !_partitions[lastBodyIndex + 1]->isGenericStream()))
+    {
         lastBodyIndex++;
+    }
 
     if (lastBodyIndex <= lastIndex) {
         if (pp_key) {

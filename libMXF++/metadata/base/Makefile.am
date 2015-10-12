@@ -18,6 +18,7 @@ libbase_la_SOURCES = \
 	GenericPackageBase.cpp \
 	GenericPictureEssenceDescriptorBase.cpp \
 	GenericSoundEssenceDescriptorBase.cpp \
+	GenericStreamTextBasedSetBase.cpp \
 	GenericTrackBase.cpp \
 	IdentificationBase.cpp \
 	InterchangeObjectBase.cpp \
@@ -34,9 +35,13 @@ libbase_la_SOURCES = \
 	StaticTrackBase.cpp \
 	StructuralComponentBase.cpp \
 	SubDescriptorBase.cpp \
+	TextBasedDMFrameworkBase.cpp \
+	TextBasedObjectBase.cpp \
 	TextLocatorBase.cpp \
 	TimecodeComponentBase.cpp \
 	TrackBase.cpp \
+	UTF8TextBasedSetBase.cpp \
+	UTF16TextBasedSetBase.cpp \
 	VBIDataDescriptorBase.cpp \
 	WaveAudioDescriptorBase.cpp
 
@@ -64,6 +69,7 @@ library_include_HEADERS = \
 	GenericPackageBase.h \
 	GenericPictureEssenceDescriptorBase.h \
 	GenericSoundEssenceDescriptorBase.h \
+	GenericStreamTextBasedSetBase.h \
 	GenericTrackBase.h \
 	IdentificationBase.h \
 	InterchangeObjectBase.h \
@@ -80,8 +86,12 @@ library_include_HEADERS = \
 	StaticTrackBase.h \
 	StructuralComponentBase.h \
 	SubDescriptorBase.h \
+	TextBasedDMFrameworkBase.h \
+	TextBasedObjectBase.h \
 	TextLocatorBase.h \
 	TimecodeComponentBase.h \
 	TrackBase.h \
+	UTF8TextBasedSetBase.h \
+	UTF16TextBasedSetBase.h \
 	VBIDataDescriptorBase.h \
 	WaveAudioDescriptorBase.h

@@ -84,6 +84,7 @@ static const char* get_sw_ref_name(MXFDataModel *dataModel, MXFItemDef *itemDef,
         { &MXF_ITEM_K(ContentStorage, Packages), "GenericPackage*" },
         { &MXF_ITEM_K(ContentStorage, EssenceContainerData), "EssenceContainerData*" },
         { &MXF_ITEM_K(Preface, PrimaryPackage), "GenericPackage*" },
+        { &MXF_ITEM_K(TextBasedDMFramework, TextBasedObject), "TextBasedObject*" },
     };
 
     for (i = 0; i < ARRAY_SIZE(nameInfo); i++)
@@ -158,6 +159,9 @@ static const char* get_type_name(MXFDataModel *dataModel, MXFItemDef *itemDef,
                 get_type_name(dataModel, itemDef, interpretTtemType, typeName);
                 break;
             case MXF_UTF16_TYPE:
+                strcpy(typeName, "std::string");
+                break;
+            case MXF_UTF8_TYPE:
                 strcpy(typeName, "std::string");
                 break;
             case MXF_BOOLEAN_TYPE:
@@ -649,7 +653,7 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
         }
         else
         {
-            if (itemType->typeId == MXF_UTF16STRING_TYPE)
+            if (itemType->typeId == MXF_UTF16STRING_TYPE || itemType->typeId == MXF_UTF8STRING_TYPE)
             {
                 strcpy(typeName, "std::string");
             }
@@ -869,6 +873,11 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
             if (itemType->typeId == MXF_UTF16STRING_TYPE)
             {
                 fprintf(baseSourceFile, "    return getStringItem(&MXF_ITEM_K(%s, %s));\n",
+                    className, itemName);
+            }
+            else if (itemType->typeId == MXF_UTF8STRING_TYPE)
+            {
+                fprintf(baseSourceFile, "    return getUTF8StringItem(&MXF_ITEM_K(%s, %s));\n",
                     className, itemName);
             }
             else
@@ -1101,7 +1110,7 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
         }
         else
         {
-            if (itemType->typeId == MXF_UTF16STRING_TYPE)
+            if (itemType->typeId == MXF_UTF16STRING_TYPE || itemType->typeId == MXF_UTF8STRING_TYPE)
             {
                 strcpy(typeName, "std::string");
             }
@@ -1288,6 +1297,11 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
             if (itemType->typeId == MXF_UTF16STRING_TYPE)
             {
                 fprintf(baseSourceFile, "    setStringItem(&MXF_ITEM_K(%s, %s), value);\n",
+                    className, itemName);
+            }
+            else if (itemType->typeId == MXF_UTF8STRING_TYPE)
+            {
+                fprintf(baseSourceFile, "    setUTF8StringItem(&MXF_ITEM_K(%s, %s), value);\n",
                     className, itemName);
             }
             else
@@ -1482,7 +1496,7 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
             CHECK(elementType != NULL);
             get_type_name(dataModel, itemDef, elementType, elementTypeName);
 
-            if (itemType->typeId == MXF_UTF16STRING_TYPE)
+            if (itemType->typeId == MXF_UTF16STRING_TYPE || itemType->typeId == MXF_UTF8STRING_TYPE)
             {
                 // do nothing
             }

@@ -107,6 +107,7 @@
     <ClCompile Include="..\..\..\libMXF++\metadata\GenericPackage.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\GenericPictureEssenceDescriptor.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\GenericSoundEssenceDescriptor.cpp" />
+    <ClCompile Include="..\..\..\libMXF++\metadata\GenericStreamTextBasedSet.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\GenericTrack.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\Identification.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\InterchangeObject.cpp" />
@@ -123,9 +124,13 @@
     <ClCompile Include="..\..\..\libMXF++\metadata\StaticTrack.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\StructuralComponent.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\SubDescriptor.cpp" />
+    <ClCompile Include="..\..\..\libMXF++\metadata\TextBasedDMFramework.cpp" />
+    <ClCompile Include="..\..\..\libMXF++\metadata\TextBasedObject.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\TextLocator.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\TimecodeComponent.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\Track.cpp" />
+    <ClCompile Include="..\..\..\libMXF++\metadata\UTF8TextBasedSet.cpp" />
+    <ClCompile Include="..\..\..\libMXF++\metadata\UTF16TextBasedSet.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\VBIDataDescriptor.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\WaveAudioDescriptor.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\base\AES3AudioDescriptorBase.cpp" />
@@ -145,6 +150,7 @@
     <ClCompile Include="..\..\..\libMXF++\metadata\base\GenericPackageBase.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\base\GenericPictureEssenceDescriptorBase.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\base\GenericSoundEssenceDescriptorBase.cpp" />
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\GenericStreamTextBasedSetBase.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\base\GenericTrackBase.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\base\IdentificationBase.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\base\InterchangeObjectBase.cpp" />
@@ -161,9 +167,13 @@
     <ClCompile Include="..\..\..\libMXF++\metadata\base\StaticTrackBase.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\base\StructuralComponentBase.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\base\SubDescriptorBase.cpp" />
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\TextBasedDMFrameworkBase.cpp" />
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\TextBasedObjectBase.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\base\TextLocatorBase.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\base\TimecodeComponentBase.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\base\TrackBase.cpp" />
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\UTF8TextBasedSetBase.cpp" />
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\UTF16TextBasedSetBase.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\base\VBIDataDescriptorBase.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\base\WaveAudioDescriptorBase.cpp" />
     <ClCompile Include="..\..\..\libMXF++\extensions\TaggedValue.cpp" />
@@ -198,6 +208,7 @@
     <ClInclude Include="..\..\..\libMXF++\metadata\GenericPackage.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\GenericPictureEssenceDescriptor.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\GenericSoundEssenceDescriptor.h" />
+    <ClInclude Include="..\..\..\libMXF++\metadata\GenericStreamTextBasedSet.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\GenericTrack.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\Identification.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\InterchangeObject.h" />
@@ -215,9 +226,13 @@
     <ClInclude Include="..\..\..\libMXF++\metadata\StaticTrack.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\StructuralComponent.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\SubDescriptor.h" />
+    <ClInclude Include="..\..\..\libMXF++\metadata\TextBasedDMFramework.h" />
+    <ClInclude Include="..\..\..\libMXF++\metadata\TextBasedObject.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\TextLocator.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\TimecodeComponent.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\Track.h" />
+    <ClInclude Include="..\..\..\libMXF++\metadata\UTF8TextBasedSet.h" />
+    <ClInclude Include="..\..\..\libMXF++\metadata\UTF16TextBasedSet.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\VBIDataDescriptor.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\WaveAudioDescriptor.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\base\AES3AudioDescriptorBase.h" />
@@ -237,6 +252,7 @@
     <ClInclude Include="..\..\..\libMXF++\metadata\base\GenericPackageBase.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\base\GenericPictureEssenceDescriptorBase.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\base\GenericSoundEssenceDescriptorBase.h" />
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\GenericStreamTextBasedSetBase.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\base\GenericTrackBase.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\base\IdentificationBase.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\base\InterchangeObjectBase.h" />
@@ -253,9 +269,13 @@
     <ClInclude Include="..\..\..\libMXF++\metadata\base\StaticTrackBase.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\base\StructuralComponentBase.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\base\SubDescriptorBase.h" />
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\TextBasedDMFrameworkBase.h" />
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\TextBasedObjectBase.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\base\TextLocatorBase.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\base\TimecodeComponentBase.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\base\TrackBase.h" />
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\UTF8TextBasedSetBase.h" />
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\UTF16TextBasedSetBase.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\base\VBIDataDescriptorBase.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\base\WaveAudioDescriptorBase.h" />
     <ClInclude Include="..\..\..\libMXF++\extensions\TaggedValue.h" />

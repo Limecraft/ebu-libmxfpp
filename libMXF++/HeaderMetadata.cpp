@@ -282,6 +282,11 @@ void HeaderMetadata::initialiseObjectFactory()
     REGISTER_CLASS(DMSet);
     REGISTER_CLASS(SubDescriptor);
     REGISTER_CLASS(AVCSubDescriptor);
+    REGISTER_CLASS(TextBasedObject);
+    REGISTER_CLASS(TextBasedDMFramework);
+    REGISTER_CLASS(GenericStreamTextBasedSet);
+    REGISTER_CLASS(UTF8TextBasedSet);
+    REGISTER_CLASS(UTF16TextBasedSet);
 
     // Add new classes here
 

@@ -116,6 +116,9 @@
     <ClCompile Include="..\..\..\libMXF++\metadata\GenericSoundEssenceDescriptor.cpp">
       <Filter>Source Files\metadata</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\GenericStreamTextBasedSet.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\libMXF++\metadata\GenericTrack.cpp">
       <Filter>Source Files\metadata</Filter>
     </ClCompile>
@@ -164,6 +167,12 @@
     <ClCompile Include="..\..\..\libMXF++\metadata\SubDescriptor.cpp">
       <Filter>Source Files\metadata</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\TextBasedDMFramework.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\TextBasedObject.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\libMXF++\metadata\TextLocator.cpp">
       <Filter>Source Files\metadata</Filter>
     </ClCompile>
@@ -171,6 +180,12 @@
       <Filter>Source Files\metadata</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\libMXF++\metadata\Track.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\UTF8TextBasedSet.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\UTF16TextBasedSet.cpp">
       <Filter>Source Files\metadata</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\libMXF++\metadata\VBIDataDescriptor.cpp">
@@ -230,6 +245,9 @@
     <ClCompile Include="..\..\..\libMXF++\metadata\base\GenericSoundEssenceDescriptorBase.cpp">
       <Filter>Source Files\metadata\base</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\GenericStreamTextBasedSetBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\libMXF++\metadata\base\GenericTrackBase.cpp">
       <Filter>Source Files\metadata\base</Filter>
     </ClCompile>
@@ -278,6 +296,12 @@
     <ClCompile Include="..\..\..\libMXF++\metadata\base\SubDescriptorBase.cpp">
       <Filter>Source Files\metadata\base</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\TextBasedDMFrameworkBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\TextBasedObjectBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\libMXF++\metadata\base\TextLocatorBase.cpp">
       <Filter>Source Files\metadata\base</Filter>
     </ClCompile>
@@ -285,6 +309,12 @@
       <Filter>Source Files\metadata\base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\libMXF++\metadata\base\TrackBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\UTF8TextBasedSetBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\UTF16TextBasedSetBase.cpp">
       <Filter>Source Files\metadata\base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\libMXF++\metadata\base\VBIDataDescriptorBase.cpp">
@@ -385,6 +415,9 @@
     <ClInclude Include="..\..\..\libMXF++\metadata\GenericSoundEssenceDescriptor.h">
       <Filter>Header Files\metadata</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\GenericStreamTextBasedSet.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\libMXF++\metadata\GenericTrack.h">
       <Filter>Header Files\metadata</Filter>
     </ClInclude>
@@ -436,6 +469,12 @@
     <ClInclude Include="..\..\..\libMXF++\metadata\SubDescriptor.h">
       <Filter>Header Files\metadata</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\TextBasedDMFramework.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\TextBasedObject.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\libMXF++\metadata\TextLocator.h">
       <Filter>Header Files\metadata</Filter>
     </ClInclude>
@@ -443,6 +482,12 @@
       <Filter>Header Files\metadata</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libMXF++\metadata\Track.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\UTF8TextBasedSet.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\UTF16TextBasedSet.h">
       <Filter>Header Files\metadata</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libMXF++\metadata\VBIDataDescriptor.h">
@@ -502,6 +547,9 @@
     <ClInclude Include="..\..\..\libMXF++\metadata\base\GenericSoundEssenceDescriptorBase.h">
       <Filter>Header Files\metadata\base</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\GenericStreamTextBasedSetBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\libMXF++\metadata\base\GenericTrackBase.h">
       <Filter>Header Files\metadata\base</Filter>
     </ClInclude>
@@ -550,6 +598,12 @@
     <ClInclude Include="..\..\..\libMXF++\metadata\base\SubDescriptorBase.h">
       <Filter>Header Files\metadata\base</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\TextBasedDMFrameworkBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\TextBasedObjectBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\libMXF++\metadata\base\TextLocatorBase.h">
       <Filter>Header Files\metadata\base</Filter>
     </ClInclude>
@@ -557,6 +611,12 @@
       <Filter>Header Files\metadata\base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libMXF++\metadata\base\TrackBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\UTF8TextBasedSetBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\UTF16TextBasedSetBase.h">
       <Filter>Header Files\metadata\base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libMXF++\metadata\base\VBIDataDescriptorBase.h">

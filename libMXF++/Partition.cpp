@@ -278,6 +278,11 @@ bool Partition::isBody() const
     return mxf_is_body_partition_pack(&_cPartition->key);
 }
 
+bool Partition::isGenericStream() const
+{
+    return mxf_is_generic_stream_partition_pack(&_cPartition->key);
+}
+
 bool Partition::isFooter() const
 {
     return mxf_is_footer_partition_pack(&_cPartition->key);

@@ -20,6 +20,7 @@ libmetadata_la_SOURCES = \
 	GenericPackage.cpp \
 	GenericPictureEssenceDescriptor.cpp \
 	GenericSoundEssenceDescriptor.cpp \
+	GenericStreamTextBasedSet.cpp \
 	GenericTrack.cpp \
 	Identification.cpp \
 	InterchangeObject.cpp \
@@ -36,9 +37,13 @@ libmetadata_la_SOURCES = \
 	StaticTrack.cpp \
 	StructuralComponent.cpp \
 	SubDescriptor.cpp \
+	TextBasedDMFramework.cpp \
+	TextBasedObject.cpp \
 	TextLocator.cpp \
 	TimecodeComponent.cpp \
 	Track.cpp \
+	UTF8TextBasedSet.cpp \
+	UTF16TextBasedSet.cpp \
 	VBIDataDescriptor.cpp \
 	WaveAudioDescriptor.cpp
 
@@ -66,6 +71,7 @@ library_include_HEADERS = \
 	GenericPackage.h \
 	GenericPictureEssenceDescriptor.h \
 	GenericSoundEssenceDescriptor.h \
+	GenericStreamTextBasedSet.h \
 	GenericTrack.h \
 	Identification.h \
 	InterchangeObject.h \
@@ -83,8 +89,12 @@ library_include_HEADERS = \
 	StaticTrack.h \
 	StructuralComponent.h \
 	SubDescriptor.h \
+	TextBasedDMFramework.h \
+	TextBasedObject.h \
 	TextLocator.h \
 	TimecodeComponent.h \
 	Track.h \
+	UTF8TextBasedSet.h \
+	UTF16TextBasedSet.h \
 	VBIDataDescriptor.h \
 	WaveAudioDescriptor.h

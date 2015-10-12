@@ -71,6 +71,11 @@
 #include <libMXF++/metadata/ANCDataDescriptor.h>
 #include <libMXF++/metadata/VBIDataDescriptor.h>
 #include <libMXF++/metadata/DMSet.h>
+#include <libMXF++/metadata/TextBasedObject.h>
+#include <libMXF++/metadata/TextBasedDMFramework.h>
+#include <libMXF++/metadata/GenericStreamTextBasedSet.h>
+#include <libMXF++/metadata/UTF8TextBasedSet.h>
+#include <libMXF++/metadata/UTF16TextBasedSet.h>
 #include <libMXF++/metadata/AVCSubDescriptor.h>
 
 

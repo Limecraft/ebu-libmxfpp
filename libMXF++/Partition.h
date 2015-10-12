@@ -124,6 +124,7 @@ public:
 
     bool isHeader() const;
     bool isBody() const;
+    bool isGenericStream() const;
     bool isFooter() const;
 
     void markHeaderStart(File *file);
