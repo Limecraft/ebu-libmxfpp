@@ -67,7 +67,7 @@ int main(int argc, const char **argv)
         return 1;
     }
 
-    printf("Duration = %"PRId64"\n", clip_reader->GetDuration());
+    printf("Duration = %" PRId64 "\n", clip_reader->GetDuration());
 
     const OPAtomContentPackage *content_package;
 
@@ -81,12 +81,12 @@ int main(int argc, const char **argv)
             break;
         }
 
-        printf("writing %d bytes from essence offset 0x%"PRIx64"\n", content_package->GetEssenceDataISize(0),
+        printf("writing %d bytes from essence offset 0x%" PRIx64 "\n", content_package->GetEssenceDataISize(0),
                content_package->GetEssenceDataI(0)->GetEssenceOffset());
         fwrite(content_package->GetEssenceDataIBytes(0), content_package->GetEssenceDataISize(0), 1, output);
     }
 
-    printf("Duration = %"PRId64"\n", clip_reader->GetDuration());
+    printf("Duration = %" PRId64 "\n", clip_reader->GetDuration());
 
     fclose(output);
 
