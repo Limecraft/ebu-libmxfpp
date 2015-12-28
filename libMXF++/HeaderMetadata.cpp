@@ -53,6 +53,8 @@ HeaderMetadata::HeaderMetadata(DataModel *dataModel)
     initialiseObjectFactory();
     MXFPP_CHECK(mxf_create_header_metadata(&_cHeaderMetadata, dataModel->getCDataModel()));
     _ownCHeaderMetadata = true;
+
+    _dataModel = new DataModel(_cHeaderMetadata->dataModel, false);
 }
 
 HeaderMetadata::HeaderMetadata(::MXFHeaderMetadata *c_header_metadata, bool take_ownership)
@@ -60,6 +62,8 @@ HeaderMetadata::HeaderMetadata(::MXFHeaderMetadata *c_header_metadata, bool take
     initialiseObjectFactory();
     _cHeaderMetadata = c_header_metadata;
     _ownCHeaderMetadata = take_ownership;
+
+    _dataModel = new DataModel(_cHeaderMetadata->dataModel, false);
 }
 
 HeaderMetadata::~HeaderMetadata()
@@ -81,6 +85,8 @@ HeaderMetadata::~HeaderMetadata()
     {
         mxf_free_header_metadata(&_cHeaderMetadata);
     }
+
+    delete _dataModel;
 }
 
 mxfProductVersion HeaderMetadata::getToolkitVersion()

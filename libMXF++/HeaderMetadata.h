@@ -80,6 +80,8 @@ public:
     Preface* getPreface();
 
 
+    DataModel* getDataModel() const { return _dataModel; }
+
     void add(MetadataSet *set);
 
     MetadataSet* wrap(::MXFMetadataSet *cMetadataSet);
@@ -91,6 +93,8 @@ public:
 private:
     void initialiseObjectFactory();
     void remove(MetadataSet *set);
+
+    DataModel *_dataModel;
 
     std::map<mxfKey, AbsMetadataSetFactory*> _objectFactory;
 
