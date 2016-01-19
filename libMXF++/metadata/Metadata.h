@@ -77,6 +77,10 @@
 #include <libMXF++/metadata/UTF8TextBasedSet.h>
 #include <libMXF++/metadata/UTF16TextBasedSet.h>
 #include <libMXF++/metadata/AVCSubDescriptor.h>
+#include <libMXF++/metadata/MCALabelSubDescriptor.h>
+#include <libMXF++/metadata/AudioChannelLabelSubDescriptor.h>
+#include <libMXF++/metadata/SoundfieldGroupLabelSubDescriptor.h>
+#include <libMXF++/metadata/GroupOfSoundfieldGroupsLabelSubDescriptor.h>
 
 
 #endif

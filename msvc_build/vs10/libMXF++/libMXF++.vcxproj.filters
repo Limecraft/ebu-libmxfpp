@@ -71,6 +71,9 @@
     <ClCompile Include="..\..\..\libMXF++\metadata\ANCDataDescriptor.cpp">
       <Filter>Source Files\metadata</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\AudioChannelLabelSubDescriptor.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\libMXF++\metadata\AVCSubDescriptor.cpp">
       <Filter>Source Files\metadata</Filter>
     </ClCompile>
@@ -122,6 +125,9 @@
     <ClCompile Include="..\..\..\libMXF++\metadata\GenericTrack.cpp">
       <Filter>Source Files\metadata</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\GroupOfSoundfieldGroupsLabelSubDescriptor.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\libMXF++\metadata\Identification.cpp">
       <Filter>Source Files\metadata</Filter>
     </ClCompile>
@@ -132,6 +138,9 @@
       <Filter>Source Files\metadata</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\libMXF++\metadata\MaterialPackage.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\MCALabelSubDescriptor.cpp">
       <Filter>Source Files\metadata</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\libMXF++\metadata\MPEGVideoDescriptor.cpp">
@@ -150,6 +159,9 @@
       <Filter>Source Files\metadata</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\libMXF++\metadata\Sequence.cpp">
+      <Filter>Source Files\metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\SoundfieldGroupLabelSubDescriptor.cpp">
       <Filter>Source Files\metadata</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\libMXF++\metadata\SourceClip.cpp">
@@ -198,6 +210,9 @@
       <Filter>Source Files\metadata\base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\libMXF++\metadata\base\ANCDataDescriptorBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\AudioChannelLabelSubDescriptorBase.cpp">
       <Filter>Source Files\metadata\base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\libMXF++\metadata\base\AVCSubDescriptorBase.cpp">
@@ -251,6 +266,9 @@
     <ClCompile Include="..\..\..\libMXF++\metadata\base\GenericTrackBase.cpp">
       <Filter>Source Files\metadata\base</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\GroupOfSoundfieldGroupsLabelSubDescriptorBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\libMXF++\metadata\base\IdentificationBase.cpp">
       <Filter>Source Files\metadata\base</Filter>
     </ClCompile>
@@ -261,6 +279,9 @@
       <Filter>Source Files\metadata\base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\libMXF++\metadata\base\MaterialPackageBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\MCALabelSubDescriptorBase.cpp">
       <Filter>Source Files\metadata\base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\libMXF++\metadata\base\MPEGVideoDescriptorBase.cpp">
@@ -279,6 +300,9 @@
       <Filter>Source Files\metadata\base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\libMXF++\metadata\base\SequenceBase.cpp">
+      <Filter>Source Files\metadata\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\SoundfieldGroupLabelSubDescriptorBase.cpp">
       <Filter>Source Files\metadata\base</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\libMXF++\metadata\base\SourceClipBase.cpp">
@@ -370,6 +394,9 @@
     <ClInclude Include="..\..\..\libMXF++\metadata\ANCDataDescriptor.h">
       <Filter>Header Files\metadata</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\AudioChannelLabelSubDescriptor.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\libMXF++\metadata\AVCSubDescriptor.h">
       <Filter>Header Files\metadata</Filter>
     </ClInclude>
@@ -421,6 +448,9 @@
     <ClInclude Include="..\..\..\libMXF++\metadata\GenericTrack.h">
       <Filter>Header Files\metadata</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\GroupOfSoundfieldGroupsLabelSubDescriptor.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\libMXF++\metadata\Identification.h">
       <Filter>Header Files\metadata</Filter>
     </ClInclude>
@@ -431,6 +461,9 @@
       <Filter>Header Files\metadata</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libMXF++\metadata\MaterialPackage.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\MCALabelSubDescriptor.h">
       <Filter>Header Files\metadata</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libMXF++\metadata\Metadata.h">
@@ -452,6 +485,9 @@
       <Filter>Header Files\metadata</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libMXF++\metadata\Sequence.h">
+      <Filter>Header Files\metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\SoundfieldGroupLabelSubDescriptor.h">
       <Filter>Header Files\metadata</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libMXF++\metadata\SourceClip.h">
@@ -500,6 +536,9 @@
       <Filter>Header Files\metadata\base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libMXF++\metadata\base\ANCDataDescriptorBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\AudioChannelLabelSubDescriptorBase.h">
       <Filter>Header Files\metadata\base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libMXF++\metadata\base\AVCSubDescriptorBase.h">
@@ -553,6 +592,9 @@
     <ClInclude Include="..\..\..\libMXF++\metadata\base\GenericTrackBase.h">
       <Filter>Header Files\metadata\base</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\GroupOfSoundfieldGroupsLabelSubDescriptorBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\libMXF++\metadata\base\IdentificationBase.h">
       <Filter>Header Files\metadata\base</Filter>
     </ClInclude>
@@ -563,6 +605,9 @@
       <Filter>Header Files\metadata\base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libMXF++\metadata\base\MaterialPackageBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\MCALabelSubDescriptorBase.h">
       <Filter>Header Files\metadata\base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libMXF++\metadata\base\MPEGVideoDescriptorBase.h">
@@ -581,6 +626,9 @@
       <Filter>Header Files\metadata\base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libMXF++\metadata\base\SequenceBase.h">
+      <Filter>Header Files\metadata\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\SoundfieldGroupLabelSubDescriptorBase.h">
       <Filter>Header Files\metadata\base</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\libMXF++\metadata\base\SourceClipBase.h">

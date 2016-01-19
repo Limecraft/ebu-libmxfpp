@@ -3,6 +3,7 @@ noinst_LTLIBRARIES = libbase.la
 libbase_la_SOURCES = \
 	AES3AudioDescriptorBase.cpp \
 	ANCDataDescriptorBase.cpp \
+	AudioChannelLabelSubDescriptorBase.cpp \
 	AVCSubDescriptorBase.cpp \
 	CDCIEssenceDescriptorBase.cpp \
 	ContentStorageBase.cpp \
@@ -20,16 +21,19 @@ libbase_la_SOURCES = \
 	GenericSoundEssenceDescriptorBase.cpp \
 	GenericStreamTextBasedSetBase.cpp \
 	GenericTrackBase.cpp \
+	GroupOfSoundfieldGroupsLabelSubDescriptorBase.cpp \
 	IdentificationBase.cpp \
 	InterchangeObjectBase.cpp \
 	LocatorBase.cpp \
 	MaterialPackageBase.cpp \
+	MCALabelSubDescriptorBase.cpp \
 	MPEGVideoDescriptorBase.cpp \
 	MultipleDescriptorBase.cpp \
 	NetworkLocatorBase.cpp \
 	PrefaceBase.cpp \
 	RGBAEssenceDescriptorBase.cpp \
 	SequenceBase.cpp \
+	SoundfieldGroupLabelSubDescriptorBase.cpp \
 	SourceClipBase.cpp \
 	SourcePackageBase.cpp \
 	StaticTrackBase.cpp \
@@ -54,6 +58,7 @@ library_includedir = ${includedir}/libMXF++-@LIBMXFPP_MAJORMINOR@/libMXF++/metad
 library_include_HEADERS = \
 	AES3AudioDescriptorBase.h \
 	ANCDataDescriptorBase.h \
+	AudioChannelLabelSubDescriptorBase.h \
 	AVCSubDescriptorBase.h \
 	CDCIEssenceDescriptorBase.h \
 	ContentStorageBase.h \
@@ -71,16 +76,19 @@ library_include_HEADERS = \
 	GenericSoundEssenceDescriptorBase.h \
 	GenericStreamTextBasedSetBase.h \
 	GenericTrackBase.h \
+	GroupOfSoundfieldGroupsLabelSubDescriptorBase.h \
 	IdentificationBase.h \
 	InterchangeObjectBase.h \
 	LocatorBase.h \
 	MaterialPackageBase.h \
+	MCALabelSubDescriptorBase.h \
 	MPEGVideoDescriptorBase.h \
 	MultipleDescriptorBase.h \
 	NetworkLocatorBase.h \
 	PrefaceBase.h \
 	RGBAEssenceDescriptorBase.h \
 	SequenceBase.h \
+	SoundfieldGroupLabelSubDescriptorBase.h \
 	SourceClipBase.h \
 	SourcePackageBase.h \
 	StaticTrackBase.h \

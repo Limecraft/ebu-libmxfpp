@@ -293,6 +293,10 @@ void HeaderMetadata::initialiseObjectFactory()
     REGISTER_CLASS(GenericStreamTextBasedSet);
     REGISTER_CLASS(UTF8TextBasedSet);
     REGISTER_CLASS(UTF16TextBasedSet);
+    REGISTER_CLASS(MCALabelSubDescriptor);
+    REGISTER_CLASS(AudioChannelLabelSubDescriptor);
+    REGISTER_CLASS(SoundfieldGroupLabelSubDescriptor);
+    REGISTER_CLASS(GroupOfSoundfieldGroupsLabelSubDescriptor);
 
     // Add new classes here
 

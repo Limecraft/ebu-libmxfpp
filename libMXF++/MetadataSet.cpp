@@ -364,6 +364,28 @@ string MetadataSet::getUTF8StringItem(const mxfKey *itemKey) const
     }
 }
 
+string MetadataSet::getISO7StringItem(const mxfKey *itemKey) const
+{
+    string result;
+    char *iso7Result = 0;
+    try
+    {
+        uint16_t iso7Size;
+        MXFPP_CHECK(mxf_get_iso7string_item_size(_cMetadataSet, itemKey, &iso7Size));
+        iso7Result = new char[iso7Size];
+        MXFPP_CHECK(mxf_get_iso7string_item(_cMetadataSet, itemKey, iso7Result));
+        result = iso7Result;
+        delete [] iso7Result;
+        iso7Result = 0;
+        return result;
+    }
+    catch (...)
+    {
+        delete [] iso7Result;
+        throw;
+    }
+}
+
 MetadataSet* MetadataSet::getStrongRefItem(const mxfKey *itemKey) const
 {
     ::MXFMetadataSet *cSet;
@@ -919,6 +941,11 @@ void MetadataSet::setFixedSizeStringItem(const mxfKey *itemKey, string value, ui
 void MetadataSet::setUTF8StringItem(const mxfKey *itemKey, string value)
 {
     MXFPP_CHECK(mxf_set_utf8string_item(_cMetadataSet, itemKey, value.c_str()));
+}
+
+void MetadataSet::setISO7StringItem(const mxfKey *itemKey, string value)
+{
+    MXFPP_CHECK(mxf_set_iso7string_item(_cMetadataSet, itemKey, value.c_str()));
 }
 
 void MetadataSet::setStrongRefItem(const mxfKey *itemKey, MetadataSet *value)
