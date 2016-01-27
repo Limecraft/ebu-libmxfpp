@@ -175,6 +175,16 @@ void HeaderMetadata::add(MetadataSet *set)
     }
 }
 
+void HeaderMetadata::moveToEnd(MetadataSet *set)
+{
+    if (set->getHeaderMetadata()) {
+        MXFPP_CHECK(_cHeaderMetadata == set->getHeaderMetadata()->_cHeaderMetadata);
+        MXFPP_CHECK(mxf_remove_set(_cHeaderMetadata, set->getCMetadataSet()));
+    }
+    MXFPP_CHECK(mxf_add_set(_cHeaderMetadata, set->getCMetadataSet()));
+    _objectDirectory.insert(pair<mxfUUID, MetadataSet*>(set->getCMetadataSet()->instanceUID, set));
+}
+
 MetadataSet* HeaderMetadata::wrap(::MXFMetadataSet *cMetadataSet)
 {
     MXFPP_CHECK(cMetadataSet->headerMetadata == _cHeaderMetadata);

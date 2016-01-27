@@ -83,6 +83,7 @@ public:
     DataModel* getDataModel() const { return _dataModel; }
 
     void add(MetadataSet *set);
+    void moveToEnd(MetadataSet *set);
 
     MetadataSet* wrap(::MXFMetadataSet *cMetadataSet);
     ::MXFMetadataSet* createCSet(const mxfKey *key);
