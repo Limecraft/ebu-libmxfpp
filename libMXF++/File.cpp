@@ -183,37 +183,77 @@ void File::updatePartitions()
 
 void File::updateBodyPartitions(const mxfKey *pp_key)
 {
-    size_t firstIndex = 0, lastIndex = (size_t)(-1);
+    size_t firstIndex, lastIndex;
     if (_cMemoryFile) {
         firstIndex = _firstMemoryPartitionIndex;
-        lastIndex  = _lastMemoryPartitionIndex;
-    }
-    if (firstIndex >= _partitions.size())
-        return;
-
-    if (lastIndex == (size_t)(-1))
+        if (_lastMemoryPartitionIndex == (size_t)(-1) || _lastMemoryPartitionIndex >= _partitions.size())
+          lastIndex = _partitions.size() - 1;
+        else
+          lastIndex = _lastMemoryPartitionIndex;
+    } else {
+        firstIndex = 0;
         lastIndex = _partitions.size() - 1;
-
-    size_t firstBodyIndex = firstIndex;
-    while (firstBodyIndex <= lastIndex &&
-           !(_partitions[firstBodyIndex]->isBody() && !_partitions[firstBodyIndex]->isGenericStream()))
-    {
-        firstBodyIndex++;
-    }
-    size_t lastBodyIndex = firstBodyIndex;
-    while (lastBodyIndex + 1 <= lastIndex &&
-           (_partitions[lastBodyIndex + 1]->isBody() && !_partitions[lastBodyIndex + 1]->isGenericStream()))
-    {
-        lastBodyIndex++;
     }
 
-    if (lastBodyIndex <= lastIndex) {
-        if (pp_key) {
-            size_t i;
-            for (i = firstBodyIndex; i <= lastBodyIndex; i++)
-                _partitions[i]->setKey(pp_key);
-        }
-        updatePartitions(firstBodyIndex, lastBodyIndex);
+    while (firstIndex <= lastIndex) {
+      size_t firstBodyIndex = firstIndex;
+      while (firstBodyIndex <= lastIndex &&
+             !(_partitions[firstBodyIndex]->isBody() && !_partitions[firstBodyIndex]->isGenericStream()))
+      {
+          firstBodyIndex++;
+      }
+      size_t lastBodyIndex = firstBodyIndex;
+      while (lastBodyIndex + 1 <= lastIndex &&
+             (_partitions[lastBodyIndex + 1]->isBody() && !_partitions[lastBodyIndex + 1]->isGenericStream()))
+      {
+          lastBodyIndex++;
+      }
+
+      if (lastBodyIndex <= lastIndex) {
+          if (pp_key) {
+              size_t i;
+              for (i = firstBodyIndex; i <= lastBodyIndex; i++)
+                  _partitions[i]->setKey(pp_key);
+          }
+          updatePartitions(firstBodyIndex, lastBodyIndex);
+      }
+
+      firstIndex = lastBodyIndex + 1;
+    }
+}
+
+void File::updateGenericStreamPartitions()
+{
+    size_t firstIndex, lastIndex;
+    if (_cMemoryFile) {
+        firstIndex = _firstMemoryPartitionIndex;
+        if (_lastMemoryPartitionIndex == (size_t)(-1) || _lastMemoryPartitionIndex >= _partitions.size())
+          lastIndex = _partitions.size() - 1;
+        else
+          lastIndex = _lastMemoryPartitionIndex;
+    } else {
+        firstIndex = 0;
+        lastIndex = _partitions.size() - 1;
+    }
+
+    while (firstIndex <= lastIndex) {
+      size_t firstGSIndex = firstIndex;
+      while (firstGSIndex <= lastIndex &&
+             !_partitions[firstGSIndex]->isGenericStream())
+      {
+          firstGSIndex++;
+      }
+      size_t lastGSIndex = firstGSIndex;
+      while (lastGSIndex + 1 <= lastIndex &&
+             _partitions[lastGSIndex + 1]->isGenericStream())
+      {
+          lastGSIndex++;
+      }
+
+      if (lastGSIndex <= lastIndex)
+          updatePartitions(firstGSIndex, lastGSIndex);
+
+      firstIndex = lastGSIndex + 1;
     }
 }
 

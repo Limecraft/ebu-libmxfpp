@@ -64,6 +64,7 @@ public:
     void writeRIP();
     void updatePartitions();
     void updateBodyPartitions(const mxfKey *pp_key);
+    void updateGenericStreamPartitions();
     void updatePartitions(size_t rewriteFirstIndex, size_t rewriteLastIndex);
 
     Partition& getPartition(size_t index);
