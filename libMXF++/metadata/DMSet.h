@@ -29,8 +29,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __MXFPP_DMSET_H__
-#define __MXFPP_DMSET_H__
+#ifndef MXFPP_DMSET_H_
+#define MXFPP_DMSET_H_
 
 
 

@@ -29,8 +29,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __MXFPP_MXF_H__
-#define __MXFPP_MXF_H__
+#ifndef MXFPP_MXF_H_
+#define MXFPP_MXF_H_
 
 
 #include <mxf/mxf.h>

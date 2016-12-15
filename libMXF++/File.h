@@ -29,8 +29,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __MXFPP_FILE_H__
-#define __MXFPP_FILE_H__
+#ifndef MXFPP_FILE_H_
+#define MXFPP_FILE_H_
 
 #include <string>
 #include <vector>
@@ -63,12 +63,16 @@ public:
 
     void writeRIP();
     void updatePartitions();
+    void updateBodyPartitions(const mxfKey *pp_key);
+    void updateGenericStreamPartitions();
+    void updatePartitions(size_t rewriteFirstIndex, size_t rewriteLastIndex);
 
     Partition& getPartition(size_t index);
     const std::vector<Partition*>& getPartitions() const { return _partitions; }
 
     bool readHeaderPartition();
     bool readPartitions();
+    void readNextPartition(const mxfKey *key, uint64_t len);
 
     uint8_t readUInt8();
     uint16_t readUInt16();
@@ -92,6 +96,7 @@ public:
     void skip(uint64_t len);
     int64_t size();
     bool eof();
+    bool isSeekable();
 
 
     uint32_t write(const unsigned char *data, uint32_t count);

@@ -350,6 +350,50 @@ string MetadataSet::getStringItem(const mxfKey *itemKey) const
     }
 }
 
+string MetadataSet::getUTF8StringItem(const mxfKey *itemKey) const
+{
+    string result;
+    char *utf8Result = 0;
+    try
+    {
+        uint16_t utf8Size;
+        MXFPP_CHECK(mxf_get_utf8string_item_size(_cMetadataSet, itemKey, &utf8Size));
+        utf8Result = new char[utf8Size];
+        MXFPP_CHECK(mxf_get_utf8string_item(_cMetadataSet, itemKey, utf8Result));
+        result = utf8Result;
+        delete [] utf8Result;
+        utf8Result = 0;
+        return result;
+    }
+    catch (...)
+    {
+        delete [] utf8Result;
+        throw;
+    }
+}
+
+string MetadataSet::getISO7StringItem(const mxfKey *itemKey) const
+{
+    string result;
+    char *iso7Result = 0;
+    try
+    {
+        uint16_t iso7Size;
+        MXFPP_CHECK(mxf_get_iso7string_item_size(_cMetadataSet, itemKey, &iso7Size));
+        iso7Result = new char[iso7Size];
+        MXFPP_CHECK(mxf_get_iso7string_item(_cMetadataSet, itemKey, iso7Result));
+        result = iso7Result;
+        delete [] iso7Result;
+        iso7Result = 0;
+        return result;
+    }
+    catch (...)
+    {
+        delete [] iso7Result;
+        throw;
+    }
+}
+
 MetadataSet* MetadataSet::getStrongRefItem(const mxfKey *itemKey) const
 {
     ::MXFMetadataSet *cSet;
@@ -925,6 +969,16 @@ void MetadataSet::setFixedSizeStringItem(const mxfKey *itemKey, string value, ui
     }
 }
 
+void MetadataSet::setUTF8StringItem(const mxfKey *itemKey, string value)
+{
+    MXFPP_CHECK(mxf_set_utf8string_item(_cMetadataSet, itemKey, value.c_str()));
+}
+
+void MetadataSet::setISO7StringItem(const mxfKey *itemKey, string value)
+{
+    MXFPP_CHECK(mxf_set_iso7string_item(_cMetadataSet, itemKey, value.c_str()));
+}
+
 void MetadataSet::setStrongRefItem(const mxfKey *itemKey, MetadataSet *value)
 {
     MXFPP_CHECK(value->getCMetadataSet() != 0);
@@ -1373,74 +1427,6 @@ bool MetadataSet::validate(bool logErrors)
     return mxf_validate_set(_cMetadataSet, logErrors);
 }
 
-
-void MetadataSet::attachAvidAttribute(string name, string value)
-{
-    mxfUTF16Char *utf16Name = 0;
-    mxfUTF16Char *utf16Val = 0;
-    size_t utf16NameSize;
-    size_t utf16ValSize;
-    try
-    {
-        utf16NameSize = mxf_utf8_to_utf16(NULL, name.c_str(), 0);
-        MXFPP_CHECK(utf16NameSize != (size_t)(-1));
-        utf16NameSize += 1;
-        utf16Name = new wchar_t[utf16NameSize];
-        mxf_utf8_to_utf16(utf16Name, name.c_str(), utf16NameSize);
-
-        utf16ValSize = mxf_utf8_to_utf16(NULL, value.c_str(), 0);
-        MXFPP_CHECK(utf16ValSize != (size_t)(-1));
-        utf16ValSize += 1;
-        utf16Val = new wchar_t[utf16ValSize];
-        mxf_utf8_to_utf16(utf16Val, value.c_str(), utf16ValSize);
-
-        MXFPP_CHECK(mxf_avid_attach_mob_attribute(_headerMetadata->getCHeaderMetadata(), _cMetadataSet,
-                                                  utf16Name, utf16Val));
-
-        delete [] utf16Name;
-        delete [] utf16Val;
-    }
-    catch (...)
-    {
-        delete [] utf16Name;
-        delete [] utf16Val;
-        throw;
-    }
-}
-
-void MetadataSet::attachAvidUserComment(string name, string value)
-{
-    mxfUTF16Char *utf16Name = 0;
-    mxfUTF16Char *utf16Val = 0;
-    size_t utf16NameSize;
-    size_t utf16ValSize;
-    try
-    {
-        utf16NameSize = mxf_utf8_to_utf16(NULL, name.c_str(), 0);
-        MXFPP_CHECK(utf16NameSize != (size_t)(-1));
-        utf16NameSize += 1;
-        utf16Name = new wchar_t[utf16NameSize];
-        mxf_utf8_to_utf16(utf16Name, name.c_str(), utf16NameSize);
-
-        utf16ValSize = mxf_utf8_to_utf16(NULL, value.c_str(), 0);
-        MXFPP_CHECK(utf16ValSize != (size_t)(-1));
-        utf16ValSize += 1;
-        utf16Val = new wchar_t[utf16ValSize];
-        mxf_utf8_to_utf16(utf16Val, value.c_str(), utf16ValSize);
-
-        MXFPP_CHECK(mxf_avid_attach_user_comment(_headerMetadata->getCHeaderMetadata(), _cMetadataSet,
-                                                 utf16Name, utf16Val));
-
-        delete [] utf16Name;
-        delete [] utf16Val;
-    }
-    catch (...)
-    {
-        delete [] utf16Name;
-        delete [] utf16Val;
-        throw;
-    }
-}
 
 void MetadataSet::setAvidRGBColor(const mxfKey *itemKey, uint16_t red, uint16_t green, uint16_t blue)
 {

@@ -53,6 +53,8 @@ HeaderMetadata::HeaderMetadata(DataModel *dataModel)
     initialiseObjectFactory();
     MXFPP_CHECK(mxf_create_header_metadata(&_cHeaderMetadata, dataModel->getCDataModel()));
     _ownCHeaderMetadata = true;
+
+    _dataModel = new DataModel(_cHeaderMetadata->dataModel, false);
 }
 
 HeaderMetadata::HeaderMetadata(::MXFHeaderMetadata *c_header_metadata, bool take_ownership)
@@ -60,6 +62,8 @@ HeaderMetadata::HeaderMetadata(::MXFHeaderMetadata *c_header_metadata, bool take
     initialiseObjectFactory();
     _cHeaderMetadata = c_header_metadata;
     _ownCHeaderMetadata = take_ownership;
+
+    _dataModel = new DataModel(_cHeaderMetadata->dataModel, false);
 }
 
 HeaderMetadata::~HeaderMetadata()
@@ -81,6 +85,8 @@ HeaderMetadata::~HeaderMetadata()
     {
         mxf_free_header_metadata(&_cHeaderMetadata);
     }
+
+    delete _dataModel;
 }
 
 mxfProductVersion HeaderMetadata::getToolkitVersion()
@@ -142,6 +148,10 @@ void HeaderMetadata::write(File *file, Partition *partition, FillerWriter *fille
     {
         filler->write(file);
     }
+    else
+    {
+        partition->fillToKag(file);
+    }
 
     partition->markHeaderEnd(file);
 }
@@ -168,6 +178,16 @@ void HeaderMetadata::add(MetadataSet *set)
             interchangeObject->setGenerationUID(_generationUID);
         }
     }
+}
+
+void HeaderMetadata::moveToEnd(MetadataSet *set)
+{
+    if (set->getHeaderMetadata()) {
+        MXFPP_CHECK(_cHeaderMetadata == set->getHeaderMetadata()->_cHeaderMetadata);
+        MXFPP_CHECK(mxf_remove_set(_cHeaderMetadata, set->getCMetadataSet()));
+    }
+    MXFPP_CHECK(mxf_add_set(_cHeaderMetadata, set->getCMetadataSet()));
+    _objectDirectory.insert(pair<mxfUUID, MetadataSet*>(set->getCMetadataSet()->instanceUID, set));
 }
 
 MetadataSet* HeaderMetadata::wrap(::MXFMetadataSet *cMetadataSet)
@@ -277,8 +297,22 @@ void HeaderMetadata::initialiseObjectFactory()
     REGISTER_CLASS(MultipleDescriptor);
     REGISTER_CLASS(WaveAudioDescriptor);
     REGISTER_CLASS(AES3AudioDescriptor);
+    REGISTER_CLASS(ANCDataDescriptor);
+    REGISTER_CLASS(VBIDataDescriptor);
     REGISTER_CLASS(DMFramework);
     REGISTER_CLASS(DMSet);
+    REGISTER_CLASS(SubDescriptor);
+    REGISTER_CLASS(AVCSubDescriptor);
+    REGISTER_CLASS(TextBasedObject);
+    REGISTER_CLASS(TextBasedDMFramework);
+    REGISTER_CLASS(GenericStreamTextBasedSet);
+    REGISTER_CLASS(UTF8TextBasedSet);
+    REGISTER_CLASS(UTF16TextBasedSet);
+    REGISTER_CLASS(MCALabelSubDescriptor);
+    REGISTER_CLASS(AudioChannelLabelSubDescriptor);
+    REGISTER_CLASS(SoundfieldGroupLabelSubDescriptor);
+    REGISTER_CLASS(GroupOfSoundfieldGroupsLabelSubDescriptor);
+    REGISTER_CLASS(VC2SubDescriptor);
 
     // Add new classes here
 

@@ -82,6 +82,10 @@ void AvidHeaderMetadata::write(File *file, Partition *partition, FillerWriter *f
     {
         filler->write(file);
     }
+    else
+    {
+        partition->fillToKag(file);
+    }
 
     partition->markHeaderEnd(file);
 }

@@ -29,8 +29,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __MXFPP_MXFEXCEPTION_H__
-#define __MXFPP_MXFEXCEPTION_H__
+#ifndef MXFPP_MXFEXCEPTION_H_
+#define MXFPP_MXFEXCEPTION_H_
 
 #include <string>
 #include <cassert>
@@ -45,7 +45,7 @@ namespace mxfpp
     do {                                                                              \
         if (!(cmd)) {                                                                 \
             mxf_log_error("'%s' failed, at %s:%d\n", #cmd, __FILE__, __LINE__);       \
-            throw MXFException("'%s' failed, at %s:%d\n", #cmd, __FILE__, __LINE__);  \
+            throw MXFException("'%s' failed, at %s:%d", #cmd, __FILE__, __LINE__);    \
         }                                                                             \
     } while (0)
 

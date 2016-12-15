@@ -170,17 +170,100 @@ void File::writeRIP()
 
 void File::updatePartitions()
 {
-    size_t firstPartitionIndex = 0, lastPartitionIndex = (size_t)(-1);
+    size_t firstIndex = 0, lastIndex = (size_t)(-1);
     if (_cMemoryFile) {
-        firstPartitionIndex = _firstMemoryPartitionIndex;
-        lastPartitionIndex = _lastMemoryPartitionIndex;
+        firstIndex = _firstMemoryPartitionIndex;
+        lastIndex  = _lastMemoryPartitionIndex;
     }
-    if (firstPartitionIndex >= _partitions.size())
+    if (firstIndex >= _partitions.size())
         return;
 
-    PartitionList partitionList(_partitions, firstPartitionIndex, lastPartitionIndex);
+    updatePartitions(firstIndex, lastIndex);
+}
 
-    MXFPP_CHECK(mxf_update_partitions(_cFile, partitionList.getList()));
+void File::updateBodyPartitions(const mxfKey *pp_key)
+{
+    size_t firstIndex, lastIndex;
+    if (_cMemoryFile) {
+        firstIndex = _firstMemoryPartitionIndex;
+        if (_lastMemoryPartitionIndex == (size_t)(-1) || _lastMemoryPartitionIndex >= _partitions.size())
+          lastIndex = _partitions.size() - 1;
+        else
+          lastIndex = _lastMemoryPartitionIndex;
+    } else {
+        firstIndex = 0;
+        lastIndex = _partitions.size() - 1;
+    }
+
+    while (firstIndex <= lastIndex) {
+      size_t firstBodyIndex = firstIndex;
+      while (firstBodyIndex <= lastIndex &&
+             !(_partitions[firstBodyIndex]->isBody() && !_partitions[firstBodyIndex]->isGenericStream()))
+      {
+          firstBodyIndex++;
+      }
+      size_t lastBodyIndex = firstBodyIndex;
+      while (lastBodyIndex + 1 <= lastIndex &&
+             (_partitions[lastBodyIndex + 1]->isBody() && !_partitions[lastBodyIndex + 1]->isGenericStream()))
+      {
+          lastBodyIndex++;
+      }
+
+      if (lastBodyIndex <= lastIndex) {
+          if (pp_key) {
+              size_t i;
+              for (i = firstBodyIndex; i <= lastBodyIndex; i++)
+                  _partitions[i]->setKey(pp_key);
+          }
+          updatePartitions(firstBodyIndex, lastBodyIndex);
+      }
+
+      firstIndex = lastBodyIndex + 1;
+    }
+}
+
+void File::updateGenericStreamPartitions()
+{
+    size_t firstIndex, lastIndex;
+    if (_cMemoryFile) {
+        firstIndex = _firstMemoryPartitionIndex;
+        if (_lastMemoryPartitionIndex == (size_t)(-1) || _lastMemoryPartitionIndex >= _partitions.size())
+          lastIndex = _partitions.size() - 1;
+        else
+          lastIndex = _lastMemoryPartitionIndex;
+    } else {
+        firstIndex = 0;
+        lastIndex = _partitions.size() - 1;
+    }
+
+    while (firstIndex <= lastIndex) {
+      size_t firstGSIndex = firstIndex;
+      while (firstGSIndex <= lastIndex &&
+             !_partitions[firstGSIndex]->isGenericStream())
+      {
+          firstGSIndex++;
+      }
+      size_t lastGSIndex = firstGSIndex;
+      while (lastGSIndex + 1 <= lastIndex &&
+             _partitions[lastGSIndex + 1]->isGenericStream())
+      {
+          lastGSIndex++;
+      }
+
+      if (lastGSIndex <= lastIndex)
+          updatePartitions(firstGSIndex, lastGSIndex);
+
+      firstIndex = lastGSIndex + 1;
+    }
+}
+
+void File::updatePartitions(size_t rewriteFirstIndex, size_t rewriteLastIndex)
+{
+    PartitionList completePartitionList(_partitions);
+    mxf_update_partitions_in_memory(completePartitionList.getList());
+
+    PartitionList partitionList(_partitions, rewriteFirstIndex, rewriteLastIndex);
+    MXFPP_CHECK(mxf_rewrite_partitions(_cFile, partitionList.getList()));
 }
 
 Partition& File::getPartition(size_t index)
@@ -206,7 +289,7 @@ bool File::readHeaderPartition()
         if (!mxf_read_header_pp_kl(_cFile, &key, &llen, &len))
             return false;
 
-        _partitions.push_back(Partition::read(this, &key));
+        _partitions.push_back(Partition::read(this, &key, len));
         // file is positioned after the partition pack
 
         return true;
@@ -233,7 +316,7 @@ bool File::readPartitions()
 
     // read the header partition if not already done so and clear the partition list
 
-    if ((!_partitions.empty() && mxf_is_header_partition_pack(_partitions[0]->getKey())) ||
+    if ((!_partitions.empty() && _partitions[0]->isHeader()) ||
         readHeaderPartition())
     {
         header_partition = _partitions[0];
@@ -266,13 +349,14 @@ bool File::readPartitions()
 
                     seek(mxf_get_runin_len(_cFile) + rip_entry->thisPartition, SEEK_SET);
                     readKL(&key, &llen, &len);
-                    _partitions.push_back(Partition::read(this, &key));
+                    _partitions.push_back(Partition::read(this, &key, len));
                 }
 
                 mxf_clear_rip(&rip);
             }
             catch (...)
             {
+                mxf_log_error("Failed to read partitions listed in RIP\n");
                 mxf_clear_rip(&rip);
                 throw;
             }
@@ -283,16 +367,20 @@ bool File::readPartitions()
             this_partition = header_partition->getFooterPartition();
 
             if (this_partition <= header_partition->getThisPartition()) {
-                mxf_log_warn("File is missing both a RIP and a footer partition offset in the header partition pack\n");
+                if (header_partition->isClosed())
+                    mxf_log_warn("Header partition is marked Closed but footer partition offset is not set\n");
+
                 if (!mxf_find_footer_partition(_cFile))
                     throw false;
+
+                mxf_log_warn("File is missing both a RIP and a footer partition offset in the header partition pack\n");
                 this_partition = mxf_file_tell(_cFile) - mxf_get_runin_len(_cFile);
             }
 
             do {
                 seek(mxf_get_runin_len(_cFile) + this_partition, SEEK_SET);
                 readKL(&key, &llen, &len);
-                _partitions.push_back(Partition::read(this, &key));
+                _partitions.push_back(Partition::read(this, &key, len));
 
                 this_partition = _partitions.back()->getPreviousPartition();
             }
@@ -320,6 +408,11 @@ bool File::readPartitions()
 
         return false;
     }
+}
+
+void File::readNextPartition(const mxfKey *key, uint64_t len)
+{
+    _partitions.push_back(Partition::read(this, key, len));
 }
 
 uint8_t File::readUInt8()
@@ -436,6 +529,11 @@ int64_t File::size()
 bool File::eof()
 {
     return mxf_file_eof(_cFile) == 1;
+}
+
+bool File::isSeekable()
+{
+    return mxf_file_is_seekable(_cFile) == 1;
 }
 
 uint32_t File::write(const unsigned char *data, uint32_t count)

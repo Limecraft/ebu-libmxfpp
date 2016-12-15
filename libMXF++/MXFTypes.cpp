@@ -73,12 +73,17 @@ bool operator < (const mxfUUID &left, const mxfUUID &right)
 
 bool operator == (const mxfRational &left, const mxfRational &right)
 {
-    return memcmp(&left, &right, sizeof(left)) == 0;
+    if (left.numerator == 0)
+        return (right.numerator == 0);
+    else if (right.numerator == 0)
+        return (left.numerator == 0);
+    else
+        return (int64_t)left.numerator * right.denominator == (int64_t)right.numerator * left.denominator;
 }
 
 bool operator != (const mxfRational &left, const mxfRational &right)
 {
-    return memcmp(&left, &right, sizeof(left)) != 0;
+    return !(left == right);
 }
 
 bool operator == (const mxfUMID &left, const mxfUMID &right)

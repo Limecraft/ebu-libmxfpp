@@ -29,8 +29,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __MXFPP_HEADERMETADATA_H__
-#define __MXFPP_HEADERMETADATA_H__
+#ifndef MXFPP_HEADERMETADATA_H_
+#define MXFPP_HEADERMETADATA_H_
 
 #include <map>
 
@@ -81,7 +81,10 @@ public:
     Preface* getPreface();
 
 
+    DataModel* getDataModel() const { return _dataModel; }
+
     void add(MetadataSet *set);
+    void moveToEnd(MetadataSet *set);
 
     MetadataSet* wrap(::MXFMetadataSet *cMetadataSet);
     ::MXFMetadataSet* createCSet(const mxfKey *key);
@@ -92,6 +95,8 @@ public:
 private:
     void initialiseObjectFactory();
     void remove(MetadataSet *set);
+
+    DataModel *_dataModel;
 
     std::map<mxfKey, AbsMetadataSetFactory*> _objectFactory;
 

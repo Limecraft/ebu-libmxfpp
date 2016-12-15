@@ -3,8 +3,11 @@ AC_CONFIG_SRCDIR([libMXF++/File.cpp])
 AC_CONFIG_HEADER([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 
-AM_INIT_AUTOMAKE([-Wall -Werror])
-m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
+AM_INIT_AUTOMAKE([1.11 -Wall parallel-tests])
+AM_SILENT_RULES([yes])
+
+dnl define for automake 1.12 to avoid warnings
+m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
 
 
 dnl-----------------------------------------------------------------------------
@@ -169,11 +172,8 @@ dnl -- Compiler flags etc.
 dnl-----------------------------------------------------------------------------
 
 WARN_CFLAGS=
-if test x"$GCC" = xyes; then
-	WARN_CFLAGS="-W -Wall"
-fi
+AC_APPEND_SUPPORTED_CFLAGS(WARN_CFLAGS, [-W -Wall])
 AC_SUBST(WARN_CFLAGS)
-
 
 LIBMXFPP_CFLAGS="$WARN_CFLAGS $LIBMXF_CFLAGS -I\$(top_srcdir)"
 AC_SUBST(LIBMXFPP_CFLAGS)
@@ -184,6 +184,10 @@ AC_SUBST(LIBMXFPP_LIBADDLIBS)
 LIBMXFPP_LDADDLIBS="$LIBMXFPP_LIBADDLIBS \
 	\$(top_builddir)/libMXF++/libMXF++-$LIBMXFPP_MAJORMINOR.la"
 AC_SUBST(LIBMXFPP_LDADDLIBS)
+
+LIBMXFPP_LDFLAGS=
+AC_APPEND_SUPPORTED_LDFLAGS(LIBMXFPP_LDFLAGS, [-Wl,--no-undefined])
+AC_SUBST(LIBMXFPP_LDFLAGS)
 
 
 dnl-----------------------------------------------------------------------------
@@ -212,7 +216,7 @@ AC_CONFIG_FILES([
     tools/Makefile
     tools/gen_classes/Makefile
     msvc_build/Makefile
-    msvc_build/vs8/Makefile
+    msvc_build/vs10/Makefile
     libMXF++.pc])
 
 AC_OUTPUT

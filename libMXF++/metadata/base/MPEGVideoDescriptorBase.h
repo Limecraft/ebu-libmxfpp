@@ -29,8 +29,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __MXFPP_MPEGVIDEODESCRIPTOR_BASE_H__
-#define __MXFPP_MPEGVIDEODESCRIPTOR_BASE_H__
+#ifndef MXFPP_MPEGVIDEODESCRIPTOR_BASE_H_
+#define MXFPP_MPEGVIDEODESCRIPTOR_BASE_H_
 
 
 
@@ -68,8 +68,8 @@ public:
    bool getIdenticalGOP() const;
    bool haveMaxGOP() const;
    uint16_t getMaxGOP() const;
-   bool haveBPictureCount() const;
-   uint16_t getBPictureCount() const;
+   bool haveMaxBPictureCount() const;
+   uint16_t getMaxBPictureCount() const;
    bool haveBitRate() const;
    uint32_t getBitRate() const;
    bool haveProfileAndLevel() const;
@@ -85,7 +85,7 @@ public:
    void setClosedGOP(bool value);
    void setIdenticalGOP(bool value);
    void setMaxGOP(uint16_t value);
-   void setBPictureCount(uint16_t value);
+   void setMaxBPictureCount(uint16_t value);
    void setBitRate(uint32_t value);
    void setProfileAndLevel(uint8_t value);
 

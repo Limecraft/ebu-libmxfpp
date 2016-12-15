@@ -29,8 +29,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __MXFPP_DMSEGMENT_H__
-#define __MXFPP_DMSEGMENT_H__
+#ifndef MXFPP_DMSEGMENT_H_
+#define MXFPP_DMSEGMENT_H_
 
 
 
