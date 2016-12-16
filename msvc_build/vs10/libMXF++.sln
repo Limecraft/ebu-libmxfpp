@@ -9,7 +9,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "D10MXFOP1AWriter", "example
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_d10mxfop1awriter", "examples\D10MXFOP1AWriter\test_d10mxfop1awriter.vcxproj", "{C40B9905-DF1C-43BA-B5EE-E4EB329EC4CE}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libMXF", "..\..\..\libMXF\msvc_build\vs10\mxf\libMXF.vcxproj", "{580F8E65-F910-46A6-8A9C-6A8E58D95E53}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libMXF", "..\..\..\ebu-libMXF\msvc_build\vs10\mxf\libMXF.vcxproj", "{580F8E65-F910-46A6-8A9C-6A8E58D95E53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
