@@ -60,6 +60,7 @@ public:
     uint8_t getMinLLen();
 
     Partition& createPartition();
+    Partition& insertPartition(size_t index);
 
     void writeRIP();
     void updatePartitions();
