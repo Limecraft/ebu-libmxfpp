@@ -7,6 +7,8 @@ libbase_la_SOURCES = \
 	AVCSubDescriptorBase.cpp \
 	CDCIEssenceDescriptorBase.cpp \
 	ContentStorageBase.cpp \
+	DCTimedTextDescriptorBase.cpp \
+	DCTimedTextResourceSubDescriptorBase.cpp \
 	DMFrameworkBase.cpp \
 	DMSegmentBase.cpp \
 	DMSetBase.cpp \
@@ -63,6 +65,8 @@ library_include_HEADERS = \
 	AVCSubDescriptorBase.h \
 	CDCIEssenceDescriptorBase.h \
 	ContentStorageBase.h \
+	DCTimedTextDescriptorBase.h \
+	DCTimedTextResourceSubDescriptorBase.h \
 	DMFrameworkBase.h \
 	DMSegmentBase.h \
 	DMSetBase.h \

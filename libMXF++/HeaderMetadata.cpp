@@ -308,6 +308,8 @@ void HeaderMetadata::initialiseObjectFactory()
     REGISTER_CLASS(SoundfieldGroupLabelSubDescriptor);
     REGISTER_CLASS(GroupOfSoundfieldGroupsLabelSubDescriptor);
     REGISTER_CLASS(VC2SubDescriptor);
+    REGISTER_CLASS(DCTimedTextDescriptor);
+    REGISTER_CLASS(DCTimedTextResourceSubDescriptor);
 
     // Add new classes here
 
@@ -323,4 +325,3 @@ void HeaderMetadata::remove(MetadataSet *set)
     }
     // TODO: throw exception or log warning if set not in there?
 }
-

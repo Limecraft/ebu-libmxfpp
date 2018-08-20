@@ -82,6 +82,8 @@
 #include <libMXF++/metadata/SoundfieldGroupLabelSubDescriptor.h>
 #include <libMXF++/metadata/GroupOfSoundfieldGroupsLabelSubDescriptor.h>
 #include <libMXF++/metadata/VC2SubDescriptor.h>
+#include <libMXF++/metadata/DCTimedTextDescriptor.h>
+#include <libMXF++/metadata/DCTimedTextResourceSubDescriptor.h>
 
 
 #endif

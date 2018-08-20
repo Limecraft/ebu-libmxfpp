@@ -96,6 +96,8 @@
     <ClCompile Include="..\..\..\libMXF++\metadata\AVCSubDescriptor.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\CDCIEssenceDescriptor.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\ContentStorage.cpp" />
+    <ClCompile Include="..\..\..\libMXF++\metadata\DCTimedTextDescriptor.cpp" />
+    <ClCompile Include="..\..\..\libMXF++\metadata\DCTimedTextResourceSubDescriptor.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\DMFramework.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\DMSegment.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\DMSet.cpp" />
@@ -144,6 +146,8 @@
     <ClCompile Include="..\..\..\libMXF++\metadata\base\AVCSubDescriptorBase.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\base\CDCIEssenceDescriptorBase.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\base\ContentStorageBase.cpp" />
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\DCTimedTextDescriptorBase.cpp" />
+    <ClCompile Include="..\..\..\libMXF++\metadata\base\DCTimedTextResourceSubDescriptorBase.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\base\DMFrameworkBase.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\base\DMSegmentBase.cpp" />
     <ClCompile Include="..\..\..\libMXF++\metadata\base\DMSetBase.cpp" />
@@ -207,6 +211,8 @@
     <ClInclude Include="..\..\..\libMXF++\metadata\AVCSubDescriptor.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\CDCIEssenceDescriptor.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\ContentStorage.h" />
+    <ClInclude Include="..\..\..\libMXF++\metadata\DCTimedTextDescriptor.h" />
+    <ClInclude Include="..\..\..\libMXF++\metadata\DCTimedTextResourceSubDescriptor.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\DMFramework.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\DMSegment.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\DMSet.h" />
@@ -256,6 +262,8 @@
     <ClInclude Include="..\..\..\libMXF++\metadata\base\AVCSubDescriptorBase.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\base\CDCIEssenceDescriptorBase.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\base\ContentStorageBase.h" />
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\DCTimedTextDescriptorBase.h" />
+    <ClInclude Include="..\..\..\libMXF++\metadata\base\DCTimedTextResourceSubDescriptorBase.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\base\DMFrameworkBase.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\base\DMSegmentBase.h" />
     <ClInclude Include="..\..\..\libMXF++\metadata\base\DMSetBase.h" />

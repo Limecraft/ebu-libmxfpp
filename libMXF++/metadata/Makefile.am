@@ -9,6 +9,8 @@ libmetadata_la_SOURCES = \
 	AVCSubDescriptor.cpp \
 	CDCIEssenceDescriptor.cpp \
 	ContentStorage.cpp \
+	DCTimedTextDescriptor.cpp \
+	DCTimedTextResourceSubDescriptor.cpp \
 	DMFramework.cpp \
 	DMSegment.cpp \
 	DMSet.cpp \
@@ -65,6 +67,8 @@ library_include_HEADERS = \
 	AVCSubDescriptor.h \
 	CDCIEssenceDescriptor.h \
 	ContentStorage.h \
+	DCTimedTextDescriptor.h \
+	DCTimedTextResourceSubDescriptor.h \
 	DMFramework.h \
 	DMSegment.h \
 	DMSet.h \
