@@ -138,7 +138,9 @@ void HeaderMetadata::write(File *file, Partition *partition, FillerWriter *fille
 {
     partition->markHeaderStart(file);
 
-    MXFPP_CHECK(mxf_write_header_metadata(file->getCFile(), _cHeaderMetadata));
+    MXFPP_CHECK(mxf_write_header_primer_pack(file->getCFile(), _cHeaderMetadata));
+    partition->fillToKag(file);
+    MXFPP_CHECK(mxf_write_header_sets(file->getCFile(), _cHeaderMetadata));
     if (filler)
     {
         filler->write(file);
