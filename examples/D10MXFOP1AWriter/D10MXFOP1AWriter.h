@@ -151,7 +151,6 @@ private:
     D10BitRate mD10BitRate;
     uint32_t mEncodedImageSize;
     uint32_t mMaxEncodedImageSize;
-    uint32_t mAES3DataSize;
     uint32_t mReserveMinBytes;
     std::string mCompanyName;
     std::string mProductName;

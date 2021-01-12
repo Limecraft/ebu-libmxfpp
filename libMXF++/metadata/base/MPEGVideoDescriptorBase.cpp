@@ -127,14 +127,14 @@ uint16_t MPEGVideoDescriptorBase::getMaxGOP() const
     return getUInt16Item(&MXF_ITEM_K(MPEGVideoDescriptor, MaxGOP));
 }
 
-bool MPEGVideoDescriptorBase::haveBPictureCount() const
+bool MPEGVideoDescriptorBase::haveMaxBPictureCount() const
 {
-    return haveItem(&MXF_ITEM_K(MPEGVideoDescriptor, BPictureCount));
+    return haveItem(&MXF_ITEM_K(MPEGVideoDescriptor, MaxBPictureCount));
 }
 
-uint16_t MPEGVideoDescriptorBase::getBPictureCount() const
+uint16_t MPEGVideoDescriptorBase::getMaxBPictureCount() const
 {
-    return getUInt16Item(&MXF_ITEM_K(MPEGVideoDescriptor, BPictureCount));
+    return getUInt16Item(&MXF_ITEM_K(MPEGVideoDescriptor, MaxBPictureCount));
 }
 
 bool MPEGVideoDescriptorBase::haveBitRate() const
@@ -192,9 +192,9 @@ void MPEGVideoDescriptorBase::setMaxGOP(uint16_t value)
     setUInt16Item(&MXF_ITEM_K(MPEGVideoDescriptor, MaxGOP), value);
 }
 
-void MPEGVideoDescriptorBase::setBPictureCount(uint16_t value)
+void MPEGVideoDescriptorBase::setMaxBPictureCount(uint16_t value)
 {
-    setUInt16Item(&MXF_ITEM_K(MPEGVideoDescriptor, BPictureCount), value);
+    setUInt16Item(&MXF_ITEM_K(MPEGVideoDescriptor, MaxBPictureCount), value);
 }
 
 void MPEGVideoDescriptorBase::setBitRate(uint32_t value)

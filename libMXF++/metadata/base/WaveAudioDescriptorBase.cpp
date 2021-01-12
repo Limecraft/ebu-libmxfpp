@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008, British Broadcasting Corporation
+ * Copyright (C) 2012, British Broadcasting Corporation
  * All Rights Reserved.
  *
  * Author: Philip de Nier
@@ -77,6 +77,106 @@ uint32_t WaveAudioDescriptorBase::getAvgBps() const
     return getUInt32Item(&MXF_ITEM_K(WaveAudioDescriptor, AvgBps));
 }
 
+bool WaveAudioDescriptorBase::haveChannelAssignment() const
+{
+    return haveItem(&MXF_ITEM_K(WaveAudioDescriptor, ChannelAssignment));
+}
+
+mxfUL WaveAudioDescriptorBase::getChannelAssignment() const
+{
+    return getULItem(&MXF_ITEM_K(WaveAudioDescriptor, ChannelAssignment));
+}
+
+bool WaveAudioDescriptorBase::havePeakEnvelopeVersion() const
+{
+    return haveItem(&MXF_ITEM_K(WaveAudioDescriptor, PeakEnvelopeVersion));
+}
+
+uint32_t WaveAudioDescriptorBase::getPeakEnvelopeVersion() const
+{
+    return getUInt32Item(&MXF_ITEM_K(WaveAudioDescriptor, PeakEnvelopeVersion));
+}
+
+bool WaveAudioDescriptorBase::havePeakEnvelopeFormat() const
+{
+    return haveItem(&MXF_ITEM_K(WaveAudioDescriptor, PeakEnvelopeFormat));
+}
+
+uint32_t WaveAudioDescriptorBase::getPeakEnvelopeFormat() const
+{
+    return getUInt32Item(&MXF_ITEM_K(WaveAudioDescriptor, PeakEnvelopeFormat));
+}
+
+bool WaveAudioDescriptorBase::havePointsPerPeakValue() const
+{
+    return haveItem(&MXF_ITEM_K(WaveAudioDescriptor, PointsPerPeakValue));
+}
+
+uint32_t WaveAudioDescriptorBase::getPointsPerPeakValue() const
+{
+    return getUInt32Item(&MXF_ITEM_K(WaveAudioDescriptor, PointsPerPeakValue));
+}
+
+bool WaveAudioDescriptorBase::havePeakEnvelopeBlockSize() const
+{
+    return haveItem(&MXF_ITEM_K(WaveAudioDescriptor, PeakEnvelopeBlockSize));
+}
+
+uint32_t WaveAudioDescriptorBase::getPeakEnvelopeBlockSize() const
+{
+    return getUInt32Item(&MXF_ITEM_K(WaveAudioDescriptor, PeakEnvelopeBlockSize));
+}
+
+bool WaveAudioDescriptorBase::havePeakChannels() const
+{
+    return haveItem(&MXF_ITEM_K(WaveAudioDescriptor, PeakChannels));
+}
+
+uint32_t WaveAudioDescriptorBase::getPeakChannels() const
+{
+    return getUInt32Item(&MXF_ITEM_K(WaveAudioDescriptor, PeakChannels));
+}
+
+bool WaveAudioDescriptorBase::havePeakFrames() const
+{
+    return haveItem(&MXF_ITEM_K(WaveAudioDescriptor, PeakFrames));
+}
+
+uint32_t WaveAudioDescriptorBase::getPeakFrames() const
+{
+    return getUInt32Item(&MXF_ITEM_K(WaveAudioDescriptor, PeakFrames));
+}
+
+bool WaveAudioDescriptorBase::havePeakOfPeaksPosition() const
+{
+    return haveItem(&MXF_ITEM_K(WaveAudioDescriptor, PeakOfPeaksPosition));
+}
+
+int64_t WaveAudioDescriptorBase::getPeakOfPeaksPosition() const
+{
+    return getPositionItem(&MXF_ITEM_K(WaveAudioDescriptor, PeakOfPeaksPosition));
+}
+
+bool WaveAudioDescriptorBase::havePeakEnvelopeTimestamp() const
+{
+    return haveItem(&MXF_ITEM_K(WaveAudioDescriptor, PeakEnvelopeTimestamp));
+}
+
+mxfTimestamp WaveAudioDescriptorBase::getPeakEnvelopeTimestamp() const
+{
+    return getTimestampItem(&MXF_ITEM_K(WaveAudioDescriptor, PeakEnvelopeTimestamp));
+}
+
+bool WaveAudioDescriptorBase::havePeakEnvelopeData() const
+{
+    return haveItem(&MXF_ITEM_K(WaveAudioDescriptor, PeakEnvelopeData));
+}
+
+ByteArray WaveAudioDescriptorBase::getPeakEnvelopeData() const
+{
+    return getRawBytesItem(&MXF_ITEM_K(WaveAudioDescriptor, PeakEnvelopeData));
+}
+
 void WaveAudioDescriptorBase::setBlockAlign(uint16_t value)
 {
     setUInt16Item(&MXF_ITEM_K(WaveAudioDescriptor, BlockAlign), value);
@@ -90,5 +190,55 @@ void WaveAudioDescriptorBase::setSequenceOffset(uint8_t value)
 void WaveAudioDescriptorBase::setAvgBps(uint32_t value)
 {
     setUInt32Item(&MXF_ITEM_K(WaveAudioDescriptor, AvgBps), value);
+}
+
+void WaveAudioDescriptorBase::setChannelAssignment(mxfUL value)
+{
+    setULItem(&MXF_ITEM_K(WaveAudioDescriptor, ChannelAssignment), value);
+}
+
+void WaveAudioDescriptorBase::setPeakEnvelopeVersion(uint32_t value)
+{
+    setUInt32Item(&MXF_ITEM_K(WaveAudioDescriptor, PeakEnvelopeVersion), value);
+}
+
+void WaveAudioDescriptorBase::setPeakEnvelopeFormat(uint32_t value)
+{
+    setUInt32Item(&MXF_ITEM_K(WaveAudioDescriptor, PeakEnvelopeFormat), value);
+}
+
+void WaveAudioDescriptorBase::setPointsPerPeakValue(uint32_t value)
+{
+    setUInt32Item(&MXF_ITEM_K(WaveAudioDescriptor, PointsPerPeakValue), value);
+}
+
+void WaveAudioDescriptorBase::setPeakEnvelopeBlockSize(uint32_t value)
+{
+    setUInt32Item(&MXF_ITEM_K(WaveAudioDescriptor, PeakEnvelopeBlockSize), value);
+}
+
+void WaveAudioDescriptorBase::setPeakChannels(uint32_t value)
+{
+    setUInt32Item(&MXF_ITEM_K(WaveAudioDescriptor, PeakChannels), value);
+}
+
+void WaveAudioDescriptorBase::setPeakFrames(uint32_t value)
+{
+    setUInt32Item(&MXF_ITEM_K(WaveAudioDescriptor, PeakFrames), value);
+}
+
+void WaveAudioDescriptorBase::setPeakOfPeaksPosition(int64_t value)
+{
+    setPositionItem(&MXF_ITEM_K(WaveAudioDescriptor, PeakOfPeaksPosition), value);
+}
+
+void WaveAudioDescriptorBase::setPeakEnvelopeTimestamp(mxfTimestamp value)
+{
+    setTimestampItem(&MXF_ITEM_K(WaveAudioDescriptor, PeakEnvelopeTimestamp), value);
+}
+
+void WaveAudioDescriptorBase::setPeakEnvelopeData(ByteArray value)
+{
+    setRawBytesItem(&MXF_ITEM_K(WaveAudioDescriptor, PeakEnvelopeData), value);
 }
 

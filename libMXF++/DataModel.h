@@ -29,8 +29,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __MXFPP_DATA_MODEL_H__
-#define __MXFPP_DATA_MODEL_H__
+#ifndef MXFPP_DATA_MODEL_H_
+#define MXFPP_DATA_MODEL_H_
 
 
 

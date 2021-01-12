@@ -29,8 +29,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __MXFPP_METADATA_SET_H__
-#define __MXFPP_METADATA_SET_H__
+#ifndef MXFPP_METADATA_SET_H_
+#define MXFPP_METADATA_SET_H_
 
 #include <map>
 #include <vector>
@@ -150,6 +150,8 @@ public:
     mxfProductVersion getProductVersionItem(const mxfKey *itemKey) const;
     mxfRGBALayout getRGBALayoutItem(const mxfKey *itemKey) const;
     std::string getStringItem(const mxfKey *itemKey) const;
+    std::string getUTF8StringItem(const mxfKey *itemKey) const;
+    std::string getISO7StringItem(const mxfKey *itemKey) const;
     MetadataSet* getStrongRefItem(const mxfKey *itemKey) const;
     MetadataSet* getStrongRefItemLight(const mxfKey *itemKey) const;
     MetadataSet* getWeakRefItem(const mxfKey *itemKey) const;
@@ -205,6 +207,8 @@ public:
     void setRGBALayoutItem(const mxfKey *itemKey, mxfRGBALayout value);
     void setStringItem(const mxfKey *itemKey, std::string value);
     void setFixedSizeStringItem(const mxfKey *itemKey, std::string value, uint16_t size);
+    void setUTF8StringItem(const mxfKey *itemKey, std::string value);
+    void setISO7StringItem(const mxfKey *itemKey, std::string value);
     void setStrongRefItem(const mxfKey *itemKey, MetadataSet *value);
     void setWeakRefItem(const mxfKey *itemKey, MetadataSet *value);
 
@@ -265,8 +269,6 @@ public:
     bool validate(bool logErrors);
 
     // Avid extensions
-    void attachAvidAttribute(std::string name, std::string value);
-    void attachAvidUserComment(std::string name, std::string value);
     void setAvidRGBColor(const mxfKey *itemKey, uint16_t red, uint16_t green, uint16_t blue);
     void setAvidProductVersion(const mxfKey *itemKey, mxfProductVersion value);
 

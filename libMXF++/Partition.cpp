@@ -67,10 +67,10 @@ void PositionFillerWriter::write(File *file)
 
 
 
-Partition* Partition::read(File *file, const mxfKey *key)
+Partition* Partition::read(File *file, const mxfKey *key, uint64_t len)
 {
     ::MXFPartition *cPartition;
-    MXFPP_CHECK(mxf_read_partition(file->getCFile(), key, &cPartition));
+    MXFPP_CHECK(mxf_read_partition(file->getCFile(), key, len, &cPartition));
 
     return new Partition(cPartition);
 }
@@ -253,8 +253,40 @@ vector<mxfUL> Partition::getEssenceContainers() const
     return result;
 }
 
+bool Partition::isClosed() const
+{
+    return mxf_partition_is_closed(&_cPartition->key);
+}
 
+bool Partition::isComplete() const
+{
+    return mxf_partition_is_complete(&_cPartition->key);
+}
 
+bool Partition::isClosedAndComplete() const
+{
+    return mxf_partition_is_closed_and_complete(&_cPartition->key);
+}
+
+bool Partition::isHeader() const
+{
+    return mxf_is_header_partition_pack(&_cPartition->key);
+}
+
+bool Partition::isBody() const
+{
+    return mxf_is_body_partition_pack(&_cPartition->key);
+}
+
+bool Partition::isGenericStream() const
+{
+    return mxf_is_generic_stream_partition_pack(&_cPartition->key);
+}
+
+bool Partition::isFooter() const
+{
+    return mxf_is_footer_partition_pack(&_cPartition->key);
+}
 
 void Partition::markHeaderStart(File *file)
 {

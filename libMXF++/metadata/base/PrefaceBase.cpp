@@ -125,6 +125,16 @@ std::vector<mxfUL> PrefaceBase::getDMSchemes() const
     return getULArrayItem(&MXF_ITEM_K(Preface, DMSchemes));
 }
 
+bool PrefaceBase::haveIsRIPPresent() const
+{
+    return haveItem(&MXF_ITEM_K(Preface, IsRIPPresent));
+}
+
+bool PrefaceBase::getIsRIPPresent() const
+{
+    return getBooleanItem(&MXF_ITEM_K(Preface, IsRIPPresent));
+}
+
 void PrefaceBase::setLastModifiedDate(mxfTimestamp value)
 {
     setTimestampItem(&MXF_ITEM_K(Preface, LastModifiedDate), value);
@@ -184,5 +194,10 @@ void PrefaceBase::setDMSchemes(const std::vector<mxfUL> &value)
 void PrefaceBase::appendDMSchemes(mxfUL value)
 {
     appendULArrayItem(&MXF_ITEM_K(Preface, DMSchemes), value);
+}
+
+void PrefaceBase::setIsRIPPresent(bool value)
+{
+    setBooleanItem(&MXF_ITEM_K(Preface, IsRIPPresent), value);
 }
 

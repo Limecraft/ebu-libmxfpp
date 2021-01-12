@@ -43,12 +43,22 @@
 #include <mxf/mxf.h>
 #include <mxf/mxf_macros.h>
 
+
 #define CHECK(cmd) \
     if (!(cmd)) \
     { \
         fprintf(stderr, "'%s' failed at line %d\n", #cmd, __LINE__); \
         exit(1); \
     }
+
+typedef struct
+{
+    FILE *baseHeaderFile;
+    const char *directory;
+    MXFDataModel *dataModel;
+} SetDefsData;
+
+
 
 static const char* get_sw_ref_name(MXFDataModel *dataModel, MXFItemDef *itemDef, char refName[256])
 {
@@ -74,6 +84,7 @@ static const char* get_sw_ref_name(MXFDataModel *dataModel, MXFItemDef *itemDef,
         { &MXF_ITEM_K(ContentStorage, Packages), "GenericPackage*" },
         { &MXF_ITEM_K(ContentStorage, EssenceContainerData), "EssenceContainerData*" },
         { &MXF_ITEM_K(Preface, PrimaryPackage), "GenericPackage*" },
+        { &MXF_ITEM_K(TextBasedDMFramework, TextBasedObject), "TextBasedObject*" },
     };
 
     for (i = 0; i < ARRAY_SIZE(nameInfo); i++)
@@ -148,6 +159,9 @@ static const char* get_type_name(MXFDataModel *dataModel, MXFItemDef *itemDef,
                 get_type_name(dataModel, itemDef, interpretTtemType, typeName);
                 break;
             case MXF_UTF16_TYPE:
+                strcpy(typeName, "std::string");
+                break;
+            case MXF_UTF8_TYPE:
                 strcpy(typeName, "std::string");
                 break;
             case MXF_BOOLEAN_TYPE:
@@ -377,8 +391,8 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
         " * POSSIBILITY OF SUCH DAMAGE.\n"
         " */\n"
         "\n"
-        "#ifndef __MXFPP_%s_H__\n"
-        "#define __MXFPP_%s_H__\n"
+        "#ifndef MXFPP_%s_H_\n"
+        "#define MXFPP_%s_H_\n"
         "\n"
         "\n"
         "\n"
@@ -442,8 +456,8 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
         " * POSSIBILITY OF SUCH DAMAGE.\n"
         " */\n"
         "\n"
-        "#ifndef __MXFPP_%s_H__\n"
-        "#define __MXFPP_%s_H__\n"
+        "#ifndef MXFPP_%s_H_\n"
+        "#define MXFPP_%s_H_\n"
         "\n"
         "\n"
         "\n"
@@ -639,7 +653,7 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
         }
         else
         {
-            if (itemType->typeId == MXF_UTF16STRING_TYPE)
+            if (itemType->typeId == MXF_UTF16STRING_TYPE || itemType->typeId == MXF_UTF8STRING_TYPE)
             {
                 strcpy(typeName, "std::string");
             }
@@ -859,6 +873,11 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
             if (itemType->typeId == MXF_UTF16STRING_TYPE)
             {
                 fprintf(baseSourceFile, "    return getStringItem(&MXF_ITEM_K(%s, %s));\n",
+                    className, itemName);
+            }
+            else if (itemType->typeId == MXF_UTF8STRING_TYPE)
+            {
+                fprintf(baseSourceFile, "    return getUTF8StringItem(&MXF_ITEM_K(%s, %s));\n",
                     className, itemName);
             }
             else
@@ -1091,7 +1110,7 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
         }
         else
         {
-            if (itemType->typeId == MXF_UTF16STRING_TYPE)
+            if (itemType->typeId == MXF_UTF16STRING_TYPE || itemType->typeId == MXF_UTF8STRING_TYPE)
             {
                 strcpy(typeName, "std::string");
             }
@@ -1278,6 +1297,11 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
             if (itemType->typeId == MXF_UTF16STRING_TYPE)
             {
                 fprintf(baseSourceFile, "    setStringItem(&MXF_ITEM_K(%s, %s), value);\n",
+                    className, itemName);
+            }
+            else if (itemType->typeId == MXF_UTF8STRING_TYPE)
+            {
+                fprintf(baseSourceFile, "    setUTF8StringItem(&MXF_ITEM_K(%s, %s), value);\n",
                     className, itemName);
             }
             else
@@ -1472,7 +1496,7 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
             CHECK(elementType != NULL);
             get_type_name(dataModel, itemDef, elementType, elementTypeName);
 
-            if (itemType->typeId == MXF_UTF16STRING_TYPE)
+            if (itemType->typeId == MXF_UTF16STRING_TYPE || itemType->typeId == MXF_UTF8STRING_TYPE)
             {
                 // do nothing
             }
@@ -1949,6 +1973,35 @@ static void gen_class(const char *directory, MXFDataModel *dataModel, MXFSetDef 
     fclose(headerFile);
 }
 
+static int process_set_defs(void *setDefIn, void *dataIn)
+{
+    MXFSetDef *setDef = (MXFSetDef*)setDefIn;
+    SetDefsData *data = (SetDefsData*)dataIn;
+    char className[256];
+
+    if (mxf_equals_key(&setDef->key, &g_Null_Key))
+    {
+        /* root set */
+        return 1;
+    }
+
+    strcpy(className, setDef->name);
+    className[0] = toupper(className[0]);
+
+    /* include */
+    fprintf(data->baseHeaderFile,
+        "#include <libMXF++/metadata/%s.h>\n",
+        className);
+
+
+    gen_class(data->directory, data->dataModel, setDef);
+
+    printf("    REGISTER_CLASS(%s);\n", className);
+
+    return 1;
+}
+
+
 static void usage(const char *cmd)
 {
     fprintf(stderr, "Usage: %s <directory>\n", cmd);
@@ -1957,12 +2010,11 @@ static void usage(const char *cmd)
 int main(int argc, const char** argv)
 {
     MXFDataModel *dataModel;
-    MXFListIterator iter;
     char mkdirCmd[FILENAME_MAX];
     FILE *baseHeaderFile;
     char filename[FILENAME_MAX];
     const char *directory;
-    char className[256];
+    SetDefsData setDefsData;
 
     if (argc != 2)
     {
@@ -2032,35 +2084,16 @@ int main(int argc, const char** argv)
         " * POSSIBILITY OF SUCH DAMAGE.\n"
         " */\n"
         "\n"
-        "#ifndef __MXFPP_METADATA_H__\n"
-        "#define __MXFPP_METADATA_H__\n"
+        "#ifndef MXFPP_METADATA_H_\n"
+        "#define MXFPP_METADATA_H_\n"
         "\n"
         "\n"
         "\n");
 
-    mxf_initialise_list_iter(&iter, &dataModel->setDefs);
-    while (mxf_next_list_iter_element(&iter))
-    {
-        MXFSetDef *setDef = (MXFSetDef*)mxf_get_iter_element(&iter);
-        if (mxf_equals_key(&setDef->key, &g_Null_Key))
-        {
-            /* root set */
-            continue;
-        }
-
-        strcpy(className, setDef->name);
-        className[0] = toupper(className[0]);
-
-        /* include */
-        fprintf(baseHeaderFile,
-            "#include <libMXF++/metadata/%s.h>\n",
-            className);
-
-
-        gen_class(directory, dataModel, setDef);
-
-        printf("    REGISTER_CLASS(%s);\n", className);
-    }
+    setDefsData.baseHeaderFile = baseHeaderFile;
+    setDefsData.directory = directory;
+    setDefsData.dataModel = dataModel;
+    mxf_tree_traverse(&dataModel->setDefs, process_set_defs, &setDefsData);
 
 
     /* footer */

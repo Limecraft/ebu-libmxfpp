@@ -76,6 +76,23 @@ std::vector<Locator*> GenericDescriptorBase::getLocators() const
     return result;
 }
 
+bool GenericDescriptorBase::haveSubDescriptors() const
+{
+    return haveItem(&MXF_ITEM_K(GenericDescriptor, SubDescriptors));
+}
+
+std::vector<SubDescriptor*> GenericDescriptorBase::getSubDescriptors() const
+{
+    vector<SubDescriptor*> result;
+    auto_ptr<ObjectIterator> iter(getStrongRefArrayItem(&MXF_ITEM_K(GenericDescriptor, SubDescriptors)));
+    while (iter->next())
+    {
+        MXFPP_CHECK(dynamic_cast<SubDescriptor*>(iter->get()) != 0);
+        result.push_back(dynamic_cast<SubDescriptor*>(iter->get()));
+    }
+    return result;
+}
+
 void GenericDescriptorBase::setLocators(const std::vector<Locator*> &value)
 {
     WrapObjectVectorIterator<Locator> iter(value);
@@ -85,5 +102,16 @@ void GenericDescriptorBase::setLocators(const std::vector<Locator*> &value)
 void GenericDescriptorBase::appendLocators(Locator *value)
 {
     appendStrongRefArrayItem(&MXF_ITEM_K(GenericDescriptor, Locators), value);
+}
+
+void GenericDescriptorBase::setSubDescriptors(const std::vector<SubDescriptor*> &value)
+{
+    WrapObjectVectorIterator<SubDescriptor> iter(value);
+    setStrongRefArrayItem(&MXF_ITEM_K(GenericDescriptor, SubDescriptors), &iter);
+}
+
+void GenericDescriptorBase::appendSubDescriptors(SubDescriptor *value)
+{
+    appendStrongRefArrayItem(&MXF_ITEM_K(GenericDescriptor, SubDescriptors), value);
 }
 

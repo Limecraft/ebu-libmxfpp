@@ -33,8 +33,12 @@
 #include "config.h"
 #endif
 
-#include <libMXF++/MXF.h>
+#include <memory>
 
+#include <libMXF++/MXF.h>
+#include <libMXF++/extensions/TaggedValue.h>
+
+#include <mxf/mxf_avid.h>
 
 using namespace std;
 using namespace mxfpp;
@@ -51,6 +55,59 @@ GenericPackage::GenericPackage(HeaderMetadata *headerMetadata, ::MXFMetadataSet 
 
 GenericPackage::~GenericPackage()
 {}
+
+vector<TaggedValue*> GenericPackage::getAvidAttributes()
+{
+    vector<TaggedValue*> result;
+    auto_ptr<ObjectIterator> iter(getStrongRefArrayItem(&MXF_ITEM_K(GenericPackage, MobAttributeList)));
+    while (iter->next())
+    {
+        MXFPP_CHECK(dynamic_cast<TaggedValue*>(iter->get()) != 0);
+        result.push_back(dynamic_cast<TaggedValue*>(iter->get()));
+    }
+
+    return result;
+}
+
+vector<TaggedValue*> GenericPackage::getAvidUserComments()
+{
+    vector<TaggedValue*> result;
+    auto_ptr<ObjectIterator> iter(getStrongRefArrayItem(&MXF_ITEM_K(GenericPackage, UserComments)));
+    while (iter->next())
+    {
+        MXFPP_CHECK(dynamic_cast<TaggedValue*>(iter->get()) != 0);
+        result.push_back(dynamic_cast<TaggedValue*>(iter->get()));
+    }
+
+    return result;
+}
+
+TaggedValue* GenericPackage::appendAvidAttribute(string name, string value)
+{
+    return appendAvidAttribute(new TaggedValue(_headerMetadata, name, value));
+}
+
+TaggedValue* GenericPackage::appendAvidAttribute(string name, int32_t value)
+{
+    return appendAvidAttribute(new TaggedValue(_headerMetadata, name, value));
+}
+
+TaggedValue* GenericPackage::appendAvidAttribute(TaggedValue *taggedValue)
+{
+    appendStrongRefArrayItem(&MXF_ITEM_K(GenericPackage, MobAttributeList), taggedValue);
+    return taggedValue;
+}
+
+TaggedValue* GenericPackage::appendAvidUserComment(string name, string value)
+{
+    return appendAvidUserComment(new TaggedValue(_headerMetadata, name, value));
+}
+
+TaggedValue* GenericPackage::appendAvidUserComment(TaggedValue *taggedValue)
+{
+    appendStrongRefArrayItem(&MXF_ITEM_K(GenericPackage, UserComments), taggedValue);
+    return taggedValue;
+}
 
 GenericTrack* GenericPackage::findTrack(uint32_t trackId) const
 {

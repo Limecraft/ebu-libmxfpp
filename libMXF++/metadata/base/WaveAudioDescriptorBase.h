@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008, British Broadcasting Corporation
+ * Copyright (C) 2012, British Broadcasting Corporation
  * All Rights Reserved.
  *
  * Author: Philip de Nier
@@ -29,8 +29,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __MXFPP_WAVEAUDIODESCRIPTOR_BASE_H__
-#define __MXFPP_WAVEAUDIODESCRIPTOR_BASE_H__
+#ifndef MXFPP_WAVEAUDIODESCRIPTOR_BASE_H_
+#define MXFPP_WAVEAUDIODESCRIPTOR_BASE_H_
 
 
 
@@ -58,6 +58,26 @@ public:
    bool haveSequenceOffset() const;
    uint8_t getSequenceOffset() const;
    uint32_t getAvgBps() const;
+   bool haveChannelAssignment() const;
+   mxfUL getChannelAssignment() const;
+   bool havePeakEnvelopeVersion() const;
+   uint32_t getPeakEnvelopeVersion() const;
+   bool havePeakEnvelopeFormat() const;
+   uint32_t getPeakEnvelopeFormat() const;
+   bool havePointsPerPeakValue() const;
+   uint32_t getPointsPerPeakValue() const;
+   bool havePeakEnvelopeBlockSize() const;
+   uint32_t getPeakEnvelopeBlockSize() const;
+   bool havePeakChannels() const;
+   uint32_t getPeakChannels() const;
+   bool havePeakFrames() const;
+   uint32_t getPeakFrames() const;
+   bool havePeakOfPeaksPosition() const;
+   int64_t getPeakOfPeaksPosition() const;
+   bool havePeakEnvelopeTimestamp() const;
+   mxfTimestamp getPeakEnvelopeTimestamp() const;
+   bool havePeakEnvelopeData() const;
+   ByteArray getPeakEnvelopeData() const;
 
 
    // setters
@@ -65,6 +85,16 @@ public:
    void setBlockAlign(uint16_t value);
    void setSequenceOffset(uint8_t value);
    void setAvgBps(uint32_t value);
+   void setChannelAssignment(mxfUL value);
+   void setPeakEnvelopeVersion(uint32_t value);
+   void setPeakEnvelopeFormat(uint32_t value);
+   void setPointsPerPeakValue(uint32_t value);
+   void setPeakEnvelopeBlockSize(uint32_t value);
+   void setPeakChannels(uint32_t value);
+   void setPeakFrames(uint32_t value);
+   void setPeakOfPeaksPosition(int64_t value);
+   void setPeakEnvelopeTimestamp(mxfTimestamp value);
+   void setPeakEnvelopeData(ByteArray value);
 
 
 protected:

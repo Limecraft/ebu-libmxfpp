@@ -93,7 +93,7 @@ static void convert_timecode_to_12m(Timecode tc, unsigned char *t12m)
 static string get_track_name(string prefix, int number)
 {
     char buf[16];
-    sprintf(buf, "%d", number);
+    mxf_snprintf(buf, sizeof(buf), "%d", number);
     return prefix.append(buf);
 }
 
@@ -904,7 +904,6 @@ void D10MXFOP1AWriter::CompleteFile()
     Partition &footer_partition = mMXFFile->createPartition();
     footer_partition.setKey(&MXF_PP_K(ClosedComplete, Footer));
     footer_partition.write(mMXFFile);
-    footer_partition.fillToKag(mMXFFile);
 
 
     // update metadata sets and index with duration
@@ -968,7 +967,6 @@ void D10MXFOP1AWriter::CreateFile()
     mHeaderPartition->setOperationalPattern(&MXF_OP_L(1a, MultiTrack_Stream_Internal));
     mHeaderPartition->addEssenceContainer(&mEssenceContainerUL);
     mHeaderPartition->write(mMXFFile);
-    mHeaderPartition->fillToKag(mMXFFile);
 
 
     // write the header metadata

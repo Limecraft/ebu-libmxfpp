@@ -29,8 +29,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __MXFPP_GENERICDESCRIPTOR_BASE_H__
-#define __MXFPP_GENERICDESCRIPTOR_BASE_H__
+#ifndef MXFPP_GENERICDESCRIPTOR_BASE_H_
+#define MXFPP_GENERICDESCRIPTOR_BASE_H_
 
 
 
@@ -56,12 +56,16 @@ public:
 
    bool haveLocators() const;
    std::vector<Locator*> getLocators() const;
+   bool haveSubDescriptors() const;
+   std::vector<SubDescriptor*> getSubDescriptors() const;
 
 
    // setters
 
    void setLocators(const std::vector<Locator*> &value);
    void appendLocators(Locator *value);
+   void setSubDescriptors(const std::vector<SubDescriptor*> &value);
+   void appendSubDescriptors(SubDescriptor *value);
 
 
 protected:

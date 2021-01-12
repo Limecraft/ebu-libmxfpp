@@ -16,7 +16,7 @@ libMXF___@LIBMXFPP_MAJORMINOR@_la_SOURCES = \
 	Partition.cpp
 
 libMXF___@LIBMXFPP_MAJORMINOR@_la_CXXFLAGS = $(LIBMXFPP_CFLAGS)
-libMXF___@LIBMXFPP_MAJORMINOR@_la_LDFLAGS = -version-info $(LIBMXFPP_LIBVERSION)
+libMXF___@LIBMXFPP_MAJORMINOR@_la_LDFLAGS = $(LIBMXFPP_LDFLAGS) -version-info $(LIBMXFPP_LIBVERSION)
 libMXF___@LIBMXFPP_MAJORMINOR@_la_LIBADD = \
 	metadata/libmetadata.la \
 	metadata/base/libbase.la \

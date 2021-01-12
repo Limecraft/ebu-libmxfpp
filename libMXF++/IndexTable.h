@@ -29,8 +29,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __MXFPP_INDEX_TABLE_H__
-#define __MXFPP_INDEX_TABLE_H__
+#ifndef MXFPP_INDEX_TABLE_H_
+#define MXFPP_INDEX_TABLE_H_
 
 #include <vector>
 
@@ -62,6 +62,11 @@ public:
     uint32_t getBodySID() const;
     uint8_t getSliceCount() const;
     uint8_t getPosTableCount() const;
+    uint64_t getExtStartOffset() const;
+    uint64_t getVBEByteCount() const;
+    mxfOptBool getSingleIndexLocation() const;
+    mxfOptBool getSingleEssenceLocation() const;
+    mxfOptBool getForwardIndexDirection() const;
     // deltaEntryArray
     // indexEntryArray
     bool haveDeltaEntryAtDelta(uint32_t delta, uint8_t slice) const;
@@ -76,7 +81,13 @@ public:
     void setIndexSID(uint32_t value);
     void setBodySID(uint32_t value);
     void setSliceCount(uint8_t value);
+    void forceWriteSliceCount(bool enable);
     void setPosTableCount(uint8_t value);
+    void setExtStartOffset(uint64_t value);
+    void setVBEByteCount(uint64_t value);
+    void setSingleIndexLocation(mxfOptBool value);
+    void setSingleEssenceLocation(mxfOptBool value);
+    void setForwardIndexDirection(mxfOptBool value);
 
     void appendDeltaEntry(int8_t posTableIndex, uint8_t slice, uint32_t elementData);
     void appendIndexEntry(int8_t temporalOffset, int8_t keyFrameOffset, uint8_t flags, uint64_t streamOffset,

@@ -29,8 +29,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef __MXFPP_PARTITION_H__
-#define __MXFPP_PARTITION_H__
+#ifndef MXFPP_PARTITION_H_
+#define MXFPP_PARTITION_H_
 
 
 
@@ -80,7 +80,7 @@ private:
 class Partition
 {
 public:
-    static Partition* read(File *file, const mxfKey *key);
+    static Partition* read(File *file, const mxfKey *key, uint64_t len);
 
     Partition();
     Partition(::MXFPartition *cPartition);
@@ -117,6 +117,15 @@ public:
     uint32_t getBodySID() const;
     const mxfUL* getOperationalPattern() const;
     std::vector<mxfUL> getEssenceContainers() const;
+
+    bool isClosed() const;
+    bool isComplete() const;
+    bool isClosedAndComplete() const;
+
+    bool isHeader() const;
+    bool isBody() const;
+    bool isGenericStream() const;
+    bool isFooter() const;
 
     void markHeaderStart(File *file);
     void markHeaderEnd(File *file);
