@@ -161,6 +161,38 @@ Partition& File::createPartition()
     return (*_partitions.back());
 }
 
+Partition& File::insertPartition(size_t index)
+{
+    Partition *previousPartition = 0;
+    Partition *nextPartition = 0;
+    Partition *partition = 0;
+
+    if (index > 0) 
+    {
+        previousPartition = _partitions[index-1];
+    }
+
+    if (index < _partitions.size())
+    {
+        nextPartition = _partitions[index];
+    }
+
+    std::vector<Partition*>::iterator it = _partitions.begin() + index;
+    partition = *_partitions.insert(it, new Partition());
+
+    if (previousPartition)
+    {
+        MXFPP_CHECK(mxf_initialise_with_partition(previousPartition->getCPartition(), partition->getCPartition()));
+        partition->setPreviousPartition(previousPartition->getThisPartition());
+    }
+    if (nextPartition)
+    {
+        nextPartition->setPreviousPartition(partition->getThisPartition());
+    }
+    
+    return *partition;
+}
+
 void File::writeRIP()
 {
     PartitionList partitionList(_partitions);
